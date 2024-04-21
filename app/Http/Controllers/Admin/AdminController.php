@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\LoginAdminRequest;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -15,11 +16,11 @@ class AdminController extends Controller
         return view('admin.login');
     }
 
-    public function check_login(Request $req) {
-        $req->validate([
-            'email' => 'required|email|exists:users',
-            'password' => 'required'
-        ]);
+    public function check_login(LoginAdminRequest $req) {
+        // $req->validate([
+        //     'email' => 'required|email|exists:users',
+        //     'password' => 'required'
+        // ]);
 
         $data = $req->only('email', 'password');
 
