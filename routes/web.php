@@ -27,6 +27,7 @@ Route::get('/about-us', [HomeController::class, 'about'])->name('home.about');
 Route::get('/category/{cat}', [HomeController::class, 'category'])->name('home.category');
 Route::get('/product/{product}', [HomeController::class, 'product'])->name('home.product');
 Route::get('/favorite/{product}', [HomeController::class, 'favorite'])->name('home.favorite');
+Route::post('/search', [HomeController::class, 'searchProduct'])->name('home.search');
 
 Route::group(['prefix' => 'account'], function() {
 
@@ -56,7 +57,7 @@ Route::group(['prefix' => 'account'], function() {
 
 Route::group(['prefix' => 'cart', 'middleware' => 'customer'], function() {
     Route::get('/', [CartController::class, 'index'])->name('cart.index');
-    Route::get('/add/{product}', [CartController::class, 'add'])->name('cart.add');
+    Route::post('/add/{product}', [CartController::class, 'add'])->name('cart.add');
     Route::get('/delete/{product}', [CartController::class, 'delete'])->name('cart.delete');
     Route::get('/update/{product}', [CartController::class, 'update'])->name('cart.update');
     Route::get('/clear', [CartController::class, 'clear'])->name('cart.clear');
@@ -67,9 +68,9 @@ Route::group(['prefix' => 'order', 'middleware' => 'customer'], function() {
     Route::get('/checkout', [CheckoutController::class, 'checkout'])->name('order.checkout');
     Route::get('/history', [CheckoutController::class, 'history'])->name('order.history');
     Route::get('/detail/{order}', [CheckoutController::class, 'detail'])->name('order.detail');
-    Route::post('/checkout', [CheckoutController::class, 'post_checkout']);
-    
+    Route::post('/checkout', [CheckoutController::class, 'post_checkout'])->name('order.postCheckout');
     Route::get('/verify/{token}', [CheckoutController::class, 'verify'])->name('order.verify');
+    Route::post('/payment/online', [CheckoutController::class, 'createPayment'])->name('order.payment');
     
 
 }); 
@@ -84,11 +85,15 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
     Route::get('/order/detail/{order}', [OrderController::class, 'show'])->name('order.show');
     Route::get('/order/update-status/{order}', [OrderController::class, 'update'])->name('order.update');
 
+    Route::group(['prefix' => 'user'], function() {
+        Route::get('/getListUser', [UserController::class, 'getListUser'])->name('user.getListUser');
+    });
     Route::resources([
         'user' => UserController::class,
         'category' => CategoryController::class,
         'product' => ProductController::class,
     ]);
+    
     route::get('product-delete-image/{image}', [ProductController::class, 'destroyImage'])->name('product.destroyImage');
 });
 

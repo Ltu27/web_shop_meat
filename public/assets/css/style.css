@@ -43,7 +43,7 @@
 	01. Variable CSS
 ===============================*/
 :root {
-    --tg-body-font-family: 'Poppins', sans-serif;
+    --tg-body-font-family: 'Roboto', 'Arial Unicode MS', sans-serif;
     --tg-heading-font-family: 'Paytone One', sans-serif;
     --tg-pacifico-font-family: 'Pacifico', cursive;
     --tg-primary-color: #df2614;
@@ -5006,4 +5006,8 @@ body.search-visible {
 
 .favorite-action i {
     font-size: 24px;
+}
+
+.btn-cart {
+    border: none;
 }

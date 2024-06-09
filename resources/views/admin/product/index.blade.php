@@ -51,8 +51,8 @@
                         <form action="{{ route('product.destroy', $model->id) }}" method="post" onsubmit="return confirm('Are you want to delete?')">
                             @csrf
                             @method('DELETE')
-                            <a href="{{ route('product.edit', $model->id) }}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i>Edit</a>
-                            <button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i>Delete</button>
+                            <a href="{{ route('product.edit', $model->id) }}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></a>
+                            <button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
                         </form>
                     </td>
                 </tr>

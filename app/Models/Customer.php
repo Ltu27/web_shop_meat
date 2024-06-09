@@ -57,4 +57,14 @@ class Customer extends Authenticatable
     public function favorites() {
         return $this->hasMany(Favorite::class, 'customer_id', 'id');
     }
+
+    public function comment()
+    {
+        return $this->hasMany(Comment::class, 'customer_id', 'id');
+    }
+
+    public function commentReply()
+    {
+        return $this->hasMany(CommentReply::class, 'customer_id', 'id');
+    }
 }

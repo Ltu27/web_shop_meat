@@ -10,9 +10,17 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::orderBy('id', 'DESC')->paginate(4);
+        $users = User::orderBy('id', 'DESC')->paginate(10);
 
         return view('admin.user.index', compact('users'));
+    }
+
+    public function getListUser()
+    {
+        $users = User::all();
+        return response()->json([
+            'data' => $users
+        ]);
     }
 
     /**
@@ -20,7 +28,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('admin.category.create');
+        return view('admin.user.create');
     }
 
     /**
@@ -33,7 +41,7 @@ class UserController extends Controller
         ]);
 
         $data = $request->all('name', 'status');
-        Category::create($data);
+        User::create($data);
 
         return redirect()->route('category.index');
     }
@@ -41,7 +49,7 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Category $category)
+    public function show(User $user)
     {
         //
     }
@@ -49,36 +57,36 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Category $category)
-    {
-        return view('admin.category.edit',compact('category'));
-    }
+    // public function edit(Category $category)
+    // {
+    //     return view('admin.category.edit',compact('category'));
+    // }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Category $category)
-    {
-        $request->validate([
-            'name' => 'required|unique:categories,name,'.$category->id
-        ]);
+    // public function update(Request $request, Category $category)
+    // {
+    //     $request->validate([
+    //         'name' => 'required|unique:categories,name,'.$category->id
+    //     ]);
 
-        $data = $request->all('name', 'status');
-        if ($category->update($data)) {
-            return redirect()->route('category.index')->with('ok', 'Update a category successfully');
-        }
-        return redirect()->back()->with('no', 'Something wrong, please try again');
+    //     $data = $request->all('name', 'status');
+    //     if ($category->update($data)) {
+    //         return redirect()->route('category.index')->with('ok', 'Update a category successfully');
+    //     }
+    //     return redirect()->back()->with('no', 'Something wrong, please try again');
 
-    }
+    // }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Category $category)
-    {
-        if ($category->delete()) {
-            return redirect()->route('category.index')->with('ok', 'Delete a category successfully');
-        }
-        return redirect()->back()->with('no', 'Something wrong, please try again');
-    }
+    // public function destroy(Category $category)
+    // {
+    //     if ($category->delete()) {
+    //         return redirect()->route('category.index')->with('ok', 'Delete a category successfully');
+    //     }
+    //     return redirect()->back()->with('no', 'Something wrong, please try again');
+    // }
 }

@@ -60,37 +60,39 @@
                                                 <span class="batch">New<i class="fas fa-star"></i></span>
                                             </div>
                                             <div class="product-content-three">
-                                                <a href="#" class="tag">{{ $prod->cat->name }}</a>
-                                                <h2 class="title"><a href="{{ route('home.product', $prod->id) }}">{{ $prod->name }}</a></h2>
-                                                @if ($prod->sale_price > 0)
-                                                    <h2><s>${{ number_format($prod->price) }}</s></h2>
-                                                    <h2 class="price">${{ number_format($prod->sale_price) }}</h2>
-                                                @else
-                                                    <h2 class="price">${{ number_format($prod->price) }}</h2>
-                                                @endif
-                                                <div class="favorite-action">
-                                                    @if (auth('cus')->check())
-                                                        @if ($prod->favorited)
-                                                            <a title="Bỏ thích" onclick="return confirm('Bạn có muốn bỏ thích không?')" 
-                                                            href="{{ route('home.favorite', $prod->id) }}"><i class="fas fa-heart"></i></a>
-                                                        @else
-                                                            <a title="Yêu thích" href="{{ route('home.favorite', $prod->id) }}">
-                                                                <i class="far fa-heart"></i></a>
-                                                        @endif
-                                                            <a title="Thêm vào giỏ hàng" href="{{ route('cart.add', $prod->id) }}">
-                                                                <i class="fa fa-shopping-cart"></i></a>
+                                                <form action="{{ route('cart.add', $prod->id) }}" method="post">
+                                                    @csrf
+                                                    <input type="hidden" name="id" value="{{ $prod->id }}">
+                                                    <a href="#" class="tag">{{ $prod->cat->name }}</a>
+                                                    <h2 class="title"><a href="{{ route('home.product', $prod->id) }}">{{ $prod->name }}</a></h2>
+                                                    @if ($prod->sale_price > 0)
+                                                        <h2><s>{{ number_format($prod->price) }} VNĐ</s></h2>
+                                                        <h2 class="price">{{ number_format($prod->sale_price) }} VNĐ</h2>
                                                     @else
-                                                    <a title="Thêm vào giỏ hàng" href="{{ route('account.login') }}" 
-                                                    onclick="alert('Vui lòng đăng nhập để thêm giỏ hàng')"><i class="fa fa-shopping-cart"></i></a>
+                                                        <h2 class="price">{{ number_format($prod->price) }} VNĐ</h2>
                                                     @endif
-                                                </div>
-                                                <div class="product-cart-wrap">
-                                                    <form action="#">
+                                                    <div class="favorite-action">
+                                                        @if (auth('cus')->check())
+                                                            @if ($prod->favorited)
+                                                                <a title="Bỏ thích" onclick="return confirm('Bạn có muốn bỏ thích không?')" 
+                                                                href="{{ route('home.favorite', $prod->id) }}"><i class="fas fa-heart"></i></a>
+                                                            @else
+                                                                <a title="Yêu thích" href="{{ route('home.favorite', $prod->id) }}">
+                                                                    <i class="far fa-heart"></i></a>
+                                                            @endif
+                                                                <button class="btn-cart" type="submit" title="Thêm vào giỏ hàng">
+                                                                    <i class="fa fa-shopping-cart"></i></button>
+                                                        @else
+                                                        <a title="Thêm vào giỏ hàng" href="{{ route('account.login') }}" 
+                                                        onclick="alert('Vui lòng đăng nhập để thêm giỏ hàng')"><i class="fa fa-shopping-cart"></i></a>
+                                                        @endif
+                                                    </div>
+                                                    <div class="product-cart-wrap">
                                                         <div class="cart-plus-minus">
-                                                            <input type="text" value="1">
+                                                            <input type="text" name="quantity" value="1">
                                                         </div>
-                                                    </form>
-                                                </div>
+                                                    </div>
+                                                </form>
                                             </div>
                                             <div class="product-shape-two">
                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 303 445" preserveAspectRatio="none">
@@ -146,10 +148,10 @@
                                             <div class="lp-content">
                                                 <h4 class="title"><a href="{{ route('home.product', $np->id) }}">{{ $np->name }}</a></h4>
                                                 @if ($np->sale_price > 0)
-                                                    <span><s>${{ number_format($np->price) }}</s></span>
-                                                    <span class="price">${{ number_format($np->sale_price) }}</span>
+                                                    <span><s>{{ number_format($np->price) }} VNĐ</s></span>
+                                                    <span class="price">{{ number_format($np->sale_price) }} VNĐ</span>
                                                 @else
-                                                    <span class="price">${{ number_format($np->price) }}</span>
+                                                    <span class="price">{{ number_format($np->price) }} VNĐ</span>
                                                 @endif
                                             </div>
                                         </div>

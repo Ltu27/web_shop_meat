@@ -90,7 +90,6 @@ class AccountController extends Controller
 
         if ($acc = Customer::create($data)) {
             Mail::to($acc->email)->send(new VerifyAccount($acc));
-            // dd($acc);
             return redirect()->route('account.login')->with('ok', 'Register successfully, please check your email to verify account');
         }
 

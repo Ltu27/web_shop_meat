@@ -52,4 +52,18 @@ class HomeController extends Controller
             return redirect()->back()->with('ok', 'Bạn đã yêu thích sản phẩm');
         }
     }
+
+    public function searchProduct(Request $request)
+    {
+        $products = Product::where('name', 'LIKE', '%'.$request['searchProduct'].'%')->get();
+        if(count($products) > 0) {
+            return view('home.product.search-product', [
+                'products' => $products
+                ]);
+        } else {
+            return view('trangchu', [
+                'products' => DB::table('sanpham')->paginate(16)
+            ]);
+        }
+    }
 }

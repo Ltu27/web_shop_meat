@@ -67,7 +67,7 @@
                             </div>
                             <span>(4 nhận xét)</span>
                         </div>
-                        <h3 class="price">${{ $product->sale_price }} <span>Giảm giá</span></h3>
+                        <h3 class="price">{{ $product->sale_price }} VNĐ<span>Giảm giá</span></h3>
                         <div class="product-count-wrap">
                             <span class="title">Nhanh tay! Giảm giá sẽ hết sau:</span>
                             <div class="coming-time" data-countdown="2024/4/6"></div>
@@ -83,10 +83,10 @@
                     <div class="product-desc-wrap">
                         <ul class="nav nav-tabs" id="descriptionTab" role="tablist">
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link active" id="description-tab" data-bs-toggle="tab" data-bs-target="#description-tab-pane" type="button" role="tab" aria-controls="description-tab-pane" aria-selected="true">Description</button>
+                                <button class="nav-link active" id="description-tab" data-bs-toggle="tab" data-bs-target="#description-tab-pane" type="button" role="tab" aria-controls="description-tab-pane" aria-selected="true">Mô tả</button>
                             </li>
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="reviews-tab" data-bs-toggle="tab" data-bs-target="#reviews-tab-pane" type="button" role="tab" aria-controls="reviews-tab-pane" aria-selected="false">Reviews (0)</button>
+                                <button class="nav-link" id="reviews-tab" data-bs-toggle="tab" data-bs-target="#reviews-tab-pane" type="button" role="tab" aria-controls="reviews-tab-pane" aria-selected="false">Nhận xét (0)</button>
                             </li>
                         </ul>
                         <div class="tab-content" id="descriptionTabContent">
@@ -140,7 +140,7 @@
                                 <div class="product-content-three">
                                     <a href="{{ route('home.category', $item->cat) }}" class="tag">{{ $item->cat->name }}</a>
                                     <h2 class="title"><a href="{{ route('home.product', $item->id) }}">{{ $item->name }}</a></h2>
-                                    <h2 class="price">${{ $item->sale_price }}</h2>
+                                    <h2 class="price">{{ $item->sale_price }} VNĐ</h2>
                                     <div class="product-cart-wrap">
                                     </div>
                                 </div>

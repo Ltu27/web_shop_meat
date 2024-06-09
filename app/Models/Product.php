@@ -25,4 +25,9 @@ class Product extends Model
         $favorited = Favorite::where(['product_id' => $this->id, 'customer_id' => auth('cus')->id()])->first();
         return $favorited ? true : false;
     }
+
+    public function comment() 
+    {
+        return $this->hasMany(Comment::class, 'product_id', 'id');
+    }
 }

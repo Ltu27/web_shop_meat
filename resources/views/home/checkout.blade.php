@@ -1,21 +1,21 @@
 @extends('master.main')
-@section('title', 'Kiểm tra thông tin đơn hàng')
+@section('title', __('common.title.checkout'))
 @section('main')
     
 <!-- main-area -->
 <main>
 
     <!-- breadcrumb-area -->
-    <section class="breadcrumb-area tg-motion-effects breadcrumb-bg" data-background="assets/img/bg/breadcrumb_bg.jpg">
+    <section class="breadcrumb-area tg-motion-effects breadcrumb-bg" data-background="uploads/bg/breadcrumb_bg.jpg">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="breadcrumb-content">
-                        <h2 class="title">Kiểm tra thông tin đơn hàng</h2>
+                    <div class="breadcrumb-content"> 
+                        <h2 class="title">{{ __('common.title.checkout') }}</h2>
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="{{ route('home.index') }}">Trang chủ</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Kiểm tra thông tin đơn hàng</li>
+                                <li class="breadcrumb-item"><a href="{{ route('home.index') }}">{{ __('common.home') }}</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">{{ __('common.title.checkout') }}</li>
                             </ol>
                         </nav>
                     </div>
@@ -59,7 +59,14 @@
                                         <div class="help-block">{{ $message }}</div>
                                     @enderror
                                 </div>
-                                <button type="submit">Đặt hàng</button>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <button type="submit">{{ __('common.checkout.cash_payment') }}</button>
+                                    </div>
+                                    <div class="col-6">
+                                        <button type="submit" value="2" name="payment">{{ __('common.checkout.online') }}</button>
+                                    </div>
+                                </div>
                             </div>
                         </form>
                     </div>

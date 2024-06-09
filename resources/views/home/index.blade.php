@@ -61,10 +61,10 @@
                                         @endif
                                     </div>
                                     @if ($np->sale_price > 0)
-                                        <span><s>${{ number_format($np->price) }}</s></span>
-                                        <span class="price">${{ number_format($np->sale_price) }}</span>
+                                        <span><s>{{ number_format($np->price) }} VNĐ</s></span>
+                                        <span class="price">{{ number_format($np->sale_price) }} VNĐ</span>
                                     @else
-                                        <span class="price">${{ number_format($np->price) }}</span>
+                                        <span class="price">{{ number_format($np->price) }} VNĐ</span>
                                     @endif
                                 </div>
                                 <div class="features-img">
@@ -92,7 +92,7 @@
                 <div class="col-lg-12">
                     <div class="section-title text-center mb-60">
                         <span class="sub-title">Bemet Shop</span>
-                        <h2 class="title">Sale</h2>
+                        <h2 class="title">Giảm giá</h2>
                         <div class="title-shape" data-background="uploads/images/title_shape.png"></div>
                     </div>
                 </div>
@@ -108,10 +108,10 @@
                                 <div class="line" data-background="uploads/images/line.png"></div>
                                 <h4 class="title"><a href="{{ route('home.product', $sp->id) }}">{{ $sp->name }}</a></h4>
                                     @if ($sp->sale_price > 0)
-                                        <h6><s>${{ number_format($sp->price) }}</s></h6>
-                                        <h6 class="price">${{ number_format($sp->sale_price) }}</h6>
+                                        <h6><s>{{ number_format($sp->price) }} VNĐ</s></h6>
+                                        <h6 class="price">{{ number_format($sp->sale_price) }} VNĐ</h6>
                                     @else
-                                        <h6 class="price">${{ number_format($sp->price) }}</h6>
+                                        <h6 class="price">{{ number_format($sp->price) }} VNĐ</h6>
                                     @endif
                                     <div class="favorite-action">
                                         @if (auth('cus')->check())
@@ -208,12 +208,11 @@
                                 </div>
                                 <div class="product-price">
                                     @if ($fp->sale_price > 0)
-                                        <h5><s>${{ number_format($fp->price) }}</s></h5>
-                                        <h5 class="price">${{ number_format($fp->sale_price) }}</h5>
+                                        <h5><s>{{ number_format($fp->price) }} VNĐ</s></h5>
+                                        <h5 class="price">{{ number_format($fp->sale_price) }} VNĐ</h5>
                                     @else
-                                        <h5 class="price">${{ number_format($fp->price) }}</h5>
+                                        <h5 class="price">{{ number_format($fp->price) }} VNĐ</h5>
                                     @endif
-                                    <a href="#" class="tag">Garden</a>
                                 </div>
                             </div>
                         </div>

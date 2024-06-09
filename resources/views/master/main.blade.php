@@ -115,6 +115,9 @@
                                     </div>
                                     <div class="header-action d-none d-md-block">
                                         <ul class="list-wrap">
+                                            <li class="header-search">
+                                                <a href="#"><i class="flaticon-search"></i></a>
+                                            </li>
                                             <li class="header-shop-cart">
                                                 <a href="{{ route('cart.index') }}">
                                                     <i class="flaticon-shopping-basket"></i>
@@ -159,8 +162,9 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="search-form">
-                                    <form action="#">
-                                        <input type="text" placeholder="Enter your keyword...">
+                                    <form action="{{ route('home.search') }}" method="POST">
+                                        @csrf
+                                        <input type="text" name="searchProduct" placeholder="Nhập tên sản phẩm...">
                                         <button class="search-btn"><i class="flaticon-search"></i></button>
                                     </form>
                                 </div>
@@ -181,29 +185,6 @@
         <!-- footer-area -->
         <footer>
             <div class="footer-area">
-                <div class="footer-logo-area">
-                    <div class="container">
-                        <div class="footer-logo-wrap">
-                            <ul class="list-wrap">
-                                <li class="order-0 order-lg-2">
-                                    <div class="footer-logo">
-                                        <a href="index-2.html"><img src="uploads/logo/w_logo.png" alt=""></a>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="footer-social">
-                                        
-                                    </div>
-                                </li>
-                                <li class="order-lg-3">
-                                    <div class="footer-newsletter">
-                                        
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
                 <div class="footer-top">
                     <div class="container">
                         <div class="row">
@@ -259,7 +240,7 @@
                         <div class="row align-items-center">
                             <div class="col-lg-6 col-md-7">
                                 <div class="copyright-text">
-                                    <p>LE BA VIET ANH <a href="{{ 'home.index' }}">Bemet</a></p>
+                                    <p>LE BA VIET ANH <a href="{{ route('home.index') }}">Bemet</a></p>
                                 </div>
                             </div>
                         </div>

@@ -16,6 +16,7 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="ad_assets/dist/css/AdminLTE.min.css">
   <link rel="stylesheet" href="ad_assets/dist/css/skins/_all-skins.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/2.0.7/css/dataTables.dataTables.min.css">
   @yield('css')
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -28,7 +29,7 @@
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>A</b>LT</span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>Admin</b>LTE</span>
+      <span class="logo-lg"><b>Admin</b>BEMET</span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -71,7 +72,7 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu">
         <li>
-          <a href="../widgets.html">
+          <a href="{{ route('admin.index') }}">
             <i class="fa fa-home"></i> <span>Dashboard</span>
           </a>
         </li>
@@ -153,11 +154,6 @@
 
           @yield('main')
         </div>
-        <!-- /.box-body -->
-        <div class="box-footer">
-          Footer
-        </div>
-        <!-- /.box-footer-->
       </div>
       <!-- /.box -->
 
@@ -166,13 +162,6 @@
   </div>
   <!-- /.content-wrapper -->
 
-  <footer class="main-footer">
-    <div class="pull-right hidden-xs">
-      <b>Version</b> 2.3.3
-    </div>
-    <strong>Copyright &copy; 2014-2015 <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong> All rights
-    reserved.
-  </footer>
 </div>
 <!-- ./wrapper -->
 
@@ -188,6 +177,7 @@
 <script src="ad_assets/dist/js/app.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="ad_assets/dist/js/demo.js"></script>
+<script src="http://cdn.datatables.net/2.0.7/js/dataTables.min.js"></script>
 @yield('js')
 </body>
 </html>
