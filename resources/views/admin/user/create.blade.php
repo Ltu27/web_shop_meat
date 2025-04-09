@@ -1,12 +1,12 @@
 @extends('master.admin')
-@section('title', 'Create a new User')
+@section('title', 'Thêm mới người dùng')
 @section('main')
 <div class="row">
     <form action="{{ route('user.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="col-md-9">
             <div class="form-group">
-                <label for="">User name</label>
+                <label for="">Tên người dùng</label>
                 <input type="text" name="name" class="form-control" id="" placeholder="Input field">
             </div>
             <div class="form-group">
@@ -14,32 +14,32 @@
                 <input type="email" name="email" class="form-control" id="" placeholder="Input field">
             </div>
             <div class="form-group">
-                <label for="">Phone</label>
+                <label for="">Số điện thoại</label>
                 <input type="text" name="phone" class="form-control" id="" placeholder="Input field">
             </div>
             <div class="form-group">
-                <label for="">Address</label>
+                <label for="">Địa chỉ</label>
                 <textarea name="address" class="form-control" placeholder="Product content"></textarea>
             </div>
         </div>
         <div class="col-md-3">
             <div class="form-group">
-                <label for="">Status</label>
+                <label for="">Trạng thái</label>
                 <div class="radio">
                     <label>
                         <input type="radio" name="status" id="input" value="1" checked>
-                        Publish
+                        Hoạt động
                     </label>
                 </div>
 
                 <div class="radio">
                     <label>
                         <input type="radio" name="status" id="input" value="0" checked>
-                        Hidden
+                        Tắt
                     </label>
                 </div>
             </div>
-            <button class="btn btn-primary" type="submit"><i class="fa fa-save"></i>Save</button>
+            <button class="btn btn-primary" type="submit"><i class="fa fa-save"></i>Lưu</button>
         </div>
     </form>
 </div>    

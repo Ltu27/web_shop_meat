@@ -1,10 +1,10 @@
 @extends('master.admin')
-@section('title', 'User manager')
+@section('title', 'Danh sách người dùng')
 @section('main')
     <form method="POST" action="" class="form-inline" >
         <div class="col">
             <div class="mb-3">
-                <label for="" class="form-inline">Inline Form</label>
+                <label for="" class="form-inline">Điền để tìm kiếm</label>
                 <input
                     type="text"
                     name=""
@@ -14,7 +14,7 @@
                     aria-describedby="helpId"
                 />
                 <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
-                <a href="{{ route('user.create') }}" class="btn btn-success pull-right"><i class="fa fa-plus"></i>Add new</a>
+                <a href="{{ route('user.create') }}" class="btn btn-success pull-right"><i class="fa fa-plus"></i>Thêm mới</a>
             </div>
         </div>
     </form>
@@ -28,37 +28,16 @@
             <thead class="table-light">
                 <tr>
                     <th>STT</th>
-                    <th>Name</th>
+                    <th>Tên</th>
                     <th>Email</th>
-                    <th>Phone</th>
-                    <th>Address</th>
-                    {{-- <th>Status</th> --}}
-                    <th>Action</th>
+                    <th>Số điện thoại</th>
+                    <th>Đại chỉ</th>
+                    {{-- <th>Trạng thái</th> --}}
+                    <th>Hành động</th>
                 </tr>
             </thead>
-            {{-- <tbody class="table-group-divider">
-                @foreach ($users as $user)
-                <tr class="table-primary">
-                    <td scope="row">{{ $user->id }}</td>
-                    <td>{{ $user->name }}</td>
-                    <td>{{ $user->email }}</td>
-                    <td>{{ $user->phone }}</td>
-                    <td>{{ $user->address }}</td>
-                    <td>{{ $user->status == 0 ? 'Tạm ẩn' :'Hiển thị' }}</td>
-                    <td class="text-right">
-                        <form action="{{ route('user.destroy', $user->id) }}" method="post">
-                            @csrf
-                            @method('DELETE')
-                            <a href="{{ route('user.edit', $user->id) }}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></a>
-                            <button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
-                        </form>
-                    </td>
-                </tr>
-                @endforeach
-            </tbody> --}}
         </table>
     </div>
-    {{-- {{ $users->links() }} --}}
 @stop
 @section('js')
     <script>

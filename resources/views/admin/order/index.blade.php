@@ -1,5 +1,5 @@
 @extends('master.admin')
-@section('title', 'Order list')
+@section('title', 'Danh sách đơn hàng')
 
 @section('main')
     
@@ -7,10 +7,10 @@
         <thead>
             <tr>
                 <th>STT</th>
-                <th>Order Date</th>
-                <th>Status</th>
-                <th>Total Price</th>
-                <th>Action</th>
+                <th>Ngày đặt</th>
+                <th>Trạng thái</th>
+                <th>Tổng tiền</th>
+                <th>Hành động</th>
             </tr>
         </thead>
         <tbody>

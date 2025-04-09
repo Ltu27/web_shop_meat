@@ -1,10 +1,10 @@
 @extends('master.admin')
-@section('title', 'Product manager')
+@section('title', 'Quản lý sản phẩm')
 @section('main')
     <form method="POST" action="" class="form-inline" >
         <div class="col">
             <div class="mb-3">
-                <label for="" class="form-inline">Inline Form</label>
+                <label for="" class="form-inline">Điền để tìm kiếm</label>
                 <input
                     type="text"
                     name=""
@@ -14,7 +14,7 @@
                     aria-describedby="helpId"
                 />
                 <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
-                <a href="{{ route('product.create') }}" class="btn btn-success pull-right"><i class="fa fa-plus"></i>Add new</a>
+                <a href="{{ route('product.create') }}" class="btn btn-success pull-right"><i class="fa fa-plus"></i>Thêm mới</a>
             </div>
         </div>
     </form>
@@ -28,12 +28,12 @@
             <thead class="table-light">
                 <tr>
                     <th>STT</th>
-                    <th>Product Name</th>
-                    <th>Category</th>
-                    <th>Price</th>
-                    <th>Image</th>
-                    <th>Product Status</th>
-                    <th>Action</th>
+                    <th>Tên sản phẩm</th>
+                    <th>Danh mục</th>
+                    <th>Giá</th>
+                    <th>Hình ảnh</th>
+                    <th>Trạng thái sản phẩm</th>
+                    <th>Hành động</th>
                 </tr>
             </thead>
             <tbody class="table-group-divider">

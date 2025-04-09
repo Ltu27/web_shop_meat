@@ -70,7 +70,7 @@
                         <h3 class="price">{{ $product->sale_price }} VNĐ<span>Giảm giá</span></h3>
                         <div class="product-count-wrap">
                             <span class="title">Nhanh tay! Giảm giá sẽ hết sau:</span>
-                            <div class="coming-time" data-countdown="2024/4/6"></div>
+                            <div class="coming-time" data-countdown="2024/6/13"></div>
                         </div>
                         <p>{{ $product->description }}</p>
                         <a href="{{ route('cart.add', $product->id) }}" class="buy-btn">Thêm vào giỏ hàng</a>

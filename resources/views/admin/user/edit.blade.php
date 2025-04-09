@@ -1,5 +1,5 @@
 @extends('master.admin')
-@section('title', 'Edit a category')
+@section('title', 'Chỉnh sửa người dùng')
 @section('main')
 <div class="row">
     <div class="col-md-4">

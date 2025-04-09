@@ -1,5 +1,5 @@
 @extends('master.admin')
-@section('title', 'Dashboard')
+@section('title', 'Trang chủ')
 @section('main')
     
 @stop

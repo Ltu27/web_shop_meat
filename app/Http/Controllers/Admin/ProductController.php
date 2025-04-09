@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Product\CreateProductRequest;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductImage;
@@ -32,18 +33,8 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CreateProductRequest $request)
     {
-        $request->validate([
-            'name' => 'required|min:4|max:150|unique:products',
-            'description' => 'required|min:4',
-            'price' => 'required|numeric',
-            'sale_price' => 'required|numeric|lte:price',
-            'img' => 'required|file|mimes:jpg,jpeg,png,gif',
-            'category_id' => 'required|exists:categories,id'
-
-        ]);
-
         $data = $request->only('name', 'price', 'sale_price', 'status', 'description', 'category_id');
 
         $img_name = $request->img->hashName();

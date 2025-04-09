@@ -15,7 +15,7 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        Customer::updateOrCreate([
+        User::updateOrCreate([
             'email' => 'admin@gmail.com',
         ], [
             'email' => 'admin@gmail.com',

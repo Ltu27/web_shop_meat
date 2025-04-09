@@ -10,7 +10,7 @@
   <!-- Bootstrap 3.3.6 -->
   <link rel="stylesheet" href="ad_assets/bootstrap/css/bootstrap.min.css">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
   <!-- Theme style -->
@@ -25,11 +25,11 @@
 
   <header class="main-header">
     <!-- Logo -->
-    <a href="ad_assets/index2.html" class="logo">
+    <a href="#" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>A</b>LT</span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>Admin</b>BEMET</span>
+      <span class="logo-lg"><b>Quản trị </b>BEMET</span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -66,58 +66,66 @@
         </div>
         <div class="pull-left info">
           <p>{{ auth()->user()->name }}</p>
-          <a href="{{ route('admin.logout') }}"><i class="fa fa-circle text-success"></i> Logout</a>
+          <a href="{{ route('admin.logout') }}"><i class="fa fa-circle text-success"></i> Đăng xuất</a>
         </div>
       </div>
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu">
         <li>
           <a href="{{ route('admin.index') }}">
-            <i class="fa fa-home"></i> <span>Dashboard</span>
+            <i class="fa fa-home"></i> <span>Trang chủ</span>
           </a>
         </li>
 
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-th"></i> <span>Users</span> <i class="fa fa-angle-left pull-right"></i>
+            <i class="fa fa-user"></i> <span>Người dùng</span> <i class="fa fa-angle-left pull-right"></i>
           </a>
           <ul class="treeview-menu">
-            <li><a href="{{ route('user.index') }}"><i class="fa fa-circle-o"></i> List</a></li>
-            <li><a href="{{ route('user.create') }}"><i class="fa fa-circle-o"></i> Add new</a></li>
+            <li><a href="{{ route('user.index') }}"><i class="fa fa-circle-o"></i> Danh sách</a></li>
+            <li><a href="{{ route('user.create') }}"><i class="fa fa-circle-o"></i> Thêm mới</a></li>
           </ul>
         </li>
 
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-th"></i> <span>Categories</span> <i class="fa fa-angle-left pull-right"></i>
+            <i class="fa fa-th"></i> <span>Danh mục</span> <i class="fa fa-angle-left pull-right"></i>
           </a>
           <ul class="treeview-menu">
-            <li><a href="{{ route('category.index') }}"><i class="fa fa-circle-o"></i> List</a></li>
-            <li><a href="{{ route('category.create') }}"><i class="fa fa-circle-o"></i> Add new</a></li>
+            <li><a href="{{ route('category.index') }}"><i class="fa fa-circle-o"></i> Danh sách</a></li>
+            <li><a href="{{ route('category.create') }}"><i class="fa fa-circle-o"></i> Thêm mới</a></li>
           </ul>
         </li>
 
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-th"></i> <span>Products</span> <i class="fa fa-angle-left pull-right"></i>
+            <i class="fa fa-inbox"></i> <span>Sản phẩm</span> <i class="fa fa-angle-left pull-right"></i>
           </a>
           <ul class="treeview-menu">
-            <li><a href="{{ route('product.index') }}"><i class="fa fa-circle-o"></i> List</a></li>
-            <li><a href="{{ route('product.create') }}"><i class="fa fa-circle-o"></i> Add new</a></li>
+            <li><a href="{{ route('product.index') }}"><i class="fa fa-circle-o"></i> Danh sách</a></li>
+            <li><a href="{{ route('product.create') }}"><i class="fa fa-circle-o"></i> Thêm mới</a></li>
           </ul>
         </li>
 
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-shopping-cart"></i> <span>Orders</span> <i class="fa fa-angle-left pull-right"></i>
+            <i class="fa fa-shopping-cart"></i> <span>Đơn hàng</span> <i class="fa fa-angle-left pull-right"></i>
           </a>
           <ul class="treeview-menu">
-            <li><a href="{{ route('order.index') }}"><i class="fa fa-circle-o"></i> List</a></li>
-            <li><a href="{{ route('order.index') }}?status=0"><i class="fa fa-circle-o"></i> Unconfimred</a></li>
-            <li><a href="{{ route('order.index') }}?status=2"><i class="fa fa-circle-o"></i> Delivered</a></li>
-            <li><a href="{{ route('order.index') }}?status=3"><i class="fa fa-circle-o"></i> Cancelled</a></li>
+            <li><a href="{{ route('order.index') }}"><i class="fa fa-circle-o"></i> Danh sách</a></li>
+            <li><a href="{{ route('order.index') }}?status=0"><i class="fa fa-circle-o"></i> Chưa xác nhận</a></li>
+            <li><a href="{{ route('order.index') }}?status=2"><i class="fa fa-circle-o"></i> Đã vận chuyển</a></li>
+            <li><a href="{{ route('order.index') }}?status=3"><i class="fa fa-circle-o"></i> Đã hủy</a></li>
           </ul>
         </li>
+        {{-- <li class="treeview">
+          <a href="#">
+            <i class="fa fa-chart-simple"></i> <span> Thống kê</span> <i class="fa fa-angle-left pull-right"></i>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="{{ route('statistical.index') }}"><i class="fa fa-circle-o"></i> Danh sách</a></li>
+          </ul>
+        </li> --}}
       </ul>
     </section>
     <!-- /.sidebar -->

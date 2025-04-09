@@ -1,5 +1,5 @@
 @extends('master.admin')
-@section('title', 'Edit product' . $product->name)
+@section('title', 'Chỉnh sửa sản phẩm' . $product->name)
 @section('main')
 <div class="row">
     <form action="{{ route('product.update', $product->id) }}" method="POST" enctype="multipart/form-data">
@@ -7,15 +7,15 @@
         @method('PUT')
         <div class="col-md-9">
             <div class="form-group">
-                <label for="">Product name</label>
+                <label for="">Tên sản phẩm</label>
                 <input type="text" name="name" class="form-control" value="{{ $product->name }}" placeholder="Input fieald">
             </div>
             <div class="form-group">
-                <label for="">Product description</label>
+                <label for="">Mô tả sản phẩm</label>
                 <textarea name="description" class="form-control" placeholder="Product content">{{ $product->description }}</textarea>
             </div>
             <div class="form-group">
-                <label for="">Product other image</label>
+                <label for="">Ảnh khác của sản phẩm</label>
                 <input type="file" name="other_img[]" class="form-control" multiple onchange="showOtherImage(this)">
                 <hr>
                 <div class="row">
@@ -39,44 +39,44 @@
         </div>
         <div class="col-md-3">
             <div class="form-group">
-                <label for="">Product category</label>
+                <label for="">Danh mục sản phẩm</label>
                 <select name="category_id" class="form-control">
-                    <option value="">Choice One---</option>
+                    <option value="">Chọn 1</option>
                     @foreach ($cats as $cat)
                         <option value="{{ $cat->id }}" {{ $cat->id == $product->category_id ? 'selected' : ''}}>{{ $cat->name }}</option>
                     @endforeach
                 </select>
             </div>
             <div class="form-group">
-                <label for="">Product price</label>
+                <label for="">Giá</label>
                 <input type="text" name="price" class="form-control" value="{{ $product->price }}" placeholder="Input fieald">
             </div>
             <div class="form-group">
-                <label for="">Product sale price</label>
+                <label for="">Giá khuyến mãi</label>
                 <input type="text" name="sale_price" class="form-control" value="{{ $product->sale_price }}" placeholder="Input fieald">
             </div>
             <div class="form-group">
-                <label for="">Product Status</label>
+                <label for="">Trạng thái sản phẩm</label>
                 <div class="radio">
                     <label>
                         <input type="radio" name="status" value="1" {{ $product->status == 1 ? 'checked' : ''}}>
-                        Publish
+                        Kích hoạt
                     </label>
                 </div>
 
                 <div class="radio">
                     <label>
                         <input type="radio" name="status" value="0" {{ $product->status == 0 ? 'checked' : ''}}>
-                        Hidden
+                        Ẩn
                     </label>
                 </div>
             </div>
             <div class="form-group">
-                <label for="">Product image</label>
+                <label for="">Ảnh sản phẩm</label>
                 <input type="file" name="img" class="form-control" onchange="showImage(this)">
                 <img src="uploads/product/{{ $product->image }}" width="100%" id="show_img">
             </div>
-            <button class="btn btn-primary" type="submit"><i class="fa fa-save"></i>Save</button>
+            <button class="btn btn-primary" type="submit"><i class="fa fa-save"></i>Lưu</button>
         </div>
     </form>
 </div>    

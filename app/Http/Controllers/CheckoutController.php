@@ -49,9 +49,10 @@ class CheckoutController extends Controller
             'address.required' => 'Địa chỉ không được để trống',
         ]);
 
+  
         $data = $req->only('name', 'email', 'phone', 'address', 'payment');
         $data['customer_id'] = $auth->id;
-
+        
         if ($order = Order::create($data)) {
             $token = Str::random(40);
             foreach($auth->carts as $cart) {

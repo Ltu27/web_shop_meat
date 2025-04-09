@@ -63,9 +63,9 @@
                                     <div class="col-6">
                                         <button type="submit">{{ __('common.checkout.cash_payment') }}</button>
                                     </div>
-                                    <div class="col-6">
+                                    {{-- <div class="col-6">
                                         <button type="submit" value="2" name="payment">{{ __('common.checkout.online') }}</button>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
                         </form>

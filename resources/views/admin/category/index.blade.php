@@ -1,10 +1,10 @@
 @extends('master.admin')
-@section('title', 'Category manager')
+@section('title', 'Quản lý danh mục')
 @section('main')
     <form method="POST" action="" class="form-inline" >
         <div class="col">
             <div class="mb-3">
-                <label for="" class="form-inline">Inline Form</label>
+                <label for="" class="form-inline">Tìm kiếm</label>
                 <input
                     type="text"
                     name=""
@@ -14,7 +14,7 @@
                     aria-describedby="helpId"
                 />
                 <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
-                <a href="{{ route('category.create') }}" class="btn btn-success pull-right"><i class="fa fa-plus"></i>Add new</a>
+                <a href="{{ route('category.create') }}" class="btn btn-success pull-right"><i class="fa fa-plus"></i>Thêm mới</a>
             </div>
         </div>
     </form>
@@ -28,9 +28,9 @@
             <thead class="table-light">
                 <tr>
                     <th>STT</th>
-                    <th>Category Name</th>
-                    <th>Category Status</th>
-                    <th>Action</th>
+                    <th>Tên danh mục</th>
+                    <th>Trạng thái</th>
+                    <th>Hành động</th>
                 </tr>
             </thead>
             <tbody class="table-group-divider">
@@ -43,8 +43,8 @@
                         <form action="{{ route('category.destroy', $cat->id) }}" method="post">
                             @csrf
                             @method('DELETE')
-                            <a href="{{ route('category.edit', $cat->id) }}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i>Edit</a>
-                            <button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i>Delete</button>
+                            <a href="{{ route('category.edit', $cat->id) }}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i>Sửa</a>
+                            <button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i>Xóa</button>
                         </form>
                     </td>
                 </tr>

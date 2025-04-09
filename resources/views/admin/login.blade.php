@@ -5,7 +5,7 @@
     <base href="/">
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 2 | Log in</title>
+  <title>AdminLTE 2 | Đăng nhập</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.6 -->
@@ -26,7 +26,7 @@
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
-    <p class="login-box-msg">Sign in to start your session</p>
+    <p class="login-box-msg">Đăng nhập để bắt đầu phiên là việc của bạn</p>
 
     <form action="" method="post">
         @csrf
@@ -53,19 +53,19 @@
         <div class="col-xs-8">
           <div class="checkbox">
             <label>
-              <input type="checkbox"> Remember Me
+              <input type="checkbox"> Ghi nhớ đăng nhập
             </label>
           </div>
         </div>
         <!-- /.col -->
         <div class="col-xs-4">
-          <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+          <button type="submit" class="btn btn-primary btn-block btn-flat">Đăng nhập</button>
         </div>
         <!-- /.col -->
       </div>
     </form>
 
-    <a href="#">I forgot my password</a><br>
+    <a href="#">Quên mật khẩu?</a><br>
 
   </div>
   <!-- /.login-box-body -->

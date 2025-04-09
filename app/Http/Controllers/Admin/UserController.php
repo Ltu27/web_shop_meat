@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Customer;
 use Illuminate\Http\Request;
 use App\Models\User;
 
@@ -10,14 +11,14 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::orderBy('id', 'DESC')->paginate(10);
+        $users = Customer::orderBy('id', 'DESC')->paginate(10);
 
         return view('admin.user.index', compact('users'));
     }
 
     public function getListUser()
     {
-        $users = User::all();
+        $users = Customer::all();
         return response()->json([
             'data' => $users
         ]);

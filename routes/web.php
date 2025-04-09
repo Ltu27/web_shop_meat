@@ -5,6 +5,7 @@ use App\Http\Controllers\AccountController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\StatisticController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
@@ -92,6 +93,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
         'user' => UserController::class,
         'category' => CategoryController::class,
         'product' => ProductController::class,
+        'statistical'=> StatisticController::class
     ]);
     
     route::get('product-delete-image/{image}', [ProductController::class, 'destroyImage'])->name('product.destroyImage');

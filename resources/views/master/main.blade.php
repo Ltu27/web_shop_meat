@@ -107,8 +107,8 @@
                                             </li>
                                             <li class="menu-item-has-children"><a href="#">Bài viết</a>
                                                 <ul class="sub-menu">
-                                                    <li><a href="blog.html">Our Blog</a></li>
-                                                    <li><a href="blog-details.html">Blog Details</a></li>
+                                                    <li><a href="#">Our Blog</a></li>
+                                                    <li><a href="#">Blog Details</a></li>
                                                 </ul>
                                             </li>
                                         </ul>
@@ -266,6 +266,13 @@
         <script src="assets/js/wow.min.js"></script>
         <script src="assets/js/main.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.js"></script>
+        <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+        <df-messenger
+        intent="WELCOME"
+        chat-title="web_shop_meet"
+        agent-id="40034e07-e5ab-490f-8626-e124de7425a9"
+        language-code="vi"
+        ></df-messenger>
         @yield('js')
         @if(Session::has('ok'))
 
