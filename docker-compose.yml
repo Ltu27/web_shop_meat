@@ -1,0 +1,51 @@
+services:
+  application:
+    container_name: web_meat_application
+    build:
+      context: .
+      dockerfile: ./dockerfiles/php.dockerfile
+      args:
+        - UID=1000
+        - GID=1000
+    expose:
+      - "9000"
+    volumes:
+      - ./:/var/www
+  nginx:
+    container_name: web_meat_nginx
+    build:
+      context: .
+      dockerfile: ./dockerfiles/nginx.dockerfile
+    ports:
+      - "81:81"
+      - "442:443"
+    volumes:
+      - ./:/var/www
+      - ./conf/default.conf:/etc/nginx/sites-available/test.conf
+    depends_on:
+      - application
+  mysql:
+    image: mysql:8.0
+    container_name: web_meat_mysql
+    environment:
+      - MYSQL_DATABASE=shopping_food
+      - MYSQL_ROOT_PASSWORD=root_secret
+      - MYSQL_USER=default
+      - MYSQL_PASSWORD=secret
+    ports:
+      - "3307:3306"
+    volumes:
+      - ./database/mysql/mysql:/var/lib/mysql
+    depends_on:
+      - application
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: web_meat_phpmyadmin
+    environment:
+      - PMA_HOST=web_meat_mysql
+      - PMA_PORT=3306
+      - MYSQL_ROOT_PASSWORD=root_secret
+    ports:
+      - "8080:80"
+    depends_on:
+      - mysql
