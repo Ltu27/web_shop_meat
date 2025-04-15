@@ -40,41 +40,46 @@
                                 @csrf
                                 <div class="contact-form-wrap">
                                     <div class="form-grp">
-                                        <input name="name" type="text" placeholder="Tên của bạn *" required>
+                                        <input name="name" type="text" placeholder="Tên của bạn *" value="{{ old('name') }}">
                                         @error('name')
                                             <div class="help-block">{{ $message }}</div>
                                         @enderror
                                     </div>
                                     <div class="form-grp">
-                                        <input name="email" type="email" placeholder="email của bạn *" required>
+                                        <input name="email" type="email" placeholder="email của bạn *" value="{{ old('email') }}">
                                         @error('email')
                                             <div class="help-block">{{ $message }}</div>
                                         @enderror
                                     </div>
                                     <div class="form-grp">
-                                        <input name="phone" type="text" placeholder="Số điện thoại của bạn *" required>
+                                        <input name="phone" type="text" placeholder="Số điện thoại của bạn *" value="{{ old('phone') }}">
                                         @error('phone')
                                             <div class="help-block">{{ $message }}</div>
                                         @enderror
                                     </div>
                                     <div class="form-grp">
-                                        <input name="address" type="text" placeholder="Địa chỉ của bạn *" required>
+                                        <input name="address" type="text" placeholder="Địa chỉ của bạn *" value="{{ old('address') }}">
                                         @error('address')
                                             <div class="help-block">{{ $message }}</div>
                                         @enderror
                                     </div>
                                     <div class="form-grp">
                                         <select name="gender" class="form-control">
-                                            <option value="">Chọn 1</option>
                                             <option value="1">Nam</option>
                                             <option value="0">Nữ</option>
                                         </select>
                                     </div>
                                     <div class="form-grp">
-                                        <input name="password" type="password" placeholder="Mật khẩu của bạn *" required>
+                                        <input name="password" type="password" placeholder="Mật khẩu của bạn *">
+                                        @error('password')
+                                            <div class="help-block">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                     <div class="form-grp">
-                                        <input name="confirm_password" type="password" placeholder="Nhập lại mật khẩu *" required>
+                                        <input name="confirm_password" type="password" placeholder="Nhập lại mật khẩu *">
+                                        @error('confirm_password')
+                                            <div class="help-block">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                     <button type="submit">Tạo tài khoản</button>
                                 </div>

@@ -193,6 +193,8 @@ return [
         'sale_price' => 'Giá khuyến mãi',
         'img' => 'hình ảnh',
         'category_id' => 'Danh mục',
+        'password' => 'Mật khẩu',
+        'confirm_password' => 'Xác nhận mật khẩu',
     ],
 
 ];
