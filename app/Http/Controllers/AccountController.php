@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Auth\LoginRequest;
 use App\Mail\ForgotPassword;
 use App\Mail\VerifyAccount;
 use App\Models\Customer;
@@ -11,9 +12,16 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use App\Models\Favorite;
+use App\Services\Customer\Auth\AuthService;
 
 class AccountController extends Controller
 {
+    public function __construct(
+        protected AuthService $authService,
+    ) {
+        
+    }
+
     public function login() {
         return view('account.login');
     }
@@ -25,29 +33,24 @@ class AccountController extends Controller
 
     public function logout() {
         auth('cus')->logout();
-        return redirect()->route('account.login')->with('ok', 'You are logout');
+        return redirect()->route('account.login')->with('ok', 'Bạn đã đăng xuất!');
     }
 
-    public function check_login(Request $req) {
-        $req->validate([
-            'email' => 'required|exists:customers',
-            'password' => 'required',
-        ]);
-
-        $data = $req->only('email', 'password');
+    public function check_login(LoginRequest $req) {
+        $data = $req->validated();
 
         $check = auth('cus')->attempt($data);
 
         if($check) {
-            if(auth('cus')->user()->email_verified_at == '') {
+            if(!$this->authService->checkVerify($data['email'])) {
                 auth('cus')->logout();
-                return redirect()->back()->with('no', 'Your account is not verified, please check email again');
+                return redirect()->back()->with('no', 'Tài khoản của bạn chưa được xác minh, hãy kiểm tra lại email!');
             }
 
-            return redirect()->route('home.index')->with('ok', 'Welcome back');
+            return redirect()->route('home.index')->with('ok', 'Chào mừng trở lại!');
         }
 
-        return redirect()->back()->with('no', 'Your account or password invalid');
+        return redirect()->back()->with('no', 'Tài khoản hoặc mật khẩu không đúng!');
 
     }
 

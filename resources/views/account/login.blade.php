@@ -39,13 +39,16 @@
                                 @csrf
                                 <div class="contact-form-wrap">
                                     <div class="form-grp">
-                                        <input name="email" type="email" placeholder="Email của bạn *" required>
+                                        <input name="email" type="email" placeholder="Email của bạn *" value="{{ old('email') }}">
                                         @error('email')
                                             <div class="help-block">{{ $message }}</div>
                                         @enderror
                                     </div>
                                     <div class="form-grp">
-                                        <input name="password" type="password" placeholder="Mật khẩu *" required>
+                                        <input name="password" type="password" placeholder="Mật khẩu *">
+                                        @error('password')
+                                            <div class="help-block">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                     <button type="submit">Đăng nhập</button>
                                     <a style="display: block; text-align:center; margin-top:15px" 
