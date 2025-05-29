@@ -33,7 +33,10 @@ class HomeController extends Controller
 
     public function product(Product $product) {
         $products = Product::where('category_id', $product->category_id)->limit(12)->get();
-        return view('home.product', compact('product', 'products'));
+        return view('home.product', compact(
+            'product', 
+            'products',
+        ));
     }
 
     public function favorite($product_id) {

@@ -26,6 +26,7 @@
         <link rel="stylesheet" href="assets/css/style.css">
         <link rel="stylesheet" href="assets/css/responsive.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.css">
+        @yield('css')
     </head>
     <body>
 
@@ -240,7 +241,7 @@
                         <div class="row align-items-center">
                             <div class="col-lg-6 col-md-7">
                                 <div class="copyright-text">
-                                    <p>LE BA VIET ANH <a href="{{ route('home.index') }}">THE FACE SHOP</a></p>
+                                    <p>HUE HUE <a href="{{ route('home.index') }}">THE FACE SHOP</a></p>
                                 </div>
                             </div>
                         </div>

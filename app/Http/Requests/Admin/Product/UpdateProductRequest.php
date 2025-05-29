@@ -37,7 +37,7 @@ class UpdateProductRequest extends FormRequest
                 'numeric',
                 // new PriceGreaterThanValueFixed($coupon),
             ],
-            'sale_price' => 'required|numeric|lte:price',
+            // 'sale_price' => 'required|numeric|lte:price',
             // 'coupon_id' => 'nullable|exists:coupons,id',
             'img' => 'file|mimes:jpg,jpeg,png,gif',
             'category_id' => 'required|exists:categories,id',

@@ -221,9 +221,8 @@
             <div class="row align-items-center justify-content-center">
                 <div class="col-lg-6 col-md-10">
                     <div class="faq-img-wrap">
-                        <img src="uploads/images/faq_img01.png" alt="">
-                        <img src="uploads/images/faq_img02.png" alt="">
-                        <img src="uploads/images/faq_img03.png" alt="">
+                        <img src="uploads/images/anh2.jpg" alt="">
+                        <img src="uploads/images/anh3.webp" alt="">
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -233,29 +232,27 @@
                             <h2 class="title">Những <span>câu hỏi</span> thường gặp.</h2>
                         </div>
                         <div class="faq-wrap">
-                            <div class="accordion" id="accordionExample">
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header">
-                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                            Thịt cam kết 100% tười sống.
-                                        </button>
-                                    </h2>
-                                    <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
-                                        <div class="accordion-body">
-                                            <p>Thị được cung cấp từ những nguồn cung uy tín nhất.</p>
-                                        </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        Sản phẩm chính hãng 100% từ thương hiệu uy tín
+                                    </button>
+                                </h2>
+                                <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                        <p>Tất cả sản phẩm đều được nhập khẩu chính ngạch hoặc phân phối từ nhà cung cấp chính thức, đảm bảo chất lượng và nguồn gốc rõ ràng.</p>
                                     </div>
                                 </div>
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header">
-                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                            Có phải thịt sạch không?
-                                        </button>
-                                    </h2>
-                                    <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                                        <div class="accordion-body">
-                                            <p>Trang trại nuôi trồng sạch sẽ, thịt không chất bảo quản.</p>
-                                        </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                        Sản phẩm có phù hợp với da nhạy cảm không?
+                                    </button>
+                                </h2>
+                                <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                        <p>Các sản phẩm đều được kiểm nghiệm da liễu, không chứa paraben hay hương liệu gây kích ứng. Phù hợp cho cả làn da nhạy cảm.</p>
                                     </div>
                                 </div>
                             </div>
@@ -263,10 +260,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="faq-shape-wrap">
-            <img src="uploads/images/faq_shape01.png" alt="" class="tg-motion-effects3">
-            <img src="uploads/images/faq_shape02.png" alt="" class="tg-motion-effects2">
         </div>
     </section>
     <!-- faq-area-end -->

@@ -59,10 +59,10 @@
                 <label for="">Giá</label>
                 <input type="text" name="price" class="form-control" value="{{ $product->price }}" placeholder="Nhập dữ liệu">
             </div>
-            <div class="form-group">
+            {{-- <div class="form-group">
                 <label for="">Giá khuyến mãi</label>
                 <input type="text" name="sale_price" class="form-control" value="{{ $product->sale_price }}" placeholder="Nhập dữ liệu">
-            </div>
+            </div> --}}
             <div class="form-group">
                 <label for="">Trạng thái sản phẩm</label>
                 <div class="radio">

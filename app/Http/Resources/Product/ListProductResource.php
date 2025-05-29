@@ -21,7 +21,7 @@ class ListProductResource extends JsonResource
             'name' => $this->name,
             'image' => $this->image,
             'price' => $this->price,
-            'sale_price' => $this->sale_price,
+            // 'sale_price' => $this->sale_price,
             'status' => $this->status,
             'category' => new ShowCategoryResource($this->cat),
             'coupon' => new ShowCouponResource($this->coupon),
