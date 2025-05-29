@@ -4,13 +4,24 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Product\CreateProductRequest;
+use App\Http\Requests\Admin\Product\UpdateProductRequest;
+use App\Http\Requests\CreateProductVariantRequest;
+use App\Http\Resources\Product\Variant\ListProductVariantResource;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductImage;
+use App\Services\ProductService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+    public function __construct(
+        protected ProductService $service,
+    )
+    {
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -81,19 +92,9 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Product $product)
+    public function update(UpdateProductRequest $request, Product $product)
     {
-        $request->validate([
-            'name' => 'required|min:4|max:150|unique:products,name,'.$product->id,
-            'description' => 'required|min:4',
-            'price' => 'required|numeric',
-            'sale_price' => 'required|numeric|lte:price',
-            'img' => 'file|mimes:jpg,jpeg,png,gif',
-            'category_id' => 'required|exists:categories,id'
-
-        ]);
-
-        $data = $request->only('name', 'price', 'sale_price', 'status', 'description', 'category_id');
+        $data = $request->validated();
 
         if ($request->has('img')) {
             $img_name = $product->image;
@@ -107,6 +108,14 @@ class ProductController extends Controller
 
             $data['image'] = $img_name;
         }
+
+        if ($product->variants) {
+            $data['quantity'] = 0;
+            foreach ($product->variants as $variant) {
+                $data['quantity'] += $variant->stock_quantity;
+            }
+        }
+
 
         if ($product->update($data)) {
             if ($request->has('other_img')) {
@@ -184,5 +193,25 @@ class ProductController extends Controller
             return redirect()->back()->with('ok', 'Delete image successfully');
         }
         return redirect()->back()->with('no', 'Something wrong, please check again');
+    }
+
+    public function getVariants(Request $request): JsonResponse
+    {
+        $data = $this->service->getVariants($request->id);
+        return $this->success(
+            ListProductVariantResource::collection($data)
+        );
+    }
+
+    public function saveVariants(CreateProductVariantRequest $request): JsonResponse
+    {
+        $data = $request->validated();
+        $result = $this->service->saveVariants($data);
+        if (!$result) {
+            return $this->failure();
+        }
+
+        return $this->success(
+            ListProductVariantResource::collection($result));
     }
 }

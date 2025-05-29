@@ -11,7 +11,9 @@ class Product extends Model
 
     public $appends = ['favorited'];
 
-    protected $fillable = ['name', 'status', 'price', 'sale_price', 'image', 'category_id', 'description'];
+    protected $fillable = ['name', 'status', 'price', 'sale_price', 'image', 'category_id', 'description',
+        'quantity',
+    ];
 
     public function cat() {
         return $this->hasOne(Category::class, 'id', 'category_id');
@@ -29,5 +31,10 @@ class Product extends Model
     public function comment() 
     {
         return $this->hasMany(Comment::class, 'product_id', 'id');
+    }
+
+    public function variants() 
+    {
+        return $this->hasMany(ProductVariant::class, 'product_id', 'id');
     }
 }

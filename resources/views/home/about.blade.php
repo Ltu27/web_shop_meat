@@ -7,7 +7,7 @@
 <main>
 
     <!-- breadcrumb-area -->
-    <section class="breadcrumb-area tg-motion-effects breadcrumb-bg" data-background="uploads/bg/breadcrumb_bg.jpg">
+    <section class="breadcrumb-area tg-motion-effects breadcrumb-bg" data-background="uploads/bg/chup_anh_my_pham.webp">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -32,7 +32,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="section-title text-center mb-50">
-                        <span class="sub-title">Về Bemet</span>
+                        <span class="sub-title">Về THE FACE SHOP</span>
                         <h2 class="title">Tại sao chọn chúng tôi</h2>
                         <div class="title-shape" data-background="uploads/images/title_shape.png"></div>
                     </div>

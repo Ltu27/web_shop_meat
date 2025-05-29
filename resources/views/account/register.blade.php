@@ -6,7 +6,7 @@
 <main>
 
     <!-- breadcrumb-area -->
-    <section class="breadcrumb-area tg-motion-effects breadcrumb-bg" data-background="uploads/bg/breadcrumb_bg.jpg">
+    <section class="breadcrumb-area tg-motion-effects breadcrumb-bg" data-background="uploads/bg/chup_anh_my_pham.webp">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">

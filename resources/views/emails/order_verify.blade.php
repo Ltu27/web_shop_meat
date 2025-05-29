@@ -1,6 +1,6 @@
 <div style="border: 3px solid green; padding: 15px; background: lightgreen; width: 600px; margin: auto">
     <h3>Gửi {{ $order->customer->name }}</h3>
-    <p>Bạn vừa đặt hàng từ Bemet</p>    
+    <p>Bạn vừa đặt hàng từ THE FACE SHOP</p>    
     <h4>Chi tiết đơn hàng của bạn</h4>
 
     <table border="1" cellpadding="5" cellspacing="0">

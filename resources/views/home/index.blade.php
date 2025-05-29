@@ -10,26 +10,15 @@
     <div class="area-bg" data-background="uploads/bg/area_bg.jpg">
 
         <!-- banner-area -->
-        <section class="banner-area banner-bg tg-motion-effects" data-background="uploads/banner/{{ $topBanner->image }}">
+        <section class="banner-area banner-bg tg-motion-effects" data-background="uploads/banner/pngtree-various.jpg">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="banner-content">
-                            <h1 class="title wow fadeInUp" data-wow-delay=".2s">{{ $topBanner->name }}</h1>
-                            <span class="sub-title wow fadeInUp" data-wow-delay=".4s">Meat shop</span>
                             <a href="{{ route('cart.index') }}" class="btn wow fadeInUp" data-wow-delay=".6s">Đặt hàng ngay</a>
-                        </div>
-                        <div class="banner-img text-center wow fadeInUp" data-wow-delay=".8s">
-                            <img src="uploads/banner/banner_img.png" alt="">
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="banner-shape-wrap">
-                <img src="uploads/banner/banner_shape01.png" alt="" class="tg-motion-effects5">
-                <img src="uploads/banner/banner_shape02.png" alt="" class="tg-motion-effects4">
-                <img src="uploads/banner/banner_shape03.png" alt="" class="tg-motion-effects3">
-                <img src="uploads/banner/banner_shape04.png" alt="" class="tg-motion-effects5">
             </div>
         </section>
         <!-- banner-area-end -->
@@ -91,7 +80,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="section-title text-center mb-60">
-                        <span class="sub-title">Bemet Shop</span>
+                        <span class="sub-title">THE FACE SHOP</span>
                         <h2 class="title">Giảm giá</h2>
                         <div class="title-shape" data-background="uploads/images/title_shape.png"></div>
                     </div>
@@ -172,7 +161,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="section-title text-center mb-70">
-                        <span class="sub-title">Bemet</span>
+                        <span class="sub-title">THE FACE SHOP</span>
                         <h2 class="title">Sản phẩm đặc trưng</h2>
                         <div class="title-shape" data-background="uploads/images/title_shape.png"></div>
                     </div>

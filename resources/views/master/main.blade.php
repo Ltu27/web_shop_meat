@@ -54,7 +54,7 @@
                         <div class="col-lg-6 col-md-8">
                             <div class="header-top-left">
                                 <ul class="list-wrap">
-                                    <li class="header-location">
+                                    <li class="header-location" style="font-size: 16px">
                                         <i class="fas fa-map-marker-alt"></i>
                                         Ha Noi. Viet Nam
                                     </li>
@@ -66,15 +66,15 @@
                                 <div class="header-top-menu">
                                     <ul class="list-wrap">
                                         @if (auth('cus')->check())
-                                            <li><a href="{{ route('account.profile') }}">Xin chào {{ auth('cus')->user()->name }}</a></li>
-                                            <li><a href="{{ route('account.change_password') }}">Thay đổi mật khẩu</a></li>
-                                            <li><a href="{{ route('account.favorite') }}">Yêu thích</a></li>
-                                            <li><a href="{{ route('order.history') }}">Đơn của tôi</a></li>
-                                            <li><a href="{{ route('account.logout') }}">Đăng xuất</a></li>
+                                            <li><a style="font-size: 16px" href="{{ route('account.profile') }}">Xin chào {{ auth('cus')->user()->name }}</a></li>
+                                            <li><a style="font-size: 16px" href="{{ route('account.change_password') }}">Thay đổi mật khẩu</a></li>
+                                            <li><a style="font-size: 16px" href="{{ route('account.favorite') }}">Yêu thích</a></li>
+                                            <li><a style="font-size: 16px" href="{{ route('order.history') }}">Đơn của tôi</a></li>
+                                            <li><a style="font-size: 16px" href="{{ route('account.logout') }}">Đăng xuất</a></li>
                                             
                                         @else
-                                            <li><a href="{{ route('account.login') }}">Đăng nhập</a></li>
-                                            <li><a href="{{ route('account.register') }}">Đăng ký</a></li>
+                                            <li><a style="font-size: 16px" href="{{ route('account.login') }}">Đăng nhập</a></li>
+                                            <li><a style="font-size: 16px" href="{{ route('account.register') }}">Đăng ký</a></li>
                                         @endif
                                         
                                     </ul>
@@ -92,7 +92,7 @@
                                 <div class="mobile-nav-toggler"><i class="fas fa-bars"></i></div>
                                 <nav class="menu-nav">
                                     <div class="logo">
-                                        <a href="#"><img src="uploads/logo/logo.png" alt="Logo"></a>
+                                        <a href="#"><img src="uploads/logo/logo-web-hue.webp" alt="Logo"></a>
                                     </div>
                                     <div class="navbar-wrap main-menu d-none d-lg-flex">
                                         <ul class="navigation">
@@ -240,7 +240,7 @@
                         <div class="row align-items-center">
                             <div class="col-lg-6 col-md-7">
                                 <div class="copyright-text">
-                                    <p>LE BA VIET ANH <a href="{{ route('home.index') }}">Bemet</a></p>
+                                    <p>LE BA VIET ANH <a href="{{ route('home.index') }}">THE FACE SHOP</a></p>
                                 </div>
                             </div>
                         </div>

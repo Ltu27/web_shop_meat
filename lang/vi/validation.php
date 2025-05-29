@@ -195,6 +195,7 @@ return [
         'category_id' => 'Danh mục',
         'password' => 'Mật khẩu',
         'confirm_password' => 'Xác nhận mật khẩu',
+        'quantity' => 'Số lượng',
     ],
 
 ];
