@@ -42,10 +42,10 @@ class AccountController extends Controller
         $check = auth('cus')->attempt($data);
 
         if($check) {
-            if(!$this->authService->checkVerify($data['email'])) {
-                auth('cus')->logout();
-                return redirect()->back()->with('no', 'Tài khoản của bạn chưa được xác minh, hãy kiểm tra lại email!');
-            }
+            // if(!$this->authService->checkVerify($data['email'])) {
+            //     auth('cus')->logout();
+            //     return redirect()->back()->with('no', 'Tài khoản của bạn chưa được xác minh, hãy kiểm tra lại email!');
+            // }
 
             return redirect()->route('home.index')->with('ok', 'Chào mừng trở lại!');
         }
