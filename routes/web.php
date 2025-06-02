@@ -71,7 +71,7 @@ Route::group(['prefix' => 'order', 'middleware' => 'customer'], function() {
     Route::get('/detail/{order}', [CheckoutController::class, 'detail'])->name('order.detail');
     Route::post('/checkout', [CheckoutController::class, 'post_checkout'])->name('order.postCheckout');
     Route::get('/verify/{token}', [CheckoutController::class, 'verify'])->name('order.verify');
-    Route::post('/payment/online', [CheckoutController::class, 'createPayment'])->name('order.payment');
+    Route::post('/payment/online', [CheckoutController::class, 'createPayment'])->name('order.payment.online');
     
 
 }); 

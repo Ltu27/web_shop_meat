@@ -129,7 +129,10 @@
                         @endif
                         
                         <p>{{ $product->description }}</p>
-                        <a href="{{ route('cart.add', $product->id) }}" class="buy-btn">Thêm vào giỏ hàng</a>
+                        <button type="button" class="buy-btn" id="add-to-cart-btn"
+                            data-product-id="{{ $product->id }}">
+                            Thêm vào giỏ hàng
+                        </button>
                         <div class="payment-method-wrap">
                     </div>
                 </div>
@@ -242,6 +245,51 @@
         $('#stock-quantity').text(stock);
         $('#production-date').text(production);
         $('#expiration-date').text(expiration);
+    });
+
+    $('#add-to-cart-btn').on('click', function () {
+        let productId = $(this).data('product-id');
+        let activeVariant = $('.variant-color.active');
+
+        let data = {};
+        if (activeVariant.length > 0) {
+            data = {
+                variant: true,
+                variant_color: activeVariant.css('background-color'),
+                variant_price: activeVariant.data('price'),
+                stock_quantity: activeVariant.data('stock'),
+                production_date: activeVariant.data('production'),
+                expiration_date: activeVariant.data('expiration'),
+                product_id: productId,
+            };
+        } else {
+            data = {
+                variant: false,
+                product_id: productId,
+            };
+        }
+
+        $.ajax({
+            url: '{{ route('cart.add', ":id") }}'.replace(':id', productId),
+            method: 'POST',
+            data: data,
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+            success: function (res) {
+                // toastr.success(res.message);    
+            },
+            error: function (xhr) {
+                if (xhr.status === 422) {
+                    let errors = xhr.responseJSON.errors;
+                    for (let field in errors) {
+                        toastr.error(errors[field][0]);
+                    }
+                } else {
+                    // toastr.error('Có lỗi xảy ra. Vui lòng thử lại.');
+                }
+            }
+        });
     });
 </script>
 

@@ -51,18 +51,17 @@ class ProductService
         return $this->product->with('variants')->find($id)->variants;
     }
 
-    public function saveVariants(array $data) 
+    public function saveVariants(Product $product, array $variants) 
     {
         try {
             DB::beginTransaction();
-            $product = $this->product->find($data['product_id']);
             $product->variants()->delete();
 
-            foreach ($data['variants'] as $variantData) {
-                $product->variants()->create($variantData);
+            foreach ($variants as $variant) {
+                $product->variants()->create($variant);
             }
             DB::commit();
-            return $product->variants;
+            return true;
         } catch (\Exception $e) {
             DB::rollBack();
             report($e);

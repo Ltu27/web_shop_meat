@@ -23,11 +23,18 @@ class CreateProductRequest extends FormRequest
     {
         return [
             'name' => 'required|max:150|unique:products',
-            'description' => 'required',
-            'price' => 'required|numeric',
+            'description' => 'nullable',
+            'price' => 'nullable|numeric',
+            'quantity' => 'nullable|integer',
             // 'sale_price' => 'required|numeric|lte:price',
-            'img' => 'required|file|mimes:jpg,jpeg,png,webp',
-            'category_id' => 'required|exists:categories,id'
+            'img' => 'nullable|file|mimes:jpg,jpeg,png,webp',
+            'category_id' => 'required|exists:categories,id',
+            'variants' => 'nullable|array',
+            'variants.*.variant_color' => 'nullable|string',
+            'variants.*.variant_price' => 'nullable|string',
+            'variants.*.stock_quantity' => 'nullable|string',
+            'variants.*.production_date' => 'nullable|date',
+            'variants.*.expiration_date' => 'nullable|date',
         ];
     }
 }
