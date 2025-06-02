@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\CartController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -23,4 +24,9 @@ Route::prefix('product')->group(function () {
     Route::get('/', [ProductController::class, 'getListProduct']);
     Route::get('/get-variants/{id}', [ProductController::class, 'getVariants']);
     Route::post('/save-variants', [ProductController::class, 'saveVariants']);
+});
+
+Route::prefix('cart')->group(function () {
+    Route::post('/add/{product}', [CartController::class, 'addToCard'])->name('api.cart.add');
+
 });

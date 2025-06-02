@@ -46,18 +46,11 @@ class ProductController extends Controller
      */
     public function store(CreateProductRequest $request)
     {
-        $data = $request->only(
-            'name', 
-            'price', 
-            // 'sale_price', 
-            'status', 
-            'description', 
-            'category_id',
-        );
+        $data = $request->validated();
 
-        $img_name = $request->img->hashName();
+        $img_name = $request->img?->hashName();
 
-        $request->img->move(public_path('uploads/product'), $img_name);
+        $request->img?->move(public_path('uploads/product'), $img_name);
 
         $data['image'] = $img_name;
         $data['sale_price'] = $data['price'];
@@ -74,6 +67,9 @@ class ProductController extends Controller
                         'product_id' => $product->id
                     ]);
                 }
+            }
+            if (isset($data['variants'])) {
+                $this->service->saveVariants($product, $data['variants']);
             }
             return redirect()->route('product.index')->with('ok', 'Create new product successfully');
         }

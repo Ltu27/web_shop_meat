@@ -16,7 +16,7 @@ return [
     'order' => 'Đặt hàng',
     'checkout' => [
         'cash_payment' => 'Tiền mặt',
-        'online' => 'Chuyển tiền',
+        'online' => 'Online',
     ],
     
 ];
