@@ -63,9 +63,11 @@
                                     <div class="col-6">
                                         <button type="submit">{{ __('common.checkout.cash_payment') }}</button>
                                     </div>
-                                    {{-- <div class="col-6">
-                                        <button type="submit" value="2" name="payment">{{ __('common.checkout.online') }}</button>
-                                    </div> --}}
+                                    <div class="col-6">
+                                        <button class="btn-payment-online" type="submit" name="redirect">
+                                            {{ __('common.checkout.online') }}
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </form>
@@ -77,12 +79,19 @@
                                     <th>STT</th>
                                     <th>Ảnh</th>
                                     <th>Tên sản phẩm</th>
-                                    <th>Giá</th>
+                                    <th>Đơn giá</th>
                                     <th>Số lượng</th>
+                                    <th>Tổng giá</th>
                                 </tr>
                             </thead>
+                            @php
+                                $total_vnpay = 0;
+                            @endphp
                             <tbody>
                                 @foreach ($carts as $item)
+                                    @php
+                                        $total_vnpay += $item->price * $item->quantity;
+                                    @endphp
                                     <tr>
                                         <td scope="row">{{ $loop->index + 1 }}</td>
                                         <td>
@@ -97,14 +106,16 @@
                                                 <button><i class="fa fa-save"></i></button>
                                             </form>
                                         </td>
-                                        
+                                        <td>
+                                            {{ $item->price * $item->quantity }}
+                                        </td>
                                         <td>
                                             <a title="Xóa sản phẩm khỏi giỏ hàng" onclick="return confirm('Are you suare want to delete product?')" 
                                             href="{{ route('cart.delete', $item->product_id) }}"><i class="fa fa-trash"></i></a>
                                         </td>
                                     </tr>
                                 @endforeach
-                                
+                                <input type="hidden" name="total_vnpay" value="{{ $total_vnpay }}">
                             </tbody>
                         </table>
                     </div>
@@ -118,4 +129,38 @@
 <!-- main-area-end -->
 
 
+@endsection
+@section('js')
+    <script>
+        $(document).ready(function() {
+            $('.btn-payment-online').on('click', function(e) {
+                e.preventDefault();
+                var total_vnpay = $('input[name="total_vnpay"]').val();
+                
+                if (total_vnpay) {
+                    $.ajax({
+                        url: "{{ route('order.payment.online') }}",
+                        type: 'POST',
+                        data: {
+                            _token: '{{ csrf_token() }}',
+                            total_vnpay: total_vnpay
+                        },
+                        success: function(response) {
+                            if (response.code == '00') {
+                                window.location.href = response.data;
+                            } else {
+                                alert('Có lỗi khi tạo yêu cầu thanh toán.');
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            console.error('Payment error:', error);
+                            alert('There was an error processing your payment. Please try again.');
+                        }
+                    });
+                } else {
+                    alert('Total amount is required for online payment.');
+                }
+            });
+        });
+    </script>
 @endsection
