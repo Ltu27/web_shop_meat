@@ -40,7 +40,7 @@
                     <span class="help-block has-error text-danger">{{ $message }}</span>
                 @enderror
             </div>
-            <div class="form-group">
+            {{-- <div class="form-group">
                 <label for="">Giá sản phẩm</label>
                 <input type="text" name="price" value="{{ old('price') }}" class="form-control" id="" placeholder="Nhập dữ liệu">
                 @error('price')
@@ -53,7 +53,7 @@
                 @error('quantity')
                     <span class="help-block has-error text-danger">{{ $message }}</span>
                 @enderror
-            </div>
+            </div> --}}
             {{-- <div class="form-group">
                 <label for="">Giá khuyến mãi</label>
                 <input type="text" name="sale_price" value="{{ old('sale_price') }}" class="form-control" id="" placeholder="Nhập dữ liệu">

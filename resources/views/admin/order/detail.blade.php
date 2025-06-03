@@ -2,14 +2,42 @@
 @section('title', 'Chi tiết đơn hàng')
 @section('main')
     
-@if ($order->status != 2)
-    @if ($order->status != 3)
-    <a href="{{ route('order.update', $order->id) }}?status=2" class="btn btn-danger" onclick="return confirm('Bạn chắc chắn chứ?')">Đã vận chuyển</a>
-    <a href="{{ route('order.update', $order->id) }}?status=3" class="btn btn-warning" onclick="return confirm('Bạn chắc chắn chứ?')">Đã hủy</a>
-    @else 
-    <a href="{{ route('order.update', $order->id) }}?status=1" class="btn btn-danger" onclick="return confirm('Bạn chắc chắn chứ?')">Khôi phục</a>
-    @endif
-@endif
+@switch($order->status)
+    @case(0)
+        <a href="{{ route('order.update', $order->id) }}?status=1" class="btn btn-success" onclick="return confirm('Xác nhận đơn hàng?')">Xác nhận</a>
+        <a href="{{ route('order.update', $order->id) }}?status=4" class="btn btn-danger" onclick="return confirm('Bạn chắc chắn muốn hủy đơn hàng?')">Hủy</a>
+        @break
+
+    @case(1)
+        <a href="{{ route('order.update', $order->id) }}?status=2" class="btn btn-primary" onclick="return confirm('Chuyển sang chưa vận chuyển?')">Chưa vận chuyển</a>
+        <a href="{{ route('order.update', $order->id) }}?status=4" class="btn btn-danger" onclick="return confirm('Bạn chắc chắn muốn hủy đơn hàng?')">Hủy</a>
+        @break
+
+    @case(2)
+        <a href="{{ route('order.update', $order->id) }}?status=3" class="btn btn-info" onclick="return confirm('Đánh dấu đã vận chuyển?')">Đã vận chuyển</a>
+        <a href="{{ route('order.update', $order->id) }}?status=4" class="btn btn-danger" onclick="return confirm('Hủy đơn hàng?')">Hủy</a>
+        @break
+
+    @case(3)
+        <a href="{{ route('order.update', $order->id) }}?status=6" class="btn btn-success" onclick="return confirm('Đã thanh toán?')">Thanh toán</a>
+        @break
+
+    @case(4)
+        <a href="{{ route('order.update', $order->id) }}?status=1" class="btn btn-warning" onclick="return confirm('Khôi phục đơn hàng?')">Khôi phục</a>
+        @break
+
+    @case(5)
+        <a href="{{ route('order.update', $order->id) }}?status=6" class="btn btn-success" onclick="return confirm('Đã thanh toán?')">Thanh toán</a>
+        @break
+
+    @case(6)
+        <span class="badge bg-success">Đã thanh toán</span>
+        @break
+
+    @default
+        <span class="badge bg-secondary">Không xác định</span>
+@endswitch
+
 <div class="row">
     <div class="col-md-6">
         <h3>Thông tin khách hàng</h3>

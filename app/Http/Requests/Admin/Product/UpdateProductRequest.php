@@ -33,7 +33,7 @@ class UpdateProductRequest extends FormRequest
             'name' => 'required|min:4|max:150|unique:products,name,'.$this->product->id,
             'description' => 'nullable|min:4',
             'price' => [
-                'required', 
+                'nullable', 
                 'numeric',
                 // new PriceGreaterThanValueFixed($coupon),
             ],
@@ -41,7 +41,7 @@ class UpdateProductRequest extends FormRequest
             // 'coupon_id' => 'nullable|exists:coupons,id',
             'img' => 'file|mimes:jpg,jpeg,png,gif',
             'category_id' => 'required|exists:categories,id',
-            'quantity' => 'required|numeric|min:1'
+            'quantity' => 'nullable|numeric|min:1'
         ];
     }
 }

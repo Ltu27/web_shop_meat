@@ -59,7 +59,15 @@
                                 <td>{{ number_format($item->totalPrice) }}</td>
                                 <td>
                                     <a href="{{ route('order.detail', $item->id) }}" class="btn btn-sm btn-primary">Chi tiết</a>
-                                </td>
+                                    
+                                    @if ($item->status == 0)
+                                        <form action="{{ route('order.cancel', $item->id) }}" method="post" class="d-inline">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="btn btn-sm btn-danger" onclick="return confirm('Bạn có chắc muốn hủy đơn hàng này?')">Hủy đơn</button>
+                                        </form>
+                                    @endif
+                                </td>                                
                             </tr>
                         @endforeach
                         
