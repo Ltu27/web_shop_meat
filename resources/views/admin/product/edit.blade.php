@@ -48,7 +48,7 @@
             </div>
         </div>
         <div class="col-md-5">
-            <div class="form-group">
+            {{-- <div class="form-group">
                 <label for="">Số lượng</label>
                 <input type="text" name="quantity" class="form-control" value="{{ old('quantity', $product->quantity) }}" placeholder="Nhập dữ liệu">
                 @error('quantity')
@@ -58,7 +58,7 @@
             <div class="form-group">
                 <label for="">Giá</label>
                 <input type="text" name="price" class="form-control" value="{{ $product->price }}" placeholder="Nhập dữ liệu">
-            </div>
+            </div> --}}
             {{-- <div class="form-group">
                 <label for="">Giá khuyến mãi</label>
                 <input type="text" name="sale_price" class="form-control" value="{{ $product->sale_price }}" placeholder="Nhập dữ liệu">
