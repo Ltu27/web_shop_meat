@@ -147,7 +147,10 @@
                         },
                         success: function(response) {
                             if (response.code == '00') {
-                                window.location.href = response.data;
+                                toastr.success('Tạo yêu cầu thanh toán thành công. Đang chuyển hướng...');
+                                setTimeout(function () {
+                                    window.location.href = response.data;
+                                }, 1000);
                             } else {
                                 alert('Có lỗi khi tạo yêu cầu thanh toán.');
                             }

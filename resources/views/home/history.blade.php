@@ -46,15 +46,38 @@
                                 <td scope="row">{{ $loop->index + 1 }}</td>
                                 <td>{{ $item->created_at->format('d/m/Y') }}</td>
                                 <td>
-                                    @if ($item->status == 0)
-                                    <span>Chưa xác nhận</span>
-                                    @elseif ($item->status == 1)
-                                    <span>Đã xác nhận</span>  
-                                    @elseif ($item->status == 2)
-                                    <span>Đã thanh toán</span>  
-                                    @else 
-                                    <span>Đã hủy</span>    
-                                    @endif
+                                    @switch($item->status)
+                                        @case(0)
+                                            <span class="badge bg-secondary">Chưa xác nhận</span>
+                                            @break
+                                
+                                        @case(1)
+                                            <span class="badge bg-info">Đã xác nhận</span>
+                                            @break
+                                
+                                        @case(2)
+                                            <span class="badge bg-warning">Chưa vận chuyển</span>
+                                            @break
+                                
+                                        @case(3)
+                                            <span class="badge bg-primary">Đã vận chuyển</span>
+                                            @break
+                                
+                                        @case(4)
+                                            <span class="badge bg-danger">Đã hủy</span>
+                                            @break
+                                
+                                        @case(5)
+                                            <span class="badge bg-dark">Chờ thanh toán</span>
+                                            @break
+                                
+                                        @case(6)
+                                            <span class="badge bg-success">Đã thanh toán</span>
+                                            @break
+                                
+                                        @default
+                                            <span class="badge bg-secondary">Không xác định</span>
+                                    @endswitch
                                 </td>
                                 <td>{{ number_format($item->totalPrice) }}</td>
                                 <td>
