@@ -39,9 +39,10 @@ class UpdateProductRequest extends FormRequest
             ],
             // 'sale_price' => 'required|numeric|lte:price',
             // 'coupon_id' => 'nullable|exists:coupons,id',
-            'img' => 'file|mimes:jpg,jpeg,png,gif',
+            'img' => 'nullable|file|mimes:jpg,jpeg,png,gif',
             'category_id' => 'required|exists:categories,id',
-            'quantity' => 'nullable|numeric|min:1'
+            'status' => 'required',
+            // 'quantity' => 'nullable|numeric|min:1'
         ];
     }
 }

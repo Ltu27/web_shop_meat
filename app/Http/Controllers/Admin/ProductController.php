@@ -53,7 +53,13 @@ class ProductController extends Controller
         $request->img?->move(public_path('uploads/product'), $img_name);
 
         $data['image'] = $img_name;
-        $data['sale_price'] = $data['price'];
+
+        if (!empty($data['variants'])) {
+            $totalQuantity = collect($data['variants'])->sum(function ($variant) {
+                return (int) $variant['stock_quantity']; 
+            });
+            $data['quantity'] = $totalQuantity;
+        }
 
         if ($product = Product::create($data)) {
             if ($request->has('other_img')) {
@@ -113,12 +119,12 @@ class ProductController extends Controller
             $data['image'] = $img_name;
         }
 
-        if ($product->variants) {
-            $data['quantity'] = 0;
-            foreach ($product->variants as $variant) {
-                $data['quantity'] += $variant->stock_quantity;
-            }
-        }
+        // if ($product->variants) {
+        //     $data['quantity'] = 0;
+        //     foreach ($product->variants as $variant) {
+        //         $data['quantity'] += $variant->stock_quantity;
+        //     }
+        // }
 
 
         if ($product->update($data)) {
