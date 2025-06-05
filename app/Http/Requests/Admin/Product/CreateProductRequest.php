@@ -26,6 +26,7 @@ class CreateProductRequest extends FormRequest
             'description' => 'nullable',
             'price' => 'nullable|numeric',
             'quantity' => 'nullable|integer',
+            'status' => 'nullable',
             // 'sale_price' => 'required|numeric|lte:price',
             'img' => 'nullable|file|mimes:jpg,jpeg,png,webp',
             'category_id' => 'required|exists:categories,id',

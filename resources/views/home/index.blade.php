@@ -49,11 +49,8 @@
                                         onclick="alert('Vui lòng đăng nhập để thêm giỏ hàng')"><i class="fa fa-shopping-cart"></i></a>
                                         @endif
                                     </div>
-                                    @if ($np->sale_price > 0)
-                                        <span><s>{{ number_format($np->price) }} VNĐ</s></span>
-                                        <span class="price">{{ number_format($np->sale_price) }} VNĐ</span>
-                                    @else
-                                        <span class="price">{{ number_format($np->price) }} VNĐ</span>
+                                    @if (count($np->variants) > 0)
+                                        <span class="price">{{ number_format($np->variants[0]->variant_price) }} VNĐ</span>
                                     @endif
                                 </div>
                                 <div class="features-img">
@@ -96,11 +93,8 @@
                             <div class="product-content">
                                 <div class="line" data-background="uploads/images/line.png"></div>
                                 <h4 class="title"><a href="{{ route('home.product', $sp->id) }}">{{ $sp->name }}</a></h4>
-                                    @if ($sp->sale_price > 0)
-                                        <h6><s>{{ number_format($sp->price) }} VNĐ</s></h6>
-                                        <h6 class="price">{{ number_format($sp->sale_price) }} VNĐ</h6>
-                                    @else
-                                        <h6 class="price">{{ number_format($sp->price) }} VNĐ</h6>
+                                    @if (count($sp->variants) > 0)
+                                        <h6 class="price">{{ number_format($sp->variants[0]->variant_price) }} VNĐ</h6>
                                     @endif
                                     <div class="favorite-action">
                                         @if (auth('cus')->check())
@@ -196,11 +190,8 @@
                                     </div>
                                 </div>
                                 <div class="product-price">
-                                    @if ($fp->sale_price > 0)
-                                        <h5><s>{{ number_format($fp->price) }} VNĐ</s></h5>
-                                        <h5 class="price">{{ number_format($fp->sale_price) }} VNĐ</h5>
-                                    @else
-                                        <h5 class="price">{{ number_format($fp->price) }} VNĐ</h5>
+                                    @if (count($fp->variants) > 0)
+                                        <span class="price">{{ number_format($fp->variants[0]->variant_price) }} VNĐ</span>
                                     @endif
                                 </div>
                             </div>

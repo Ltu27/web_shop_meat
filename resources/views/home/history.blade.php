@@ -99,10 +99,10 @@
                 <br>
                 <div class="text-center">
                     <a href="" class="btn btn-primary">Tiếp tục mua hàng</a>
-                    @if ($carts->count())
+                    {{-- @if ($carts->count())
                         <a href="{{ route('cart.clear') }}" class="btn btn-danger" onclick="return confirm('Are you suare want to delete all product?')">Xóa tất cả</a>
                         <a href="{{ route('order.checkout') }}" class="btn btn-success">Đặt hàng</a>
-                    @endif
+                    @endif --}}
                 </div>
             </div>
         </div>
