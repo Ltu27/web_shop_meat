@@ -109,7 +109,7 @@ class ProductController extends Controller
         if ($request->has('img')) {
             $img_name = $product->image;
             $image_path = public_path('uploads/product').'/'.$img_name;
-            if (file_exists($image_path)) {
+            if (file_exists($image_path) && isset($img_name)) {
                 unlink($image_path);
             }
             $img_name = $request->img->hashName();
@@ -175,14 +175,14 @@ class ProductController extends Controller
             ProductImage::where('product_id', $product->id)->delete();
 
             if ($product->delete()) {
-                if (file_exists($image_path)) {
+                if (file_exists($image_path) && isset($img_name)) {
                     unlink($image_path);
                 }
                 return redirect()->route('product.index')->with('ok', 'Xóa sản phẩm thành công');
             }
         } else {
             if ($product->delete()) {
-                if (file_exists($image_path)) {
+                if (file_exists($image_path) && isset($img_name)) {
                     unlink($image_path);
                 }
                 return redirect()->route('product.index')->with('ok', 'Xóa sản phẩm thành công');
@@ -197,7 +197,7 @@ class ProductController extends Controller
         $img_name = $image->image;
         if ($image->delete()) {
             $image_path = public_path('uploads/product').'/'.$img_name;
-            if (file_exists($image_path)) {
+            if (file_exists($image_path) && isset($img_name)) {
                 unlink($image_path);
             }
             return redirect()->back()->with('ok', 'Xóa ảnh thành công');
