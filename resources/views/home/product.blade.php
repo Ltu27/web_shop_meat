@@ -111,21 +111,39 @@
                         @endif
                         
                         @if($product->variants->count())
-                            <div class="productInfo__variants">
-                                <label>Chọn màu:</label>
-                                <div class="variant-options">
-                                    @foreach($product->variants as $variant)
-                                        <span class="variant-color" 
-                                            data-price="{{ number_format($variant->variant_price, 0, ',', '.') }}"
-                                            data-stock="{{ $variant->stock_quantity }}"
-                                            data-production="{{ $variant->production_date }}"
-                                            data-expiration="{{ $variant->expiration_date }}"
-                                            style="background-color: {{ $variant->variant_color }};" 
-                                            title="{{ $variant->variant_color }}">
-                                        </span>
-                                    @endforeach
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="productInfo__variants">
+                                        <label>Chọn màu:</label>
+                                        <div class="variant-options">
+                                            @foreach($product->variants as $variant)
+                                                <span class="variant-color" 
+                                                    data-variant-id="{{ $variant->id }}"
+                                                    data-price="{{ number_format($variant->variant_price, 0, ',', '.') }}"
+                                                    data-stock="{{ $variant->stock_quantity }}"
+                                                    data-production="{{ $variant->production_date }}"
+                                                    data-expiration="{{ $variant->expiration_date }}"
+                                                    style="background-color: {{ $variant->variant_color }};" 
+                                                    title="{{ $variant->variant_color }}">
+                                                </span>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="productInfo__variants">
+                                        <label>Số lượng:</label>
+                                        <div class="variant-options">
+                                            <div class="product-cart-wrap">
+                                                <div class="cart-plus-minus">
+                                                    <input type="text" id="quantity" name="quantity" value="1">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>                                 
                                 </div>
                             </div>
+                            
                         @endif
                         
                         <p>{{ $product->description }}</p>
@@ -232,65 +250,69 @@
     })
 </script>
 <script>
+    let selectedVariantId = {{ $firstVariant ? $firstVariant->id : 'null' }};
+
     $('.variant-color').on('click', function () {
         $('.variant-color').removeClass('active');
         $(this).addClass('active');
+        
+        selectedVariantId = $(this).data('variant-id');
 
-        let price = $(this).data('price');
-        let stock = $(this).data('stock');
-        let production = $(this).data('production');
-        let expiration = $(this).data('expiration');
-
-        $('#main-price').text(price + ' VNĐ');
-        $('#stock-quantity').text(stock);
-        $('#production-date').text(production);
-        $('#expiration-date').text(expiration);
+        $('#main-price').text($(this).data('price') + ' VNĐ');
+        $('#stock-quantity').text($(this).data('stock'));
+        $('#production-date').text($(this).data('production'));
+        $('#expiration-date').text($(this).data('expiration'));
     });
 
     $('#add-to-cart-btn').on('click', function () {
         let productId = $(this).data('product-id');
-        let activeVariant = $('.variant-color.active');
+        const quantity = parseInt($('#quantity').val());
 
-        let data = {};
-        if (activeVariant.length > 0) {
-            data = {
-                variant: true,
-                variant_color: activeVariant.css('background-color'),
-                variant_price: activeVariant.data('price'),
-                stock_quantity: activeVariant.data('stock'),
-                production_date: activeVariant.data('production'),
-                expiration_date: activeVariant.data('expiration'),
-                product_id: productId,
-            };
-        } else {
-            data = {
-                variant: false,
-                product_id: productId,
-            };
+        if (!selectedVariantId) {
+            $.toast({
+                heading: 'Lỗi',
+                text: 'Vui lòng chọn phiên bản sản phẩm!',
+                showHideTransition: 'slide',
+                icon: 'error',
+                position: 'top-center',
+            });
+            return;
         }
 
         $.ajax({
-            url: '{{ route('cart.add', ":id") }}'.replace(':id', productId),
+            url: '{{ route('api.cart.add', ":id") }}'.replace(':id', productId),
             method: 'POST',
-            data: data,
-            headers: {
-                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            data: {
+                _token: '{{ csrf_token() }}',
+                variant_id: selectedVariantId,
+                quantity: quantity
             },
             success: function (res) {
-                // toastr.success(res.message);    
+                $.toast({
+                    heading: 'Thành công',
+                    text: 'Đã thêm vào giỏ hàng!',
+                    showHideTransition: 'slide',
+                    icon: 'success',
+                    position: 'top-center',
+                });
             },
-            error: function (xhr) {
-                if (xhr.status === 422) {
-                    let errors = xhr.responseJSON.errors;
-                    for (let field in errors) {
-                        toastr.error(errors[field][0]);
-                    }
-                } else {
-                    // toastr.error('Có lỗi xảy ra. Vui lòng thử lại.');
+            error: function (err) {
+                let message = 'Có lỗi xảy ra!';
+                if (err.responseJSON && err.responseJSON.message) {
+                    message = err.responseJSON.message;
                 }
+
+                $.toast({
+                    heading: 'Lỗi',
+                    text: message,
+                    showHideTransition: 'slide',
+                    icon: 'error',
+                    position: 'top-center',
+                });
             }
         });
     });
+
 </script>
 
 @stop()

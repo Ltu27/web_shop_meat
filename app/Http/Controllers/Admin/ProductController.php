@@ -77,9 +77,9 @@ class ProductController extends Controller
             if (isset($data['variants'])) {
                 $this->service->saveVariants($product, $data['variants']);
             }
-            return redirect()->route('product.index')->with('ok', 'Create new product successfully');
+            return redirect()->route('product.index')->with('ok', 'Tạo mới đơn hàng thành công');
         }
-        return redirect()->back()->with('no', 'Something wrong, please check again');
+        return redirect()->back()->with('no', 'Có lỗi xảy ra, vui lòng kiểm tra lại');
     }
 
     /**
@@ -151,9 +151,9 @@ class ProductController extends Controller
                     ]);
                 }
             }
-            return redirect()->route('product.index')->with('ok', 'Update product successfully');
+            return redirect()->route('product.index')->with('ok', 'Cập nhật sản phẩm thành công');
         }
-        return redirect()->back()->with('no', 'Something wrong, please check again');
+        return redirect()->back()->with('no', 'Có lỗi xảy ra, vui lòng kiểm tra lại');
     }
 
     /**
@@ -178,18 +178,18 @@ class ProductController extends Controller
                 if (file_exists($image_path)) {
                     unlink($image_path);
                 }
-                return redirect()->route('product.index')->with('ok', 'Delete product successfully');
+                return redirect()->route('product.index')->with('ok', 'Xóa sản phẩm thành công');
             }
         } else {
             if ($product->delete()) {
                 if (file_exists($image_path)) {
                     unlink($image_path);
                 }
-                return redirect()->route('product.index')->with('ok', 'Delete product successfully');
+                return redirect()->route('product.index')->with('ok', 'Xóa sản phẩm thành công');
             }
         }
         
-        return redirect()->back()->with('no', 'Something wrong, please check again');
+        return redirect()->back()->with('no', 'Có lỗi xảy ra, vui lòng kiểm tra lại');
     }
 
     public function destroyImage(ProductImage $image)
@@ -200,9 +200,9 @@ class ProductController extends Controller
             if (file_exists($image_path)) {
                 unlink($image_path);
             }
-            return redirect()->back()->with('ok', 'Delete image successfully');
+            return redirect()->back()->with('ok', 'Xóa ảnh thành công');
         }
-        return redirect()->back()->with('no', 'Something wrong, please check again');
+        return redirect()->back()->with('no', 'Có lỗi xảy ra, vui lòng kiểm tra lại');
     }
 
     public function getVariants(Request $request): JsonResponse
@@ -216,7 +216,8 @@ class ProductController extends Controller
     public function saveVariants(CreateProductVariantRequest $request): JsonResponse
     {
         $data = $request->validated();
-        $result = $this->service->saveVariants($data);
+        $product = Product::find($data['product_id']);
+        $result = $this->service->saveVariants($product, $data);
         if (!$result) {
             return $this->failure();
         }

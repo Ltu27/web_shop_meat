@@ -67,9 +67,9 @@ class CheckoutController extends Controller
             return view('home.vnpay.index', compact('totalPrice'));
         } else {
             Mail::to($auth->email)->send(new OrderMail($order, $token));
-            return redirect()->route('home.index')->with('ok', 'Order checkout successfully, please check your email to verify');
+            return redirect()->route('home.index')->with('ok', 'Xác nhận đơn hàng thành công, vui lòng kiểm tra email để xác nhận đơn hàng');
         }
-        return redirect()->route('home.index')->with('no', 'Something error, please check again');
+        return redirect()->route('home.index')->with('no', 'Có lỗi xảy ra, vui lòng kiểm tra lại');
     }
 
     public function verify($token) {
@@ -78,9 +78,9 @@ class CheckoutController extends Controller
             $order->token = null;
             $order->status = 1;
             $order->save();
-            return redirect()->route('home.index')->with('ok', 'Order verify successfully');
+            return redirect()->route('home.index')->with('ok', 'Xác thực đơn hàng thành công');
         }
-        return redirect()->route('home.index')->with('no', 'Something error, please check again');
+        return redirect()->route('home.index')->with('no', 'Có lỗi xảy ra, vui lòng kiểm tra lại');
     }
 
     public function createPayment(Request $request) 

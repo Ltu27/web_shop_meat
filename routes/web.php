@@ -62,7 +62,7 @@ Route::group(['prefix' => 'cart', 'middleware' => 'customer'], function() {
     Route::get('/delete/{product}', [CartController::class, 'delete'])->name('cart.delete');
     Route::get('/update/{product}', [CartController::class, 'update'])->name('cart.update');
     Route::get('/clear', [CartController::class, 'clear'])->name('cart.clear');
-
+    Route::post('/add-product-detail/{product}', [CartController::class, 'addToCard'])->name('api.cart.add');
 }); 
 
 Route::group(['prefix' => 'order', 'middleware' => 'customer'], function() {

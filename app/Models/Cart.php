@@ -11,7 +11,9 @@ class Cart extends Model
 
     public $timestamps = false;
     
-    protected $fillable = ['customer_id', 'product_id', 'price', 'quantity'];
+    protected $fillable = ['customer_id', 'product_id', 'price', 'quantity',
+        'variant_id',
+    ];
 
     public function prod() {
         return $this->hasOne(Product::class, 'id', 'product_id');

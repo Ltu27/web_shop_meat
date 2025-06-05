@@ -26,7 +26,3 @@ Route::prefix('product')->group(function () {
     Route::post('/save-variants', [ProductController::class, 'saveVariants']);
 });
 
-Route::prefix('cart')->group(function () {
-    Route::post('/add/{product}', [CartController::class, 'addToCard'])->name('api.cart.add');
-
-});

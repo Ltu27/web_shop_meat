@@ -68,9 +68,9 @@ class CategoryController extends Controller
 
         $data = $request->all('name', 'status');
         if ($category->update($data)) {
-            return redirect()->route('category.index')->with('ok', 'Update a category successfully');
+            return redirect()->route('category.index')->with('ok', 'Cập nhật danh mục thành công');
         }
-        return redirect()->back()->with('no', 'Something wrong, please try again');
+        return redirect()->back()->with('no', 'Có lỗi xảy ra, vui lòng kiểm tra lại');
 
     }
 
@@ -80,8 +80,8 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         if ($category->delete()) {
-            return redirect()->route('category.index')->with('ok', 'Delete a category successfully');
+            return redirect()->route('category.index')->with('ok', 'Xóa danh mục thành công');
         }
-        return redirect()->back()->with('no', 'Something wrong, please try again');
+        return redirect()->back()->with('no', 'Có lỗi xảy ra, vui lòng kiểm tra lại');
     }
 }
