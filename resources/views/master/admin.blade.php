@@ -110,11 +110,15 @@
             <i class="fa fa-shopping-cart"></i> <span>Đơn hàng</span> <i class="fa fa-angle-left pull-right"></i>
           </a>
           <ul class="treeview-menu">
-            <li><a href="{{ route('order.index') }}"><i class="fa fa-circle-o"></i> Danh sách</a></li>
-            <li><a href="{{ route('order.index') }}?status=0"><i class="fa fa-circle-o"></i> Chưa xác nhận</a></li>
-            <li><a href="{{ route('order.index') }}?status=2"><i class="fa fa-circle-o"></i> Đã vận chuyển</a></li>
-            <li><a href="{{ route('order.index') }}?status=3"><i class="fa fa-circle-o"></i> Đã hủy</a></li>
-          </ul>
+            <li><a href="{{ route('order.index') }}">Danh sách</a></li>
+            <li><a href="{{ route('order.index', ['filters[status]' => 0]) }}">Chưa xác nhận</a></li>
+            <li><a href="{{ route('order.index', ['filters[status]' => 1]) }}">Đã xác nhận</a></li>
+            <li><a href="{{ route('order.index', ['filters[status]' => 2]) }}">Chưa thanh toán</a></li>
+            <li><a href="{{ route('order.index', ['filters[status]' => 3]) }}">Đã thanh toán</a></li>
+            <li><a href="{{ route('order.index', ['filters[status]' => 4]) }}">Chưa vận chuyển</a></li>
+            <li><a href="{{ route('order.index', ['filters[status]' => 5]) }}">Đã vận chuyển</a></li>
+            <li><a href="{{ route('order.index', ['filters[status]' => 6]) }}">Đã hủy</a></li>
+        </ul>        
         </li>
         {{-- <li class="treeview">
           <a href="#">

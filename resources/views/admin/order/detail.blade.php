@@ -2,36 +2,41 @@
 @section('title', 'Chi tiết đơn hàng')
 @section('main')
     
+@php
+    use App\Constants\OrderConstant;
+@endphp
+
 @switch($order->status)
-    @case(0)
-        <a href="{{ route('order.update', $order->id) }}?status=1" class="btn btn-success" onclick="return confirm('Xác nhận đơn hàng?')">Xác nhận</a>
-        <a href="{{ route('order.update', $order->id) }}?status=4" class="btn btn-danger" onclick="return confirm('Bạn chắc chắn muốn hủy đơn hàng?')">Hủy</a>
+
+    @case(OrderConstant::STATUS_PENDING) 
+        <a href="{{ route('order.update', $order->id) }}?status={{ OrderConstant::STATUS_CONFIRMED }}" class="btn btn-success" onclick="return confirm('Xác nhận đơn hàng?')">Xác nhận</a>
+        <a href="{{ route('order.update', $order->id) }}?status={{ OrderConstant::STATUS_COMPLETED }}" class="btn btn-danger" onclick="return confirm('Bạn chắc chắn muốn hủy đơn hàng?')">Hủy</a>
         @break
 
-    @case(1)
-        <a href="{{ route('order.update', $order->id) }}?status=2" class="btn btn-primary" onclick="return confirm('Chuyển sang chưa vận chuyển?')">Chưa vận chuyển</a>
-        <a href="{{ route('order.update', $order->id) }}?status=4" class="btn btn-danger" onclick="return confirm('Bạn chắc chắn muốn hủy đơn hàng?')">Hủy</a>
+    @case(OrderConstant::STATUS_CONFIRMED) 
+        <a href="{{ route('order.update', $order->id) }}?status={{ OrderConstant::STATUS_NOT_YET_PAY }}" class="btn btn-primary" onclick="return confirm('Chuyển sang chưa thanh toán?')">Chưa thanh toán</a>
+        <a href="{{ route('order.update', $order->id) }}?status={{ OrderConstant::STATUS_COMPLETED }}" class="btn btn-danger" onclick="return confirm('Bạn chắc chắn muốn hủy đơn hàng?')">Hủy</a>
         @break
 
-    @case(2)
-        <a href="{{ route('order.update', $order->id) }}?status=3" class="btn btn-info" onclick="return confirm('Đánh dấu đã vận chuyển?')">Đã vận chuyển</a>
-        <a href="{{ route('order.update', $order->id) }}?status=4" class="btn btn-danger" onclick="return confirm('Hủy đơn hàng?')">Hủy</a>
+    @case(OrderConstant::STATUS_NOT_YET_PAY) 
+        <a href="{{ route('order.update', $order->id) }}?status={{ OrderConstant::STATUS_PAID }}" class="btn btn-info" onclick="return confirm('Xác nhận đã thanh toán?')">Đã thanh toán</a>
+        <a href="{{ route('order.update', $order->id) }}?status={{ OrderConstant::STATUS_COMPLETED }}" class="btn btn-danger" onclick="return confirm('Hủy đơn hàng?')">Hủy</a>
         @break
 
-    @case(3)
-        <a href="{{ route('order.update', $order->id) }}?status=6" class="btn btn-success" onclick="return confirm('Đã thanh toán?')">Thanh toán</a>
+    @case(OrderConstant::STATUS_PAID) 
+        <a href="{{ route('order.update', $order->id) }}?status={{ OrderConstant::STATUS_NOT_YET_SHIP }}" class="btn btn-primary" onclick="return confirm('Chuyển sang chưa vận chuyển?')">Chưa vận chuyển</a>
         @break
 
-    @case(4)
-        <a href="{{ route('order.update', $order->id) }}?status=1" class="btn btn-warning" onclick="return confirm('Khôi phục đơn hàng?')">Khôi phục</a>
+    @case(OrderConstant::STATUS_NOT_YET_SHIP) 
+        <a href="{{ route('order.update', $order->id) }}?status={{ OrderConstant::STATUS_SHIPPED }}" class="btn btn-info" onclick="return confirm('Đánh dấu đã vận chuyển?')">Đã vận chuyển</a>
         @break
 
-    @case(5)
-        <a href="{{ route('order.update', $order->id) }}?status=6" class="btn btn-success" onclick="return confirm('Đã thanh toán?')">Thanh toán</a>
+    @case(OrderConstant::STATUS_SHIPPED) 
+        <a href="{{ route('order.update', $order->id) }}?status={{ OrderConstant::STATUS_COMPLETED }}" class="btn btn-success" onclick="return confirm('Hoàn tất đơn hàng?')">Hoàn tất</a>
         @break
 
-    @case(6)
-        <span class="badge bg-success">Đã thanh toán</span>
+    @case(OrderConstant::STATUS_COMPLETED) 
+        <span class="badge bg-success">Đã hoàn tất / Đã hủy</span>
         @break
 
     @default

@@ -131,8 +131,17 @@
 
 @endsection
 @section('js')
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script>
         $(document).ready(function() {
+            @if(session('success'))
+                toastr.success('{{ session('success') }}');
+            @endif
+
+            @if(session('error'))
+                toastr.error('{{ session('error') }}');
+            @endif
+
             $('.btn-payment-online').on('click', function(e) {
                 e.preventDefault();
                 var total_vnpay = $('input[name="total_vnpay"]').val();
@@ -147,10 +156,7 @@
                         },
                         success: function(response) {
                             if (response.code == '00') {
-                                // toastr.success('Tạo yêu cầu thanh toán thành công. Đang chuyển hướng...');
-                                // setTimeout(function () {
-                                    window.location.href = response.data;
-                                // }, 1000);
+                                window.location.href = response.data;
                             } else {
                                 alert('Có lỗi khi tạo yêu cầu thanh toán.');
                             }

@@ -2,15 +2,44 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\Order\ListOrderResource;
 use App\Models\Order;
+use App\Services\OrderService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
+    public function __construct(
+        protected OrderService $service
+    ) {
+    }
+
     public function index() {
-        $status = request('status', 1);
-        $orders = Order::orderby('id', 'DESC')->where('status', $status)->paginate();
-        return view('admin.order.index', compact('orders'));
+        return view('admin.order.index');
+    }
+
+    public function getListOrder(Request $request): JsonResponse
+    {
+        $filters = $request->query('filters', []);
+        // dd($filters);
+
+        $has = $request->query('has', []);
+        $search = $request->query('search', []);
+        $sorts = $request->query('sorts', []);
+        $from = $request->query('from', []);
+        $to = $request->query('to', []);
+        $limit = $request->query('limit', static::LIMIT);
+        $freeSearch = $request->query('q', '');
+        $data = $this->service->getByConditions($filters, $has, $sorts, $search, $freeSearch, [$from, $to], $limit);
+        return $this->success(
+            ListOrderResource::collection($data->items()),
+            [
+                'current_page' => $data->currentPage(),
+                'total' => $data->total(),
+                'per_page' => $data->perPage(),
+            ]
+        );
     }
 
     public function show(Order $order) {

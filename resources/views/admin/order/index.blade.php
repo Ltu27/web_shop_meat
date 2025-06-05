@@ -2,41 +2,60 @@
 @section('title', 'Danh sách đơn hàng')
 
 @section('main')
-    
-    <table class="table">
-        <thead>
-            <tr>
-                <th>STT</th>
-                <th>Ngày đặt</th>
-                <th>Trạng thái</th>
-                <th>Tổng tiền</th>
-                <th>Hành động</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($orders as $item)
+    <div class="table-responsive">
+        <table class="table table-bordered" id="order-table">
+            <thead>
                 <tr>
-                    <td scope="row">{{ $loop->index + 1 }}</td>
-                    <td>{{ $item->created_at->format('d/m/Y') }}</td>
-                    <td>
-                        @if ($item->status == 0)
-                        <span>Chưa xác nhận</span>
-                        @elseif ($item->status == 1)
-                        <span>Đã xác nhận</span>  
-                        @elseif ($item->status == 2)
-                        <span>Đã thanh toán</span>  
-                        @else 
-                        <span>Đã hủy</span>    
-                        @endif
-                    </td>
-                    <td>{{ number_format($item->totalPrice) }}</td>
-                    <td>
-                        <a href="{{ route('order.show', $item->id) }}" class="btn btn-sm btn-primary">Chi tiết</a>
-                    </td>
+                    <th>STT</th>
+                    <th>Ngày đặt</th>
+                    <th>Trạng thái</th>
+                    <th>Tổng tiền</th>
+                    <th>Hành động</th>
                 </tr>
-            @endforeach
-            
-        </tbody>
-    </table>
+            </thead>
+        </table>
+    </div>
+@endsection 
+@section('js')
+<script>
+    $(function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const statusFilter = urlParams.get('filters[status]');
+
+        $('#order-table').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: {
+                url: '{{ route("order.getListOrder") }}',
+                data: function(d) {
+                    if (statusFilter !== null) {
+                        d.filters = {
+                            status: statusFilter
+                        };
+                    }
+                }
+            },
+            columns: [
+                { data: 'id', name: 'id', orderable: false, searchable: false },
+                { data: 'created_at', name: 'created_at' },
+                { data: 'status', name: 'status' },
+                { data: 'total_price', name: 'total_price', render: $.fn.dataTable.render.number(',', '.', 0) },
+                { data: 'id', 
+                    name: 'action', 
+                    orderable: false, 
+                    className: 'text-center',
+                    render: function(data) {
+                        var html = '';
+                        html += '<div class="d-flex justify-content-center align-items-center flex-nowrap">';
+                        html += '<a href="{{ route("order.show", ":id") }}" class="m-2 btn btn-primary btn-sm"><i class="fa fa-eye"></i></a>';
+                        html = html.replace(':id', data);
+                        html += '</div>';
+                        return html;
+                    }
+                }
+            ]
+        });
+    });
+</script>
 
 @endsection

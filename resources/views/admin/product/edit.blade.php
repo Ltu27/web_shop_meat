@@ -226,14 +226,26 @@
                     _token: '{{ csrf_token() }}'
                 },
                 success: function (res) {
-                    alert('Lưu thành công!');
+                    $.toast({
+                        heading: 'Thành công',
+                        text: 'Lưu thành công!',
+                        showHideTransition: 'slide',
+                        icon: 'success',
+                        position: 'top-center',
+                    });
                     $('#optionModal').modal('hide');
                     // reset nếu muốn
                 },
                 error: function (xhr) {
                     const errors = xhr.responseJSON.errors;
                     if (!errors) {
-                        alert('Lỗi không xác định!');
+                        $.toast({
+                            heading: 'Lỗi',
+                            text: 'Đã có lỗi xảy ra!',
+                            showHideTransition: 'slide',
+                            icon: 'error',
+                            position: 'top-center',
+                        });
                         return;
                     }
 
