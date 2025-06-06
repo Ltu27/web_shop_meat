@@ -1,5 +1,5 @@
 @extends('master.admin')
-@section('title', 'Thêm mưới danh mục')
+@section('title', 'Thêm mới danh mục')
 @section('main')
 <div class="row">
     <div class="col-md-4">
@@ -15,7 +15,7 @@
                 <div class="radio">
                     <label>
                         <input type="radio" name="status" id="input" value="1" checked>
-                        hiển thị
+                        Hiển thị
                     </label>
                 </div>
 

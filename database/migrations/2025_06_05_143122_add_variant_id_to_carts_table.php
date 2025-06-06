@@ -10,7 +10,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('carts', function (Blueprint $table) {
-            $table->unsignedInteger('variant_id')->nullable()->after('product_id');
+            $table->unsignedBigInteger('variant_id')->nullable()->after('product_id');
+            $table->foreign('variant_id')->references('id')->on('product_variants');
         });
     }
 

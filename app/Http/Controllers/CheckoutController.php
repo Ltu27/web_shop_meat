@@ -98,7 +98,7 @@ class CheckoutController extends Controller
                 'email' => $auth->email,
                 'phone' => $auth->phone,
                 'address' => $auth->address,
-                'status' => 3, 
+                'status' => OrderConstant::STATUS_PAID, 
                 'total_price' => $data['total_vnpay'],
                 'payment_type' => 1,
             ]);

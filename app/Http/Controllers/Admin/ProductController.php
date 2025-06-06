@@ -77,7 +77,7 @@ class ProductController extends Controller
             if (isset($data['variants'])) {
                 $this->service->saveVariants($product, $data);
             }
-            return redirect()->route('product.index')->with('ok', 'Tạo mới đơn hàng thành công');
+            return redirect()->route('product.index')->with('ok', 'Tạo mới sản phẩm thành công');
         }
         return redirect()->back()->with('no', 'Có lỗi xảy ra, vui lòng kiểm tra lại');
     }
