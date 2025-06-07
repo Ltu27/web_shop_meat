@@ -2,14 +2,31 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Constants\OrderConstant;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\LoginAdminRequest;
+use App\Services\ChartService;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
+    public function __construct(
+        protected ChartService $chartService,
+    )
+    {
+    }
+
     public function index() {
-        return view('admin.index');
+        $totalProducts = $this->chartService->getTotalProducts();
+        $totalConfirmedOrder = $this->chartService->getTotalOrderWithStatus(OrderConstant::STATUS_CONFIRMED); 
+        $totalPaidOrder = $this->chartService->getTotalOrderWithStatus(OrderConstant::STATUS_PAID); 
+        $totalCancelOrder = $this->chartService->getTotalOrderWithStatus(OrderConstant::STATUS_COMPLETED); 
+        return view('admin.index', compact(
+            'totalProducts',
+            'totalConfirmedOrder',
+            'totalPaidOrder',
+            'totalCancelOrder'
+        ));
     }
 
     public function login() {

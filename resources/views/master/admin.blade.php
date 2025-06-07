@@ -188,6 +188,7 @@
 <!-- AdminLTE for demo purposes -->
 <script src="ad_assets/dist/js/demo.js"></script>
 <script src="http://cdn.datatables.net/2.0.7/js/dataTables.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 @yield('js')
 </body>
 </html>

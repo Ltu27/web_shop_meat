@@ -48,31 +48,31 @@
                                 <td>
                                     @switch($item->status)
                                         @case(0)
-                                            <span class="badge bg-secondary">Chưa xác nhận</span>
+                                            <span class="badge bg-secondary">Chờ xác nhận</span>
                                             @break
                                 
                                         @case(1)
                                             <span class="badge bg-info">Đã xác nhận</span>
                                             @break
-                                
+
                                         @case(2)
-                                            <span class="badge bg-warning">Chưa vận chuyển</span>
+                                            <span class="badge bg-dark">Chưa thanh toán</span>
                                             @break
                                 
                                         @case(3)
-                                            <span class="badge bg-primary">Đã vận chuyển</span>
+                                            <span class="badge bg-success">Đã thanh toán</span>
                                             @break
-                                
+
                                         @case(4)
-                                            <span class="badge bg-danger">Đã hủy</span>
+                                            <span class="badge bg-warning">Chưa vận chuyển</span>
                                             @break
                                 
                                         @case(5)
-                                            <span class="badge bg-dark">Chờ thanh toán</span>
+                                            <span class="badge bg-primary">Đã vận chuyển</span>
                                             @break
                                 
                                         @case(6)
-                                            <span class="badge bg-success">Đã thanh toán</span>
+                                            <span class="badge bg-danger">Đã hủy</span>
                                             @break
                                 
                                         @default
