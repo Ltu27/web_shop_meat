@@ -11,6 +11,7 @@ use App\Models\OrderDetail;
 use App\Models\ProductVariant;
 use App\Services\CheckoutService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
@@ -54,7 +55,8 @@ class CheckoutController extends Controller
                     'order_id' => $order->id,
                     'product_id' => $cart->product_id,
                     'price' => $cart->price,
-                    'quantity' => $cart->quantity
+                    'quantity' => $cart->quantity,
+                    'variant_id' => $cart->variant_id,
                 ];
                 
                 OrderDetail::create($data1);
@@ -89,6 +91,7 @@ class CheckoutController extends Controller
     public function createPayment(Request $request) 
     {
         try {
+            DB::beginTransaction();
             $auth = auth('cus')->user();
             $data = $request->all();
 
@@ -109,6 +112,7 @@ class CheckoutController extends Controller
                     'product_id' => $cart->product_id,
                     'price' => $cart->price,
                     'quantity' => $cart->quantity,
+                    'variant_id' => $cart->variant_id,
                 ]);
 
                 $variant = ProductVariant::find($cart->variant_id);
@@ -179,9 +183,11 @@ class CheckoutController extends Controller
                 'message' => 'success',
                 'data' => $vnp_Url
             ];
+            DB::commit();
 
             return response()->json($returnData);
         } catch (\Exception $e) {
+            DB::rollBack();
             return response()->json([
                 'code' => '99',
                 'message' => 'Lỗi thanh toán: ' . $e->getMessage()
