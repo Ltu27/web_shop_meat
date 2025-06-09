@@ -64,11 +64,7 @@
                                             @break
 
                                         @case(4)
-                                            <span class="badge bg-warning">Chưa vận chuyển</span>
-                                            @break
-                                
-                                        @case(5)
-                                            <span class="badge bg-primary">Đã vận chuyển</span>
+                                            <span class="badge bg-warning">Đã nhận hàng</span>
                                             @break
                                 
                                         @case(6)

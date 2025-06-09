@@ -48,12 +48,13 @@ class OrderController extends Controller
     }
 
     public function update(Order $order) {
-        $status = request('status', 1);
-        if ($order->status != 2) {
+        try {
+            $status = request('status', 1);
             $order->update(['status' => $status]);
             return redirect()->route('order.index')->with('ok', 'Cập nhật trạng thái đơn hàng thành công');
+        } catch (\Exception $e) {
+            return redirect()->route('order.index')->with('no', 'Có lỗi xảy ra, vui lòng kiểm tra lại');
         }
-        return redirect()->route('order.index')->with('no', 'Có lỗi xảy ra, vui lòng kiểm tra lại');
         
     }
 

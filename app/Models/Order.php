@@ -35,6 +35,8 @@ class Order extends Model
 
     protected $fillable = [
         'name', 'email', 'phone', 'address', 'token', 'customer_id', 'status',
+        'total_price',
+        'payment_type',
     ];
 
     public function customer() {

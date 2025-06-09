@@ -115,8 +115,6 @@
             <li><a href="{{ route('order.index', ['filters[status]' => 1]) }}">Đã xác nhận</a></li>
             <li><a href="{{ route('order.index', ['filters[status]' => 2]) }}">Chưa thanh toán</a></li>
             <li><a href="{{ route('order.index', ['filters[status]' => 3]) }}">Đã thanh toán</a></li>
-            <li><a href="{{ route('order.index', ['filters[status]' => 4]) }}">Chưa vận chuyển</a></li>
-            <li><a href="{{ route('order.index', ['filters[status]' => 5]) }}">Đã vận chuyển</a></li>
             <li><a href="{{ route('order.index', ['filters[status]' => 6]) }}">Đã hủy</a></li>
         </ul>        
         </li>

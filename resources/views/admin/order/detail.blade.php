@@ -24,19 +24,12 @@
         @break
 
     @case(OrderConstant::STATUS_PAID) 
-        <a href="{{ route('order.update', $order->id) }}?status={{ OrderConstant::STATUS_NOT_YET_SHIP }}" class="btn btn-primary" onclick="return confirm('Chuyển sang chưa vận chuyển?')">Chưa vận chuyển</a>
+        <a href="{{ route('order.update', $order->id) }}?status={{ OrderConstant::STATUS_DONE }}" class="btn btn-primary" onclick="return confirm('Khách đã nhận hàng?')">Đã nhận hàng</a>
+        <a href="{{ route('order.update', $order->id) }}?status={{ OrderConstant::STATUS_COMPLETED }}" class="btn btn-danger" onclick="return confirm('Khách đã hủy đơn hàng?')">Đã hủy</a>
         @break
 
-    @case(OrderConstant::STATUS_NOT_YET_SHIP) 
-        <a href="{{ route('order.update', $order->id) }}?status={{ OrderConstant::STATUS_SHIPPED }}" class="btn btn-info" onclick="return confirm('Đánh dấu đã vận chuyển?')">Đã vận chuyển</a>
-        @break
-
-    @case(OrderConstant::STATUS_SHIPPED) 
-        <a href="{{ route('order.update', $order->id) }}?status={{ OrderConstant::STATUS_COMPLETED }}" class="btn btn-success" onclick="return confirm('Hoàn tất đơn hàng?')">Hoàn tất</a>
-        @break
-
-    @case(OrderConstant::STATUS_COMPLETED) 
-        <span class="badge bg-success">Đã hoàn tất / Đã hủy</span>
+    @case(OrderConstant::STATUS_DONE) 
+        <span class="badge bg-success">Hoàn thành</span>
         @break
 
     @default
