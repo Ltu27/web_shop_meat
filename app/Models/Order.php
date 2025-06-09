@@ -28,7 +28,7 @@ class Order extends Model
     ];
 
     public const SORT_FIELDS = [
-        // 'id' => 'campaigns.id',
+        'id' => 'orders.id',
     ];
 
     protected $appends = ['totalPrice'];

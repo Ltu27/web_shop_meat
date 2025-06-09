@@ -26,7 +26,7 @@ class OrderController extends Controller
 
         $has = $request->query('has', []);
         $search = $request->query('search', []);
-        $sorts = $request->query('sorts', []);
+        $sorts = ['id' => 'desc'];
         $from = $request->query('from', []);
         $to = $request->query('to', []);
         $limit = $request->query('limit', static::LIMIT);
