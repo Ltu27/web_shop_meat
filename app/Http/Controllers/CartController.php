@@ -149,4 +149,34 @@ class CartController extends Controller
         }
         return true;
     }
+
+    public function updateQuantity(Product $product, Request $request) {
+        try {
+            $data = $request->validate([
+                'quantity' => 'required|integer|min:1',
+                'variant_id' => 'required|exists:product_variants,id'
+            ]);
+
+            $cus_id = auth('cus')->id();
+            $cart = Cart::where([
+                'customer_id' => $cus_id,
+                'product_id' => $product->id,
+                'variant_id' => $data['variant_id']
+            ])->first();
+
+            if ($cart) {
+                if ($this->checkQuantity(ProductVariant::find($data['variant_id']), $data['quantity'])) {
+                    $cart->update(['quantity' => $data['quantity']]);
+                    return response()->json(['status' => 'ok', 'message' => 'Cập nhật số lượng thành công']);
+                } else {
+                    return response()->json(['status' => 'no', 'message' => 'Số lượng không đủ']);
+                }
+            } else {
+                return response()->json(['status' => 'no', 'message' => 'Sản phẩm không có trong giỏ hàng']);
+            }
+        } catch (\Exception $e) {
+            Log::error('Error updating cart quantity: ' . $e->getMessage());
+            return response()->json(['status' => 'no', 'message' => 'Có lỗi xảy ra, vui lòng thử lại sau.'], 500);
+        }
+    }
 }

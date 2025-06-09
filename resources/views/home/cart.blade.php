@@ -50,10 +50,12 @@
                                 <td>{{ $item->prod->name }}</td>
                                 <td>{{ $item->price }}</td>
                                 <td>
-                                    <form action="{{ route('cart.update', $item->product_id) }}" method="get">
-                                        <input type="number" value="{{ $item->quantity }}" name="quantity" 
-                                        style="width: 60px; text-align:center">
-                                        <button><i class="fa fa-save"></i></button>
+                                    <form class="update-cart-form" data-id="{{ $item->product_id }}" 
+                                        data-variant-id="{{ $item->variant_id }}"
+                                        @csrf
+                                        <input type="number" value="{{ $item->quantity }}" 
+                                            name="quantity" class="quantity-input" style="width: 60px; text-align:center">
+                                        <button type="submit"><i class="fa fa-save"></i></button>
                                     </form>
                                 </td>
                                 
@@ -81,6 +83,47 @@
 
 </main>
 <!-- main-area-end -->
+@endsection
+@section('js')
+<script>
+    $(document).ready(function() {
+        $('.update-cart-form').on('submit', function(e) {
+            e.preventDefault();
 
+            const form = $(this);
+            const productId = form.data('id');
+            const variantId = form.data('variant-id');
+            const quantity = form.find('.quantity-input').val();
 
+            $.ajax({
+                url: '/cart/update-quantity/' + productId,
+                method: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    quantity: quantity,
+                    variant_id: variantId,
+                    product_id: productId
+                },
+                success: function(response) {
+                    $.toast({
+                        heading: 'Thông báo',
+                        text: 'Cập nhật giỏ hàng thành công',
+                        showHideTransition: 'slide',
+                        icon: 'success',
+                        position: 'top-center',
+                    });
+                },
+                error: function() {
+                    $.toast({
+                        heading: 'Thông báo',
+                        text: 'Đã xảy ra lỗi khi cập nhật',
+                        showHideTransition: 'fade',
+                        icon: 'error',
+                        position: 'top-center',
+                    });
+                }
+            });
+        });
+    });
+</script>
 @endsection

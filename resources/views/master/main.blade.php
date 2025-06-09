@@ -274,7 +274,6 @@
         agent-id="40034e07-e5ab-490f-8626-e124de7425a9"
         language-code="vi"
         ></df-messenger>
-        @yield('js')
         @if(Session::has('ok'))
 
         <script>
@@ -300,6 +299,8 @@
             })
         </script>
         @endif
+        @yield('js')
+
     </body> 
 
 </html>
