@@ -3,38 +3,42 @@
 
 @section('main')
     <div class="table-responsive">
-        <div class="mb-3 d-flex align-items-end flex-wrap gap-3">
-            <div class="w-auto">
-                <label for="filter-status" class="form-label">Trạng thái:</label>
-                <select id="filter-status" class="form-control form-control-sm">
-                    <option value="">Tất cả</option>
-                    <option value="0">Chờ xác nhận</option>
-                    <option value="1">Đã xác nhận</option>
-                    <option value="2">Chưa thanh toán</option>
-                    <option value="3">Đã thanh toán</option>
-                    <option value="4">Đã nhận hàng</option>
-                    <option value="6">Đã hủy</option>
-                </select>
-            </div>
-            <div class="w-auto">
-                <label for="from-date" class="form-label">Từ ngày:</label>
-                <input type="date" id="from-date" class="form-control form-control-sm" />
-            </div>
-            
-            <div class="w-auto">
-                <label for="to-date" class="form-label">Đến ngày:</label>
-                <input type="date" id="to-date" class="form-control form-control-sm" />
-            </div>
+        <div class="container">
+            <div class="row mb-3 gx-2 gy-2 align-items-end">
+                <div class="col-md-2">
+                    <label for="filter-status" class="form-label">Trạng thái:</label>
+                    <select id="filter-status" class="form-control form-control-sm">
+                        <option value="">Tất cả</option>
+                        <option value="0">Chờ xác nhận</option>
+                        <option value="1">Đã xác nhận</option>
+                        <option value="2">Chưa thanh toán</option>
+                        <option value="3">Đã thanh toán</option>
+                        <option value="4">Đã nhận hàng</option>
+                        <option value="6">Đã hủy</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <label for="from-date" class="form-label">Từ ngày:</label>
+                    <input type="date" id="from-date" class="form-control form-control-sm" />
+                </div>
+                
+                <div class="col-md-2">
+                    <label for="to-date" class="form-label">Đến ngày:</label>
+                    <input type="date" id="to-date" class="form-control form-control-sm" />
+                </div>
 
-            <div class="w-auto">
-                <label for="search-keyword" class="form-label">Tìm kiếm:</label>
-                <input type="text" id="search-keyword" class="form-control form-control-sm" placeholder="Nhập từ khóa..." />
-            </div>
-            
-            <div class="w-auto align-self-end">
-                <button id="filter-date-btn" class="btn btn-primary btn-sm">Lọc</button>
-            </div>
-        </div>        
+                <div class="col-md-1" style="margin-top: 26px">
+                    <button id="filter-date-btn" class="btn btn-primary btn-sm">Lọc</button>
+                </div>
+    
+                <div class="col-md-2 align-self-end">
+                    <label for="search-keyword" class="form-label">Tìm kiếm:</label>
+                    <input type="text" id="search-keyword" class="form-control form-control-sm" placeholder="Nhập từ khóa..." />
+                </div>
+                
+                
+            </div>        
+        </div>
         
         <table class="table table-bordered" id="order-table">
             <thead>
