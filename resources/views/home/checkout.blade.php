@@ -27,7 +27,7 @@
 
     <!-- contact-area -->
     <section class="contact-area">
-        
+
         <div class="contact-wrap">
             <div class="container">
                 <div class="row">
@@ -79,6 +79,7 @@
                                     <th>STT</th>
                                     <th>Ảnh</th>
                                     <th>Tên sản phẩm</th>
+                                    <th>Màu</th>
                                     <th>Đơn giá</th>
                                     <th>Số lượng</th>
                                     <th>Tổng giá</th>
@@ -98,6 +99,13 @@
                                             <img src="uploads/product/{{ $item->prod->image }}" width="40" alt="">    
                                         </td>
                                         <td>{{ $item->prod->name }}</td>
+                                        <td>
+                                            @if ($item->variant && $item->variant->variant_color)
+                                                <div style="width: 20px; height: 20px; margin-top: 5px; border-radius: 50%; background-color: {{ $item->variant->variant_color }}; border: 1px solid #ccc;" title="{{ $item->variant->variant_color }}"></div>
+                                            @else
+                                                <span>Không có</span>
+                                            @endif
+                                        </td>
                                         <td>{{ $item->price }}</td>
                                         <td>
                                             <form class="update-cart-form" data-id="{{ $item->product_id }}" 

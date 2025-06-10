@@ -31,10 +31,10 @@
                     <button id="filter-date-btn" class="btn btn-primary btn-sm">Lọc</button>
                 </div>
     
-                <div class="col-md-2 align-self-end">
+                {{-- <div class="col-md-2 align-self-end">
                     <label for="search-keyword" class="form-label">Tìm kiếm:</label>
                     <input type="text" id="search-keyword" class="form-control form-control-sm" placeholder="Nhập từ khóa..." />
-                </div>
+                </div> --}}
                 
                 
             </div>        
