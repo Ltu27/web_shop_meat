@@ -33,7 +33,7 @@
         @break
 
     @default
-        <span class="badge bg-secondary">Không xác định</span>
+        <span class="badge bg-secondary">Đã hủy</span>
 @endswitch
 
 <div class="row">
