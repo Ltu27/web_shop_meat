@@ -64,7 +64,7 @@
                                         <button type="submit">{{ __('common.checkout.cash_payment') }}</button>
                                     </div>
                                     <div class="col-6">
-                                        <button class="btn-payment-online" type="submit" name="redirect">
+                                        <button class="btn-payment-online" type="button" name="redirect">
                                             {{ __('common.checkout.online') }}
                                         </button>
                                     </div>
@@ -143,6 +143,15 @@
             @if(session('error'))
                 toastr.error('{{ session('error') }}');
             @endif
+
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('success') === '1') {
+                toastr.success('Thanh toán thành công!');
+            }
+
+            if (urlParams.get('success') === '0') {
+                toastr.error('Thanh toán thất bại!');
+            }
 
             $('.btn-payment-online').on('click', function(e) {
                 e.preventDefault();

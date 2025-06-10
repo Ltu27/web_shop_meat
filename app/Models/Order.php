@@ -13,9 +13,11 @@ class Order extends Model
     ];
 
     public const FROM_FIELDS = [
+        'created_at' => 'orders.created_at',
     ];
-
+    
     public const TO_FIELDS = [
+        'created_at' => 'orders.created_at',
     ];
 
     public const IN_SET_FIELDS = [

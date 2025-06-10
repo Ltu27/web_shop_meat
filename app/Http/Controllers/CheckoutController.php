@@ -134,7 +134,7 @@ class CheckoutController extends Controller
             // Thanh toán VNPAY
             $code_cart = rand(00, 9999);
             $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-            $vnp_Returnurl = env('APP_URL') . '/order/checkout';
+            $vnp_Returnurl = route('order.checkout') . '?success=1';
             $vnp_TmnCode = env('vnp_TmnCode');
             $vnp_HashSecret = env('vnp_HashSecret');
 
@@ -143,7 +143,7 @@ class CheckoutController extends Controller
             $vnp_OrderType = 'billpayment';
             $vnp_Amount = $data['total_vnpay'] * 100;
             $vnp_Locale = 'vn';
-            $vnp_IpAddr = $_SERVER['REMOTE_ADDR'];
+            $vnp_IpAddr = $request->ip();
 
             $inputData = [
                 "vnp_Version" => "2.1.0",

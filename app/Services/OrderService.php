@@ -20,12 +20,10 @@ class OrderService
         array $search = [],
         string $freeSearch = '',
         array $range = [[], []],
-        int $limit
+        int $limit = 10,
+        int $page = 1
     ): LengthAwarePaginator {
-        $relation = [
-        ];
-
-        [$from, $to] = $range;
+        [$from, $to] = $range;    
         return $this->order
             ->search(Order::SEARCH_FIELDS, $freeSearch)
             ->from($from, Order::FROM_FIELDS)
@@ -35,8 +33,7 @@ class OrderService
             ->findInSet($filters, Order::IN_SET_FIELDS)
             ->searchBy($search, Order::SEARCH_FIELDS)
             ->filterBy($filters, Order::FILTER_FIELDS)
-            ->with($relation)
-            ->paginate($limit);
+            ->paginate($limit, ['*'], 'page', $page); 
     }
 
     

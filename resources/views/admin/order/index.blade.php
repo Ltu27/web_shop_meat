@@ -3,6 +3,39 @@
 
 @section('main')
     <div class="table-responsive">
+        <div class="mb-3 d-flex align-items-end flex-wrap gap-3">
+            <div class="w-auto">
+                <label for="filter-status" class="form-label">Trạng thái:</label>
+                <select id="filter-status" class="form-control form-control-sm">
+                    <option value="">Tất cả</option>
+                    <option value="0">Chờ xác nhận</option>
+                    <option value="1">Đã xác nhận</option>
+                    <option value="2">Chưa thanh toán</option>
+                    <option value="3">Đã thanh toán</option>
+                    <option value="4">Đã nhận hàng</option>
+                    <option value="6">Đã hủy</option>
+                </select>
+            </div>
+            <div class="w-auto">
+                <label for="from-date" class="form-label">Từ ngày:</label>
+                <input type="date" id="from-date" class="form-control form-control-sm" />
+            </div>
+            
+            <div class="w-auto">
+                <label for="to-date" class="form-label">Đến ngày:</label>
+                <input type="date" id="to-date" class="form-control form-control-sm" />
+            </div>
+
+            <div class="w-auto">
+                <label for="search-keyword" class="form-label">Tìm kiếm:</label>
+                <input type="text" id="search-keyword" class="form-control form-control-sm" placeholder="Nhập từ khóa..." />
+            </div>
+            
+            <div class="w-auto align-self-end">
+                <button id="filter-date-btn" class="btn btn-primary btn-sm">Lọc</button>
+            </div>
+        </div>        
+        
         <table class="table table-bordered" id="order-table">
             <thead>
                 <tr>
@@ -19,20 +52,24 @@
 @section('js')
 <script>
     $(function() {
-        const urlParams = new URLSearchParams(window.location.search);
-        const statusFilter = urlParams.get('filters[status]');
-
-        $('#order-table').DataTable({
+        let table = $('#order-table').DataTable({
             processing: true,
             serverSide: true,
+            searching: false,
             ajax: {
                 url: '{{ route("order.getListOrder") }}',
                 data: function(d) {
-                    if (statusFilter !== null) {
-                        d.filters = {
-                            status: statusFilter
-                        };
+                    d.filters = {};
+                    const status = $('#filter-status').val();
+                    if (status) {
+                        d.filters.status = status;
                     }
+
+                    const from = $('#from-date').val();
+                    const to = $('#to-date').val();
+
+                    if (from) d.from = from;
+                    if (to) d.to = to;
                 }
             },
             columns: [
@@ -55,7 +92,15 @@
                 }
             ]
         });
+
+        $('#filter-status, #filter-date-btn').change(function() {
+            table.ajax.reload();
+        });
+        $('#filter-date-btn').on('click', function() {
+            table.ajax.reload();
+        });
     });
+
 </script>
 
 @endsection

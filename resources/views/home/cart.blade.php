@@ -33,9 +33,11 @@
                 <table class="table">
                     <thead>
                         <tr>
+                            {{-- <th><input type="checkbox" id="checkAll"> </th> --}}
                             <th>STT</th>
                             <th>Ảnh</th>
                             <th>Tên sản phẩm</th>
+                            <th>Màu</th>
                             <th>Giá</th>
                             <th>Số lượng</th>
                         </tr>
@@ -43,11 +45,21 @@
                     <tbody>
                         @foreach ($carts as $item)
                             <tr>
+                                {{-- <td>
+                                    <input type="checkbox" class="cart-item" name="products[]" value="{{ $item->id }}">
+                                </td> --}}
                                 <td scope="row">{{ $loop->index + 1 }}</td>
                                 <td>
                                     <img src="uploads/product/{{ $item->prod->image }}" width="40" alt="">    
                                 </td>
                                 <td>{{ $item->prod->name }}</td>
+                                <td>
+                                    @if ($item->variant && $item->variant->variant_color)
+                                        <div style="width: 20px; height: 20px; margin-top: 5px; border-radius: 50%; background-color: {{ $item->variant->variant_color }}; border: 1px solid #ccc;" title="{{ $item->variant->variant_color }}"></div>
+                                    @else
+                                        <span>Không có</span>
+                                    @endif
+                                </td>
                                 <td>{{ $item->price }}</td>
                                 <td>
                                     <form class="update-cart-form" data-id="{{ $item->product_id }}" 
