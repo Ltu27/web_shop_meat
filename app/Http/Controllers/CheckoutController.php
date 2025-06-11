@@ -25,7 +25,21 @@ class CheckoutController extends Controller
         $this->checkoutService = $checkoutService;
     }
 
-    public function checkout() {
+    public function checkout(Request $request) {
+        $auth = auth('cus')->user();
+    
+        $productIds = $request->input('products', []);
+        
+        $cartsChoosen = Cart::whereIn('id', $productIds)->get();
+    
+        if ($cartsChoosen->isEmpty()) {
+            return redirect()->back()->with('no', 'Vui lòng chọn sản phẩm để đặt hàng.');
+        }
+    
+        return view('home.checkout', compact('auth', 'cartsChoosen'));
+    }
+
+    public function checkoutResult(Request $request) {
         $auth = auth('cus')->user();
         return view('home.checkout', compact('auth'));
     }
@@ -48,6 +62,8 @@ class CheckoutController extends Controller
         $data['customer_id'] = $auth->id;
         $data['status'] = OrderConstant::STATUS_PENDING; 
         
+        $cartIds = $req->input('cart_ids', []);
+
         if ($order = Order::create($data)) {
             $token = Str::random(40);
             foreach($auth->carts as $cart) {
@@ -71,7 +87,7 @@ class CheckoutController extends Controller
             session(['inforCustomer' => $data]);
             return view('home.vnpay.index', compact('totalPrice'));
         } else {
-            $auth->carts()->delete();
+            $auth->carts()->whereIn('id', $cartIds)->delete();
             return redirect()->route('home.index')->with('ok', 'Chọn phương thức thanh toán thành công, vui lòng đợi người quản trị xác nhận đơn hàng');
         }
         return redirect()->route('home.index')->with('no', 'Có lỗi xảy ra, vui lòng kiểm tra lại');
@@ -90,6 +106,8 @@ class CheckoutController extends Controller
 
     public function createPayment(Request $request) 
     {
+        $cartIds = $request->input('cart_ids', []);
+        // dd($cartIds);
         try {
             DB::beginTransaction();
             $auth = auth('cus')->user();
@@ -106,7 +124,11 @@ class CheckoutController extends Controller
                 'payment_type' => 1,
             ]);
 
-            foreach ($auth->carts as $cart) {
+            $cartIds = $request->input('cart_ids', []);
+
+            $cartsChoosen = Cart::whereIn('id', $cartIds)->get();
+            
+            foreach ($cartsChoosen as $cart) {
                 OrderDetail::create([
                     'order_id' => $order->id,
                     'product_id' => $cart->product_id,
@@ -129,7 +151,7 @@ class CheckoutController extends Controller
             $order->token = $token;
             $order->save();
 
-            Cart::where('customer_id', $auth->id)->delete();
+            $auth->carts()->whereIn('id', $cartIds)->delete();
 
             // Thanh toán VNPAY
             $code_cart = rand(00, 9999);

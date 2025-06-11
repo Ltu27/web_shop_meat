@@ -32,8 +32,13 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-4">
-                        <form action="" method="post">
+                        <form action="{{ route('order.postCheckout') }}" method="post">
                             @csrf
+                            @if (isset($cartsChoosen))
+                                @foreach ($cartsChoosen as $item)
+                                    <input type="hidden" name="cart_ids[]" value="{{ $item->id }}">
+                                @endforeach
+                            @endif
                             <div class="contact-form-wrap">
                                 <div class="form-grp">
                                     <input name="name" value="{{ $auth->name }}" class="form-control" type="text" placeholder="Your Name *" required>
@@ -89,42 +94,48 @@
                                 $total_vnpay = 0;
                             @endphp
                             <tbody>
-                                @foreach ($carts as $item)
-                                    @php
-                                        $total_vnpay += $item->price * $item->quantity;
-                                    @endphp
+                                @if (!isset($cartsChoosen))
                                     <tr>
-                                        <td scope="row">{{ $loop->index + 1 }}</td>
-                                        <td>
-                                            <img src="uploads/product/{{ $item->prod->image }}" width="40" alt="">    
-                                        </td>
-                                        <td>{{ $item->prod->name }}</td>
-                                        <td>
-                                            @if ($item->variant && $item->variant->variant_color)
-                                                <div style="width: 20px; height: 20px; margin-top: 5px; border-radius: 50%; background-color: {{ $item->variant->variant_color }}; border: 1px solid #ccc;" title="{{ $item->variant->variant_color }}"></div>
-                                            @else
-                                                <span>Không có</span>
-                                            @endif
-                                        </td>
-                                        <td>{{ $item->price }}</td>
-                                        <td>
-                                            <form class="update-cart-form" data-id="{{ $item->product_id }}" 
-                                                data-variant-id="{{ $item->variant_id }}"
-                                                @csrf
-                                                <input type="number" value="{{ $item->quantity }}" name="quantity" 
-                                                    class="quantity-input" style="width: 60px; text-align:center">
-                                                <button type="submit"><i class="fa fa-save"></i></button>
-                                            </form>
-                                        </td>
-                                        <td>
-                                            {{ $item->price * $item->quantity }}
-                                        </td>
-                                        <td>
-                                            <a title="Xóa sản phẩm khỏi giỏ hàng" onclick="return confirm('Are you suare want to delete product?')" 
-                                            href="{{ route('cart.delete', $item->product_id) }}"><i class="fa fa-trash"></i></a>
-                                        </td>
+                                        <td colspan="8" class="text-center">Giỏ hàng trống</td>
                                     </tr>
-                                @endforeach
+                                @else
+                                    @foreach ($cartsChoosen as $item)
+                                        @php
+                                            $total_vnpay += $item->price * $item->quantity;
+                                        @endphp
+                                        <tr>
+                                            <td scope="row">{{ $loop->index + 1 }}</td>
+                                            <td>
+                                                <img src="uploads/product/{{ $item->prod->image }}" width="40" alt="">    
+                                            </td>
+                                            <td>{{ $item->prod->name }}</td>
+                                            <td>
+                                                @if ($item->variant && $item->variant->variant_color)
+                                                    <div style="width: 20px; height: 20px; margin-top: 5px; border-radius: 50%; background-color: {{ $item->variant->variant_color }}; border: 1px solid #ccc;" title="{{ $item->variant->variant_color }}"></div>
+                                                @else
+                                                    <span>Không có</span>
+                                                @endif
+                                            </td>
+                                            <td>{{ $item->price }}</td>
+                                            <td>
+                                                <form class="update-cart-form" data-id="{{ $item->product_id }}" 
+                                                    data-variant-id="{{ $item->variant_id }}"
+                                                    @csrf
+                                                    <input type="number" value="{{ $item->quantity }}" name="quantity" 
+                                                        class="quantity-input" style="width: 60px; text-align:center">
+                                                    <button type="submit"><i class="fa fa-save"></i></button>
+                                                </form>
+                                            </td>
+                                            <td>
+                                                {{ $item->price * $item->quantity }}
+                                            </td>
+                                            <td>
+                                                <a title="Xóa sản phẩm khỏi giỏ hàng" onclick="return confirm('Are you suare want to delete product?')" 
+                                                href="{{ route('cart.delete', $item->product_id) }}"><i class="fa fa-trash"></i></a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                @endif
                                 <input type="hidden" name="total_vnpay" value="{{ $total_vnpay }}">
                             </tbody>
                         </table>
@@ -164,6 +175,10 @@
             $('.btn-payment-online').on('click', function(e) {
                 e.preventDefault();
                 var total_vnpay = $('input[name="total_vnpay"]').val();
+                var cartIds = [];
+                $('input[name="cart_ids[]"]').each(function() {
+                    cartIds.push($(this).val());
+                });
                 
                 if (total_vnpay) {
                     $.ajax({
@@ -171,7 +186,8 @@
                         type: 'POST',
                         data: {
                             _token: '{{ csrf_token() }}',
-                            total_vnpay: total_vnpay
+                            total_vnpay: total_vnpay,
+                            cart_ids: cartIds
                         },
                         success: function(response) {
                             if (response.code == '00') {
