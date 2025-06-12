@@ -64,6 +64,17 @@
                                         <div class="help-block">{{ $message }}</div>
                                     @enderror
                                 </div>
+                                <div class="form-grp">
+                                    <label for="coupon_id">Chọn mã giảm giá</label>
+                                    <select name="coupon_id" id="coupon_id" class="form-control">
+                                        <option value="">-- Không áp dụng --</option>
+                                        @foreach ($coupons as $coupon)
+                                            <option value="{{ $coupon->id }}">
+                                                {{ $coupon->code }} - Giảm {{ (int)$coupon->discount }}%
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
                                 <div class="row">
                                     <div class="col-6">
                                         <button type="submit">{{ __('common.checkout.cash_payment') }}</button>

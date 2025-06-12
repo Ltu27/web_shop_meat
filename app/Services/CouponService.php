@@ -44,10 +44,26 @@ class CouponService
         return $this->coupon->create($data);
     }
 
+    public function find(string $id): ?Coupon
+    {
+        return $this->coupon->find($id);
+    }
+
     public function update(Coupon $coupon, array $data): Coupon
     {
         $coupon->update($data);
         return $coupon;
+    }
+
+    public function delete(string $id): bool
+    {
+        return $this->coupon->destroy($id);
+    }
+
+    public function getCoupons() {
+        return $this->coupon->where('status', 1)
+            ->whereDate('end_date', '>=', now())
+            ->get();
     }
 
     public function applyCoupon(Request $request)

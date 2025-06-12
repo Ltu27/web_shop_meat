@@ -96,7 +96,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
     });
 
     Route::group(['prefix' => 'coupon'], function() {
-        Route::get('/getListcoupon', [UserController::class, 'getListCoupon'])->name('coupon.getListCoupon');
+        Route::get('/getListcoupon', [CouponController::class, 'getListCoupon'])->name('coupon.getListCoupon');
     });
 
     Route::resources([

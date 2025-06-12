@@ -37,4 +37,9 @@ class Coupon extends Model
         'quantity',
         'status',
     ];
+
+    public function getDiscountPercent()
+    {
+        return $this->discount / 100;
+    }
 }

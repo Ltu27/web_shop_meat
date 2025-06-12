@@ -3,6 +3,7 @@
 
 @section('main')
     <div class="table-responsive">
+        <a href="{{ route('coupon.create') }}" class="btn btn-success pull-right"><i class="fa fa-plus"></i>Thêm mới</a>
         <table class="table table-bordered" id="order-table">
             <thead>
                 <tr>
@@ -27,6 +28,7 @@
         $('#order-table').DataTable({
             processing: true,
             serverSide: true,
+            // searchable: false
             ajax: {
                 url: '{{ route("coupon.getListCoupon") }}',
                 // data: function(d) {
@@ -40,8 +42,14 @@
             columns: [
                 { data: 'id', name: 'id', orderable: false, searchable: false },
                 { data: 'code', name: 'code' },
-                { data: 'discount', name: 'discount', render: $.fn.dataTable.render.number(',', '.', 0) },
-                { data: 'expired_at', name: 'expired_at' },
+                { 
+                    data: 'discount', 
+                    name: 'discount', 
+                    render: function (data) {
+                        return parseInt(data) + ' %';
+                    }
+                },
+                { data: 'end_date', name: 'end_date' },
                 { data: 'quantity', name: 'quantity' },
                 { data: 'status', name: 'status' },
                 { data: 'id', 
@@ -49,12 +57,20 @@
                     orderable: false, 
                     className: 'text-center',
                     render: function(data) {
-                        var html = '';
-                        html += '<div class="d-flex justify-content-center align-items-center flex-nowrap">';
-                        html += '<a href="{{ route("coupon.edit", ":id") }}" class="m-2 btn btn-primary btn-sm"><i class="fa fa-eye"></i></a>';
-                        html = html.replace(':id', data);
-                        html += '</div>';
-                        return html;
+                        var editUrl = '{{ route("coupon.edit", ":id") }}'.replace(':id', data);
+                        var deleteUrl = '{{ route("coupon.destroy", ":id") }}'.replace(':id', data);
+                        var csrf = '{{ csrf_token() }}';
+
+                        return `
+                            <div class="d-flex justify-content-center align-items-center flex-nowrap">
+                                <a href="${editUrl}" class="btn btn-sm btn-primary m-1"><i class="fa fa-edit"></i> Sửa</a>
+                                <form method="POST" action="${deleteUrl}" style="display:inline;" onsubmit="return confirm('Bạn có chắc muốn xóa?')">
+                                    <input type="hidden" name="_token" value="${csrf}">
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <button type="submit" class="btn btn-sm btn-danger m-1"><i class="fa fa-trash"></i> Xóa</button>
+                                </form>
+                            </div>
+                        `;
                     }
                 }
             ]

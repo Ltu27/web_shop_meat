@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Coupon\CreateCouponRequest;
+use App\Http\Requests\Coupon\UpdateCouponRequest;
 use App\Http\Resources\Coupon\ListCouponResource;
 use App\Models\Coupon;
 use App\Services\CouponService;
@@ -23,7 +25,7 @@ class CouponController extends Controller
         return view('admin.coupon.index');
     }
 
-    public function getListOrder(Request $request): JsonResponse
+    public function getListCoupon(Request $request): JsonResponse
     {
         $filters = $request->query('filters', []);
 
@@ -56,9 +58,15 @@ class CouponController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CreateCouponRequest $request)
     {
-        //
+        try{
+            $data = $request->validated();
+            $this->service->create($data);
+            return redirect()->route('coupon.index')->with('ok', 'Thêm mã giảm giá thành công');
+        }catch(\Exception $e){
+            return redirect()->back()->with('no', $e->getMessage());
+        }
     }
 
     /**
@@ -74,15 +82,22 @@ class CouponController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $coupon = $this->service->find($id);
+        return view('admin.coupon.edit', compact('coupon'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateCouponRequest $request, string $id)
     {
-        //
+        try{
+            $data = $request->validated();
+            $this->service->update($this->service->find($id), $data);
+            return redirect()->route('coupon.index')->with('ok', 'Cập nhật mã giảm giá thành công');
+        }catch(\Exception $e){
+            return redirect()->back()->with('no', $e->getMessage());
+        }
     }
 
     /**
@@ -90,6 +105,7 @@ class CouponController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $this->service->delete($id);
+        return redirect()->route('coupon.index')->with('ok', 'Xoá mã giảm giá thành công');
     }
 }

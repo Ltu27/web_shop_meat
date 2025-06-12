@@ -53,6 +53,9 @@
                         <div class="shop-item-wrap">
                             <div class="row">
                                 @foreach ($cat->products as $prod)
+                                    @php
+                                        $firstVariant = $prod->variants->first();
+                                    @endphp
                                     <div class="col-xl-4 col-md-6">
                                         <div class="product-item-three inner-product-item">
                                             <div class="product-thumb-three">
@@ -65,12 +68,11 @@
                                                     <input type="hidden" name="id" value="{{ $prod->id }}">
                                                     <a href="#" class="tag">{{ $prod->cat->name }}</a>
                                                     <h2 class="title"><a href="{{ route('home.product', $prod->id) }}">{{ $prod->name }}</a></h2>
-                                                    @if ($prod->sale_price > 0)
-                                                        <h2><s>{{ number_format($prod->price) }} VNĐ</s></h2>
-                                                        <h2 class="price">{{ number_format($prod->sale_price) }} VNĐ</h2>
-                                                    @else
-                                                        <h2 class="price">{{ number_format($prod->price) }} VNĐ</h2>
-                                                    @endif
+                                                    <h2 class="price">{{ number_format($firstVariant ? $firstVariant->variant_price : (
+                                                        $product->coupon ? 
+                                                            caculatePriceOfProduct($product->price, $product->coupon->value, $product->coupon->type)
+                                                            : $product->price
+                                                    ), 0, ',', '.') }} VNĐ</h2>
                                                     <div class="favorite-action">
                                                         @if (auth('cus')->check())
                                                             @if ($prod->favorited)
@@ -141,18 +143,20 @@
                                 <h4 class="sw-title">Sản phẩm mới nhất</h4>
                                 <div class="latest-products-wrap">
                                     @foreach ($new_products as $np)
+                                        @php
+                                            $firstVariant = $prod->variants->first();
+                                        @endphp
                                         <div class="lp-item">
                                             <div class="lp-thumb">
                                                 <a href="{{ route('home.product', $np->id) }}"><img src="uploads/product/{{ $np->image }}" alt=""></a>
                                             </div>
                                             <div class="lp-content">
                                                 <h4 class="title"><a href="{{ route('home.product', $np->id) }}">{{ $np->name }}</a></h4>
-                                                @if ($np->sale_price > 0)
-                                                    <span><s>{{ number_format($np->price) }} VNĐ</s></span>
-                                                    <span class="price">{{ number_format($np->sale_price) }} VNĐ</span>
-                                                @else
-                                                    <span class="price">{{ number_format($np->price) }} VNĐ</span>
-                                                @endif
+                                                <span class="price">{{ number_format($firstVariant ? $firstVariant->variant_price : (
+                                                    $product->coupon ? 
+                                                        caculatePriceOfProduct($product->price, $product->coupon->value, $product->coupon->type)
+                                                        : $product->price
+                                                ), 0, ',', '.') }} VNĐ</span>
                                             </div>
                                         </div>
                                     @endforeach

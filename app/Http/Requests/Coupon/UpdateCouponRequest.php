@@ -23,11 +23,10 @@ class UpdateCouponRequest extends FormRequest
     {
         return [
             'code' => 'required|unique:coupons,code,' . ($this->route('coupon')->id ?? $this->route('coupon')),
-            'type' => 'required|in:fixed,percentage',
-            'value' => 'required|numeric|min:0',
-            'min_order_amount' => 'nullable|numeric|min:0',
-            'usage_limit' => 'nullable|integer|min:1',
-            'expires_at' => 'nullable|date',
+            'discount' => 'required|string|min:0',
+            'end_date' => 'nullable|date',
+            'quantity' => 'required|integer|min:1',
+            'status' => 'required|boolean',
         ];
     }
 }
