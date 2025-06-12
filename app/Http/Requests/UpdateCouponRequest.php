@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Coupon;
+namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -11,7 +11,7 @@ class UpdateCouponRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -22,11 +22,7 @@ class UpdateCouponRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'code' => 'required|unique:coupons,code,' . ($this->route('coupon')->id ?? $this->route('coupon')),
-            'discount' => 'required|string|min:0',
-            'end_date' => 'nullable|date',
-            'quantity' => 'required|integer|min:1',
-            'status' => 'required|boolean',
+            //
         ];
     }
 }

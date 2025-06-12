@@ -22,6 +22,7 @@ class OrderController extends Controller
     public function getListOrder(Request $request): JsonResponse
     {
         $filters = $request->query('filters', []);
+
         $has = $request->query('has', []);
         $search = $request->query('search', []);
         $sorts = ['id' => 'desc'];

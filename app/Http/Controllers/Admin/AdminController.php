@@ -46,7 +46,7 @@ class AdminController extends Controller
                 $revenue = Order::whereDay('created_at', $d)
                     ->whereMonth('created_at', $month)
                     ->whereYear('created_at', $year)
-                    ->where('status', 3)
+                    ->whereIn('status', [3, 4])
                     ->with('details')
                     ->get()
                     ->flatMap->details
@@ -67,7 +67,7 @@ class AdminController extends Controller
             for ($m = 1; $m <= 12; $m++) {
                 $revenue = Order::whereMonth('created_at', $m)
                     ->whereYear('created_at', $year)
-                    ->where('status', 3)
+                    ->whereIn('status', [3, 4])
                     ->with('details')
                     ->get()
                     ->flatMap->details

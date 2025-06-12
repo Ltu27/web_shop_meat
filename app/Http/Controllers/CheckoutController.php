@@ -10,6 +10,7 @@ use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\ProductVariant;
 use App\Services\CheckoutService;
+use App\Services\CouponService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -20,7 +21,10 @@ class CheckoutController extends Controller
 {
     protected $checkoutService;
 
-    public function __construct(CheckoutService $checkoutService)
+    public function __construct(
+        CheckoutService $checkoutService,
+        protected CouponService $couponService,
+    )
     {
         $this->checkoutService = $checkoutService;
     }
@@ -31,17 +35,22 @@ class CheckoutController extends Controller
         $productIds = $request->input('products', []);
         
         $cartsChoosen = Cart::whereIn('id', $productIds)->get();
+        $coupons = $this->couponService->getCoupons();
     
         if ($cartsChoosen->isEmpty()) {
             return redirect()->back()->with('no', 'Vui lòng chọn sản phẩm để đặt hàng.');
         }
     
-        return view('home.checkout', compact('auth', 'cartsChoosen'));
+        return view('home.checkout', compact('auth', 'cartsChoosen', 'coupons'));
     }
 
     public function checkoutResult(Request $request) {
         $auth = auth('cus')->user();
-        return view('home.checkout', compact('auth'));
+        $coupons = $this->couponService->getCoupons();
+        return view('home.checkout', compact(
+            'auth',
+            'coupons'
+        ));
     }
 
     public function history() {
@@ -61,6 +70,7 @@ class CheckoutController extends Controller
 
         $data['customer_id'] = $auth->id;
         $data['status'] = OrderConstant::STATUS_PENDING; 
+        $data['coupon_id'] = $req->input('coupon_id');
         
         $cartIds = $req->input('cart_ids', []);
         $cartsChoosen = Cart::whereIn('id', $cartIds)->get();
