@@ -18,4 +18,8 @@ class Cart extends Model
     public function prod() {
         return $this->hasOne(Product::class, 'id', 'product_id');
     }
+
+    public function variant() {
+        return $this->hasOne(ProductVariant::class, 'id', 'variant_id');
+    }
 }

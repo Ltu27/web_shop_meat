@@ -111,11 +111,6 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="{{ route('order.index') }}">Danh sách</a></li>
-            <li><a href="{{ route('order.index', ['filters[status]' => 0]) }}">Chưa xác nhận</a></li>
-            <li><a href="{{ route('order.index', ['filters[status]' => 1]) }}">Đã xác nhận</a></li>
-            <li><a href="{{ route('order.index', ['filters[status]' => 2]) }}">Chưa thanh toán</a></li>
-            <li><a href="{{ route('order.index', ['filters[status]' => 3]) }}">Đã thanh toán</a></li>
-            <li><a href="{{ route('order.index', ['filters[status]' => 6]) }}">Đã hủy</a></li>
         </ul>        
         </li>
         <li class="treeview">

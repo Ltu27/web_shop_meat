@@ -26,6 +26,7 @@
         <link rel="stylesheet" href="assets/css/style.css">
         <link rel="stylesheet" href="assets/css/responsive.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.css">
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
         @yield('css')
     </head>
     <body>
@@ -274,7 +275,6 @@
         agent-id="40034e07-e5ab-490f-8626-e124de7425a9"
         language-code="vi"
         ></df-messenger>
-        @yield('js')
         @if(Session::has('ok'))
 
         <script>
@@ -300,6 +300,8 @@
             })
         </script>
         @endif
+        @yield('js')
+
     </body> 
 
 </html>

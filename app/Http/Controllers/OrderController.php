@@ -22,24 +22,33 @@ class OrderController extends Controller
     public function getListOrder(Request $request): JsonResponse
     {
         $filters = $request->query('filters', []);
-        // dd($filters);
-
         $has = $request->query('has', []);
         $search = $request->query('search', []);
-        $sorts = $request->query('sorts', []);
-        $from = $request->query('from', []);
-        $to = $request->query('to', []);
-        $limit = $request->query('limit', static::LIMIT);
+        $sorts = ['id' => 'desc'];
+        $from = [
+            'created_at' => $request->query('from')
+        ];
+        $to = [
+            'created_at' => $request->query('to')
+        ];
+        $limit = $request->query('length', static::LIMIT); 
+        $start = $request->query('start', 0);
+        $draw = (int) $request->query('draw'); 
+
         $freeSearch = $request->query('q', '');
-        $data = $this->service->getByConditions($filters, $has, $sorts, $search, $freeSearch, [$from, $to], $limit);
-        return $this->success(
-            ListOrderResource::collection($data->items()),
-            [
-                'current_page' => $data->currentPage(),
-                'total' => $data->total(),
-                'per_page' => $data->perPage(),
-            ]
+
+        $page = floor($start / $limit) + 1;
+
+        $data = $this->service->getByConditions(
+            $filters, $has, $sorts, $search, $freeSearch, [$from, $to], $limit, $page
         );
+
+        return response()->json([
+            'draw' => $draw,
+            'recordsTotal' => $data->total(),
+            'recordsFiltered' => $data->total(),
+            'data' => ListOrderResource::collection($data->items()),
+        ]);
     }
 
     public function show(Order $order) {

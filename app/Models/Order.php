@@ -13,9 +13,11 @@ class Order extends Model
     ];
 
     public const FROM_FIELDS = [
+        'created_at' => 'orders.created_at',
     ];
-
+    
     public const TO_FIELDS = [
+        'created_at' => 'orders.created_at',
     ];
 
     public const IN_SET_FIELDS = [
@@ -28,7 +30,7 @@ class Order extends Model
     ];
 
     public const SORT_FIELDS = [
-        // 'id' => 'campaigns.id',
+        'id' => 'orders.id',
     ];
 
     protected $appends = ['totalPrice'];
