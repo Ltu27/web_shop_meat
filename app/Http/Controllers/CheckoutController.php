@@ -63,10 +63,11 @@ class CheckoutController extends Controller
         $data['status'] = OrderConstant::STATUS_PENDING; 
         
         $cartIds = $req->input('cart_ids', []);
+        $cartsChoosen = Cart::whereIn('id', $cartIds)->get();
 
         if ($order = Order::create($data)) {
             $token = Str::random(40);
-            foreach($auth->carts as $cart) {
+            foreach($cartsChoosen as $cart) {
                 $data1 = [
                     'order_id' => $order->id,
                     'product_id' => $cart->product_id,
