@@ -118,6 +118,15 @@
             <li><a href="{{ route('order.index', ['filters[status]' => 6]) }}">Đã hủy</a></li>
         </ul>        
         </li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-inbox"></i> <span>Phiếu giảm giá</span> <i class="fa fa-angle-left pull-right"></i>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="{{ route('coupon.index') }}"><i class="fa fa-circle-o"></i> Danh sách</a></li>
+            <li><a href="{{ route('coupon.create') }}"><i class="fa fa-circle-o"></i> Thêm mới</a></li>
+          </ul>
+        </li>
         {{-- <li class="treeview">
           <a href="#">
             <i class="fa fa-chart-simple"></i> <span> Thống kê</span> <i class="fa fa-angle-left pull-right"></i>

@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\StatisticController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\CouponController;
 use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
 
@@ -91,11 +92,16 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
     Route::group(['prefix' => 'user'], function() {
         Route::get('/getListUser', [UserController::class, 'getListUser'])->name('user.getListUser');
     });
+
+    Route::group(['prefix' => 'coupon'], function() {
+        Route::get('/getListcoupon', [UserController::class, 'getListCoupon'])->name('coupon.getListCoupon');
+    });
+
     Route::resources([
         'user' => UserController::class,
         'category' => CategoryController::class,
         'product' => ProductController::class,
-        'statistical'=> StatisticController::class
+        'coupon' => CouponController::class,
     ]);
     
     route::get('product-delete-image/{image}', [ProductController::class, 'destroyImage'])->name('product.destroyImage');
