@@ -11,8 +11,7 @@ class Product extends Model
 
     public $appends = ['favorited'];
 
-    protected $fillable = ['name', 'status', 'price', 'sale_price', 'image', 'category_id', 'description',
-        'quantity',
+    protected $fillable = ['name', 'status', 'image', 'category_id', 'description'
     ];
 
     public function cat() {

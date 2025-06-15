@@ -97,6 +97,37 @@
       </div>
     </div>
 
+    <div class="row mt-4">
+      <div class="col-lg-6">
+        <div class="box">
+          <div class="box-header with-border">
+            <h1 class="box-title">Top 10 sản phẩm tồn kho nhiều nhất</h1>
+          </div>
+          <div class="box-body">
+            <ul class="list-group">
+              @foreach ($topStockProducts as $product)
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  {{ $product->name }}
+                  <span class="badge bg-primary">{{ $product->total_stock }}</span>
+                </li>
+              @endforeach
+            </ul>
+          </div>
+        </div>
+      </div>      
+    
+      <div class="col-lg-6">
+        <div class="box">
+          <div class="box-header with-border">
+            <h1 class="box-title">Top 10 sản phẩm bán chạy</h1>
+          </div>
+          <div class="box-body">
+            <canvas id="top-sold-chart" height="200"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+
     
 @endsection
 @section('js')
@@ -157,6 +188,30 @@
         const currentYear = new Date().getFullYear();
         $('#filter-year').val(currentYear);
         fetchData('year', currentYear);
+
+        const soldChart = document.getElementById('top-sold-chart').getContext('2d');
+        new Chart(soldChart, {
+            type: 'bar',
+            data: {
+                labels: {!! json_encode($topSellingProducts->pluck('name')) !!},
+                datasets: [{
+                    label: 'Số lượng bán',
+                    data: {!! json_encode($topSellingProducts->pluck('total')) !!},
+                    backgroundColor: 'rgba(255, 99, 132, 0.6)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                indexAxis: 'y',
+                scales: {
+                    x: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
     });
 </script>
 @endsection

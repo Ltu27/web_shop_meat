@@ -15,10 +15,9 @@ class HomeController extends Controller
         $galleries = Banner::getBanner('gallery')->get();
 
         $new_products = Product::orderBy('created_at', 'DESC')->limit(2)->get();
-        $sale_products = Product::orderBy('created_at', 'DESC')->where('sale_price', '>', 0)->limit(3)->get();
         $feature_products = Product::inRandomOrder()->limit(4)->get();
 
-        return view('home.index', compact('topBanner', 'galleries', 'new_products', 'sale_products','feature_products'));
+        return view('home.index', compact('topBanner', 'galleries', 'new_products', 'feature_products'));
     }
     
     public function about() {

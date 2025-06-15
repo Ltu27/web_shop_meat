@@ -72,7 +72,7 @@
     <!-- area-bg-end -->
 
     <!-- product-area -->
-    <section class="product-area product-bg" data-background="uploads/bg/product_bg01.jpg">
+    {{-- <section class="product-area product-bg" data-background="uploads/bg/product_bg01.jpg">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -126,7 +126,7 @@
         <div class="shop-shape">
             <img src="uploads/product/product_shape01.png" alt="">
         </div>
-    </section>
+    </section> --}}
     <!-- product-area-end -->
 
     <!-- gallery-area -->

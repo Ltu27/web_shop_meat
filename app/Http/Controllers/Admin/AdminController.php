@@ -23,11 +23,16 @@ class AdminController extends Controller
         $totalConfirmedOrder = $this->chartService->getTotalOrderWithStatus(OrderConstant::STATUS_CONFIRMED); 
         $totalPaidOrder = $this->chartService->getTotalOrderWithStatus(OrderConstant::STATUS_PAID); 
         $totalCancelOrder = $this->chartService->getTotalOrderWithStatus(OrderConstant::STATUS_COMPLETED); 
+        $topStockProducts = $this->chartService->getTopStockProducts();
+        $topSellingProducts = $this->chartService->getTopSellingProducts();
+
         return view('admin.index', compact(
             'totalProducts',
             'totalConfirmedOrder',
             'totalPaidOrder',
-            'totalCancelOrder'
+            'totalCancelOrder',
+            'topStockProducts',
+            'topSellingProducts'
         ));
     }
 
