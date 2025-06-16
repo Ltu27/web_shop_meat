@@ -6,6 +6,7 @@ use App\Constants\OrderConstant;
 use App\Http\Requests\Payment\CreatePaymentRequest;
 use App\Mail\OrderMail;
 use App\Models\Cart;
+use App\Models\Coupon;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\ProductVariant;
@@ -70,7 +71,6 @@ class CheckoutController extends Controller
 
         $data['customer_id'] = $auth->id;
         $data['status'] = OrderConstant::STATUS_PENDING; 
-        $data['coupon_id'] = $req->input('coupon_id');
         
         $cartIds = $req->input('cart_ids', []);
         $cartsChoosen = Cart::whereIn('id', $cartIds)->get();
@@ -90,8 +90,16 @@ class CheckoutController extends Controller
             }
         }
             
+        $order->total_price = $order->getTotalPriceAttribute();
         $order->token = $token;
         $order->save();
+
+        if (!empty($data['coupon_id'])) {
+            $coupon = Coupon::find($data['coupon_id']);
+            if ($coupon && $coupon->quantity > 0) {
+                $coupon->decrement('quantity');
+            }
+        }
 
         if(isset($data['payment']) == 2) {
             $totalPrice = $this->checkoutService->getToltalPrice($order);
@@ -118,7 +126,7 @@ class CheckoutController extends Controller
     public function createPayment(Request $request) 
     {
         $cartIds = $request->input('cart_ids', []);
-        // dd($cartIds);
+        $couponId = $request->input('coupon_id', null);
         try {
             DB::beginTransaction();
             $auth = auth('cus')->user();
@@ -133,6 +141,7 @@ class CheckoutController extends Controller
                 'status' => OrderConstant::STATUS_PAID, 
                 'total_price' => $data['total_vnpay'],
                 'payment_type' => 1,
+                'coupon_id' => $couponId,
             ]);
 
             $cartIds = $request->input('cart_ids', []);
@@ -158,9 +167,18 @@ class CheckoutController extends Controller
                 }
             }
 
+            $order->total_price = $order->getTotalPriceAttribute();
+
             $token = Str::random(40);
             $order->token = $token;
             $order->save();
+
+            if ($couponId) {
+                $coupon = Coupon::find($couponId);
+                if ($coupon && $coupon->quantity > 0) {
+                    $coupon->decrement('quantity');
+                }
+            }
 
             $auth->carts()->whereIn('id', $cartIds)->delete();
 

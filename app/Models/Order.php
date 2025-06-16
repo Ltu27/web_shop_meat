@@ -39,6 +39,7 @@ class Order extends Model
         'name', 'email', 'phone', 'address', 'token', 'customer_id', 'status',
         'total_price',
         'payment_type',
+        'coupon_id',
     ];
 
     public function customer() {
@@ -53,6 +54,10 @@ class Order extends Model
         $t = 0;
         foreach ($this->details as $item) {
             $t += $item->price * $item->quantity;
+        }
+        if ($this->coupon_id) {
+            $coupon = Coupon::find($this->coupon_id);
+            $t = $coupon ? $t * (1 - $coupon->getDiscountPercent()) : $t;
         }
         return $t;
     }

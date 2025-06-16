@@ -27,6 +27,7 @@ class CreatePaymentRequest extends FormRequest
             'phone' => 'required',
             'address' => 'required',
             'payment' => 'nullable',
+            'coupon_id' => 'nullable',
         ];
     }
 }
