@@ -101,6 +101,10 @@
                 <td>{{ number_format($item->price * $item->quantity) }}</td>
             </tr>
         @endforeach
+        <tr>
+            <td colspan="5" class="text-end"><strong>Tổng giá sau khi giảm giá:</strong></td>
+            <td><strong>{{ number_format($order->total_price) }}</strong></td>
+        </tr>
         
     </tbody>
 </table>

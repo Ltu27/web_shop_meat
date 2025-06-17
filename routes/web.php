@@ -76,7 +76,6 @@ Route::group(['prefix' => 'order', 'middleware' => 'customer'], function() {
     Route::get('/verify/{token}', [CheckoutController::class, 'verify'])->name('order.verify');
     Route::post('/payment/online', [CheckoutController::class, 'createPayment'])->name('order.payment.online');
     Route::delete('/cancel/{order}', [OrderController::class, 'cancel'])->name('order.cancel');
-    Route::get('/get-list-order', [OrderController::class, 'getListOrder'])->name('order.getListOrder');
 
 }); 
 
@@ -97,6 +96,10 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
 
     Route::group(['prefix' => 'coupon'], function() {
         Route::get('/getListcoupon', [CouponController::class, 'getListCoupon'])->name('coupon.getListCoupon');
+    });
+
+    Route::group(['prefix' => 'order'], function() {
+        Route::get('/get-list-order', [OrderController::class, 'getListOrder'])->name('order.getListOrder');
     });
 
     Route::resources([

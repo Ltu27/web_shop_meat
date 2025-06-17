@@ -67,9 +67,9 @@
                                 <div class="form-grp">
                                     <label for="coupon_id">Chọn mã giảm giá</label>
                                     <select name="coupon_id" id="coupon_id" class="form-control">
-                                        <option value="">-- Không áp dụng --</option>
+                                        <option value="" data-discount="0">-- Không áp dụng --</option>
                                         @foreach ($coupons as $coupon)
-                                            <option value="{{ $coupon->id }}">
+                                            <option value="{{ $coupon->id }}" data-discount="{{ $coupon->discount }}">
                                                 {{ $coupon->code }} - Giảm {{ (int)$coupon->discount }}%
                                             </option>
                                         @endforeach
@@ -99,6 +99,7 @@
                                     <th>Đơn giá</th>
                                     <th>Số lượng</th>
                                     <th>Tổng giá</th>
+                                    <th>Thành tiền sau giảm</th>
                                 </tr>
                             </thead>
                             @php
@@ -140,12 +141,23 @@
                                             <td>
                                                 {{ $item->price * $item->quantity }}
                                             </td>
+                                            @php
+                                                $total = $item->price * $item->quantity;
+                                            @endphp
+                                            <td class="discounted-price" data-original="{{ $total }}">
+                                                {{ number_format($total, 0, ',', '.') }} đ
+                                            </td>
                                             <td>
                                                 <a title="Xóa sản phẩm khỏi giỏ hàng" onclick="return confirm('Are you suare want to delete product?')" 
                                                 href="{{ route('cart.delete', $item->product_id) }}"><i class="fa fa-trash"></i></a>
                                             </td>
                                         </tr>
                                     @endforeach
+                                    <tr>
+                                        <td colspan="6" class="text-start"><strong>Tổng giá sau khi giảm giá:</strong></td>
+                                        <td><strong>{{ number_format($total_vnpay) }}</strong></td>
+                                        <td id="total-after-discount"><strong>{{ number_format($total_vnpay) }} đ</strong></td>
+                                    </tr>
                                 @endif
                                 <input type="hidden" name="total_vnpay" value="{{ $total_vnpay }}">
                             </tbody>
@@ -185,20 +197,30 @@
 
             $('.btn-payment-online').on('click', function(e) {
                 e.preventDefault();
-                var total_vnpay = $('input[name="total_vnpay"]').val();
+
+                let total_vnpay = 0;
+                const discountPercent = parseFloat($('#coupon_id option:selected').data('discount')) || 0;
+
+                $('.discounted-price').each(function () {
+                    const original = parseFloat($(this).data('original'));
+                    const discounted = original * (1 - discountPercent / 100);
+                    total_vnpay += discounted;
+                });
+
                 var cartIds = [];
                 $('input[name="cart_ids[]"]').each(function() {
                     cartIds.push($(this).val());
                 });
-                
-                if (total_vnpay) {
+
+                if (total_vnpay > 0) {
                     $.ajax({
                         url: "{{ route('order.payment.online') }}",
                         type: 'POST',
                         data: {
                             _token: '{{ csrf_token() }}',
-                            total_vnpay: total_vnpay,
-                            cart_ids: cartIds
+                            total_vnpay: Math.round(total_vnpay), 
+                            cart_ids: cartIds,
+                            coupon_id: $('#coupon_id').val()
                         },
                         success: function(response) {
                             if (response.code == '00') {
@@ -216,6 +238,7 @@
                     alert('Total amount is required for online payment.');
                 }
             });
+
 
             $('.update-cart-form').on('submit', function(e) {
                 e.preventDefault();
@@ -255,5 +278,21 @@
                 });
             });
         });
+
+        $('#coupon_id').on('change', function () {
+            const selectedOption = $(this).find('option:selected');
+            const discountPercent = parseFloat(selectedOption.data('discount')) || 0;
+            let totalAfterDiscount = 0;
+
+            $('.discounted-price').each(function () {
+                const original = parseFloat($(this).data('original'));
+                const discounted = original * (1 - discountPercent / 100);
+                $(this).text(discounted.toLocaleString('vi-VN') + ' đ');
+                totalAfterDiscount += discounted;
+            });
+
+            $('#total-after-discount').html('<strong>' + totalAfterDiscount.toLocaleString('vi-VN') + ' đ</strong>');
+        });
+
     </script>
 @endsection

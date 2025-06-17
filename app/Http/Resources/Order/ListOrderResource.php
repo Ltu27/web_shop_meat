@@ -23,12 +23,14 @@ class ListOrderResource extends JsonResource
             'email' => $this->email,
             'phone' => $this->phone,
             'address' => $this->address,
-            'status' => OrderConstant::getLabel($this->status),
+            'status' => OrderConstant::getLabel($this->status) ?? null,
             'created_at' => $this->created_at,
-            'customer' => new ShowCustomerResource($this->customer),
-            'details' => OrderDetailResource::collection($this->details),
-            'total_price' => $this->getTotalPriceAttribute(),
+            'customer' => new ShowCustomerResource($this->customer) ?? null,
+            'details' => $this->details ? OrderDetailResource::collection($this->details) : null,
+            'total_price' => $this->getTotalPriceAttribute() ?? null,
             'payment_type' => $this->payment_type,
+            'customer_name' => $this->customer ? $this->customer->name : null,
+            'product_name' => $this->details->first()?->product?->name ?? null,
         ];
     }
 }

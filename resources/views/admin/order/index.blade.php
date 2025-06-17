@@ -44,6 +44,8 @@
             <thead>
                 <tr>
                     <th>STT</th>
+                    <th>Khách hàng</th>
+                    <th>Sản phẩm</th>
                     <th>Ngày đặt</th>
                     <th>Trạng thái</th>
                     <th>Tổng tiền</th>
@@ -78,6 +80,8 @@
             },
             columns: [
                 { data: 'id', name: 'id', orderable: false, searchable: false },
+                { data: 'customer_name', name: 'customer_name' },
+                { data: 'product_name', name: 'product_name' },
                 { data: 'created_at', name: 'created_at' },
                 { data: 'status', name: 'status' },
                 { data: 'total_price', name: 'total_price', render: $.fn.dataTable.render.number(',', '.', 0) },
