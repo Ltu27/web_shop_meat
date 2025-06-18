@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
@@ -38,13 +39,23 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|unique:categories'
+            'name' => 'required|min:6|max:100',
+            'email' => 'required|email|min:6|max:100|unique:customers',
+            'phone' => 'required|min:6|unique:customers',
+            'address' => 'required|min:4',
+            'gender' => 'required',
+            'password' => 'required|min:4',
+            'confirm_password' => 'required|same:password',
         ]);
 
         $data = $request->all();
+        $data['password'] = bcrypt($request->password);
+
+        $data['email_verified_at'] = date('Y-m-d');
+
         Customer::create($data);
 
-        return redirect()->route('user.index');
+        return redirect()->route('user.index')->with('ok', 'Tạo mới người dùng thành công!');
     }
 
     /**
@@ -58,36 +69,55 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    // public function edit(Category $category)
-    // {
-    //     return view('admin.category.edit',compact('category'));
-    // }
+    public function edit(Customer $user)
+    {
+        return view('admin.user.edit',compact('user'));
+    }
 
     /**
      * Update the specified resource in storage.
      */
-    // public function update(Request $request, Category $category)
-    // {
-    //     $request->validate([
-    //         'name' => 'required|unique:categories,name,'.$category->id
-    //     ]);
+    public function update(Request $request, Customer $user)
+    {
+        $request->validate([
+            'name' => 'required',
+            'email' => [
+                'required', 'email', 'min:6', 'max:100',
+                Rule::unique('customers')->ignore($user->id)
+            ],
+            'phone' => [
+                'required', 'min:6',
+                Rule::unique('customers')->ignore($user->id)
+            ],
+            'address' => 'nullable|min:4',
+            'gender' => 'nullable',
+            'password' => 'nullable|min:4',
+            'confirm_password' => 'nullable|same:password',
+        ]);
 
-    //     $data = $request->all('name', 'status');
-    //     if ($category->update($data)) {
-    //         return redirect()->route('category.index')->with('ok', 'Update a category successfully');
-    //     }
-    //     return redirect()->back()->with('no', 'Something wrong, please try again');
+        $data = $request->all();
 
-    // }
+        if ($request->password) {
+            $data['password'] = bcrypt($request->password);
+        } else {
+            unset($data['password']);
+        }
+
+        if ($user->update($data)) {
+            return redirect()->route('user.index')->with('ok', 'Cập nhật người dùng thành công');
+        }
+        return redirect()->back()->with('no', 'Có lỗi xảy ra');
+
+    }
 
     /**
      * Remove the specified resource from storage.
      */
-    // public function destroy(Category $category)
-    // {
-    //     if ($category->delete()) {
-    //         return redirect()->route('category.index')->with('ok', 'Delete a category successfully');
-    //     }
-    //     return redirect()->back()->with('no', 'Something wrong, please try again');
-    // }
+    public function destroy(Customer $user)
+    {
+        if ($user->delete()) {
+            return redirect()->route('user.index')->with('ok', 'Xóa người dùng thành công');
+        }
+        return redirect()->back()->with('no', 'Có lỗi xảy ra');
+    }
 }

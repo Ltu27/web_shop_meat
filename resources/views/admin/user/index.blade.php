@@ -31,7 +31,7 @@
                     <th>Tên</th>
                     <th>Email</th>
                     <th>Số điện thoại</th>
-                    <th>Đại chỉ</th>
+                    <th>Địa chỉ</th>
                     {{-- <th>Trạng thái</th> --}}
                     <th>Hành động</th>
                 </tr>
@@ -68,7 +68,7 @@
                             html = html.replace(':id', data);
                             html += '@method('DELETE')';
                             html += '<input type="hidden" name="_token" value="{{ csrf_token() }}">';
-                            html += '<button onclick="return confirm(\'Bạn có muốn xóa sản phẩm này ?\')" class="m-2 btn btn-danger btn-sm">';
+                            html += '<button onclick="return confirm(\'Bạn có muốn xóa người dùng này ?\')" class="m-2 btn btn-danger btn-sm">';
                             html += '<input type="hidden" name="id" value="' + data + '">';
                             html += '<i class="fa fa-trash"></i></button>';
                             html += '</form>';
