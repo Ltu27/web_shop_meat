@@ -41,10 +41,10 @@ class UserController extends Controller
             'name' => 'required|unique:categories'
         ]);
 
-        $data = $request->all('name', 'status');
-        User::create($data);
+        $data = $request->all();
+        Customer::create($data);
 
-        return redirect()->route('category.index');
+        return redirect()->route('user.index');
     }
 
     /**

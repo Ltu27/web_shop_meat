@@ -102,8 +102,9 @@
             </tr>
         @endforeach
         <tr>
-            <td colspan="5" class="text-end"><strong>Tổng giá sau khi giảm giá:</strong></td>
-            <td><strong>{{ number_format($order->total_price) }}</strong></td>
+            <td class="text-end"><strong>Tổng giá sau khi giảm giá:</strong>
+                <strong>{{ number_format($order->total_price) }} (VNĐ)</strong>
+            </td>
         </tr>
         
     </tbody>

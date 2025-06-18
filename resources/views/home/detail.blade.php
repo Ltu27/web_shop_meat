@@ -77,6 +77,7 @@
                             <th>STT</th>
                             <th>Ảnh</th>
                             <th>Tên sản phẩm</th>
+                            <th>Màu sắc</th>
                             <th>Số lượng</th>
                             <th>Giá</th>
                             <th>Tổng tiền</th>
@@ -90,12 +91,23 @@
                                     <img src="uploads/product/{{ $item->product->image }}" width="40" alt="">    
                                 </td>
                                 <td>{{ $item->product->name }}</td>
+                                <td>
+                                    @if ($item->productVariant && $item->productVariant->first()->variant_color)
+                                        <div style="width: 20px; height: 20px; margin-top: 5px; border-radius: 50%; background-color: {{ $item->productVariant->variant_color }}; border: 1px solid #ccc;" title="{{ $item->productVariant->first()->variant_color }}"></div>
+                                    @else
+                                        <span>Không có</span>
+                                    @endif
+                                </td>
                                 <td>{{ $item->quantity }}</td>
                                 <td>{{ number_format($item->price) }}</td>
                                 <td>{{ number_format($item->price * $item->quantity) }}</td>
                             </tr>
                         @endforeach
-                        
+                        <tr>
+                            <td class="text-start"><strong>Tổng giá sau khi giảm giá:</strong>
+                                <strong>{{ number_format($order->total_price) }} (VNĐ)</strong>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
