@@ -122,6 +122,15 @@
             <li><a href="{{ route('coupon.create') }}"><i class="fa fa-circle-o"></i> Thêm mới</a></li>
           </ul>
         </li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-inbox"></i> <span>Bài viết</span> <i class="fa fa-angle-left pull-right"></i>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="{{ route('blog.index') }}"><i class="fa fa-circle-o"></i> Danh sách</a></li>
+            <li><a href="{{ route('blog.create') }}"><i class="fa fa-circle-o"></i> Thêm mới</a></li>
+          </ul>
+        </li>
         {{-- <li class="treeview">
           <a href="#">
             <i class="fa fa-chart-simple"></i> <span> Thống kê</span> <i class="fa fa-angle-left pull-right"></i>

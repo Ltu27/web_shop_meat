@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\StatisticController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\CouponController;
@@ -30,6 +31,7 @@ Route::get('/category/{cat}', [HomeController::class, 'category'])->name('home.c
 Route::get('/product/{product}', [HomeController::class, 'product'])->name('home.product');
 Route::get('/favorite/{product}', [HomeController::class, 'favorite'])->name('home.favorite');
 Route::post('/search', [HomeController::class, 'searchProduct'])->name('home.search');
+Route::get('/blog', [HomeController::class, 'blog'])->name('home.blog');
 
 Route::group(['prefix' => 'account'], function() {
 
@@ -107,6 +109,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
         'category' => CategoryController::class,
         'product' => ProductController::class,
         'coupon' => CouponController::class,
+        'blog' => BlogController::class,
     ]);
     
     route::get('product-delete-image/{image}', [ProductController::class, 'destroyImage'])->name('product.destroyImage');

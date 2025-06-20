@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Banner;
+use App\Models\Blog;
 use App\Models\Category;
 use App\Models\Favorite;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -57,15 +59,23 @@ class HomeController extends Controller
 
     public function searchProduct(Request $request)
     {
-        $products = Product::where('name', 'LIKE', '%'.$request['searchProduct'].'%')->get();
-        if(count($products) > 0) {
-            return view('home.product.search-product', [
-                'products' => $products
-                ]);
-        } else {
-            return view('trangchu', [
-                'products' => DB::table('sanpham')->paginate(16)
-            ]);
+        $keyword = trim($request->input('searchProduct'));
+
+        if (empty($keyword)) {
+            return redirect()->back()->with('no', 'Vui lòng nhập từ khóa tìm kiếm.');
         }
+
+        $products = Product::where('name', 'LIKE', '%' . $keyword . '%')->get();
+
+        if ($products->isNotEmpty()) {
+            return view('home.product.search-product', compact('products'));
+        } else {
+            return redirect()->back()->with('no', 'Không có kết quả phù hợp!');
+        }
+    }
+
+    public function blog() {
+        $blogs = Blog::orderBy('id', 'DESC')->paginate(4);
+        return view('home.blog', compact('blogs'));
     }
 }

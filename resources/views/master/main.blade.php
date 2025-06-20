@@ -107,11 +107,11 @@
                                                     @endforeach
                                                 </ul>
                                             </li>
-                                            <li class="menu-item-has-children"><a href="#">Bài viết</a>
-                                                <ul class="sub-menu">
-                                                    <li><a href="#">Our Blog</a></li>
-                                                    <li><a href="#">Blog Details</a></li>
-                                                </ul>
+                                            <li class="menu-item-has-children"><a href="{{ route('home.blog') }}">Bài viết</a>
+                                                {{-- <ul class="sub-menu">
+                                                    <li><a href="{{ route('home.blog') }}"></a></li> --}}
+                                                    {{-- <li><a href="#">Blog Details</a></li> --}}
+                                                {{-- </ul> --}}
                                             </li>
                                         </ul>
                                     </div>
