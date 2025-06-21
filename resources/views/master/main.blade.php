@@ -268,7 +268,7 @@
         <script src="assets/js/wow.min.js"></script>
         <script src="assets/js/main.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.js"></script>
-        <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+        {{-- <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script> --}}
         <df-messenger
         intent="WELCOME"
         chat-title="web_shop_meet"
@@ -301,6 +301,14 @@
         </script>
         @endif
         @yield('js')
+
+        <script
+            src="https://app.preny.ai/embed-global.js"
+            data-button-style="width:200px;height:200px"
+            async
+            defer
+            data-preny-bot-id="6856d33b28f9cd6fd67bd159"
+        ></script>
 
     </body> 
 
