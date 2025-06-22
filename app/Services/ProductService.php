@@ -48,30 +48,51 @@ class ProductService
     }
 
     public function getVariants(int $id) {
-        return $this->product->with('variants')->find($id)->variants;
+        return $this->product
+        ->with(['variants.carts', 'variants.orderDetails'])
+        ->find($id)
+        ->variants;
     }
 
-    public function saveVariants(Product $product, array $variants)
-{
-    try {
-        DB::beginTransaction();
+    public function saveVariants(Product $product, array $data)
+    {
+        try {
+            DB::beginTransaction();
 
-        $product->variants()->delete();
+            $incoming = collect($data['variants']);
 
-        foreach ($variants['variants'] as $variant) {
-            $product->variants()->create($variant);
+            $incomingIds = $incoming->pluck('id')->filter()->map(fn($id) => (int)$id)->toArray();
+
+            $product->variants()->whereNotIn('id', $incomingIds)->each(function ($variant) {
+                $used = $variant->carts()->exists() || $variant->orderDetails()->exists();
+                if (!$used) {
+                    $variant->delete();
+                }
+            });
+
+            foreach ($incoming as $variantData) {
+                if (!empty($variantData['id'])) {
+                    $variant = $product->variants()->find($variantData['id']);
+                    if ($variant) {
+                        $used = $variant->carts()->exists() || $variant->orderDetails()->exists();
+                        if (!$used) {
+                            $variant->update($variantData);
+                        }
+                    }
+                } else {
+                    $product->variants()->create($variantData);
+                }
+            }
+
+            DB::commit();
+            return $product->variants()->get();
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            report($e);
+            return null;
         }
-
-        DB::commit();
-
-        return $product->variants()->get();
-
-    } catch (\Exception $e) {
-        DB::rollBack();
-        report($e);
-        return null;
     }
-}
 
     public function getDetailProduct(int $id, bool $withRelation = true): ?Product
     {

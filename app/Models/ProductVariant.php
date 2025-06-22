@@ -23,13 +23,14 @@ class ProductVariant extends Model
         return $this->belongsTo(Product::class);
     }
 
-    public function cart()
+    public function carts()
     {
-        return $this->belongsTo(Cart::class);
+        return $this->hasMany(Cart::class, 'variant_id');
     }
 
-    public function order()
+    public function orderDetails()
     {
-        return $this->belongsTo(Order::class);
+        return $this->hasMany(OrderDetail::class, 'variant_id');
     }
+
 }

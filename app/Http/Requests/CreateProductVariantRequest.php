@@ -24,6 +24,7 @@ class CreateProductVariantRequest extends FormRequest
         return [
             'product_id' => 'required|exists:products,id',
             'variants' => 'nullable|array',
+            'variants.*.id' => 'nullable',
             'variants.*.production_date' => 'nullable|string',
             'variants.*.stock_quantity' => 'required|string',
             'variants.*.variant_color' => 'nullable|string', 

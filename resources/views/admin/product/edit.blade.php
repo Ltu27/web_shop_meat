@@ -153,12 +153,18 @@
         variants.forEach(variant => {
             const $newRow = $template.clone().removeClass('template').css('display', 'block');
 
+            $newRow.find('.variant_id').val(variant.id || '');
             $newRow.find('.colorPicker').val(variant.variant_color || '#000000');
             $newRow.find('.variant_color').val(variant.variant_color || '');
             $newRow.find('.variant_price').val(variant.variant_price || '');
             $newRow.find('.stock_quantity').val(variant.stock_quantity || '');
             $newRow.find('.production_date').val(variant.production_date || '');
             $newRow.find('.expiration_date').val(variant.expiration_date || '');
+
+            if ((variant.cart && variant.cart.length > 0) || 
+                (variant.order_detail && variant.order_detail.length > 0)) {
+                $newRow.find('.removeRow').hide();
+            }
 
             $variantList.append($newRow);
         });
@@ -208,6 +214,7 @@
             
             $('.variant-row').not('.template').each(function () {
                 variants.push({
+                    id: $(this).find('.variant_id').val(),
                     variant_color: $(this).find('.variant_color').val(),
                     variant_price: $(this).find('.variant_price').val(),
                     stock_quantity: $(this).find('.stock_quantity').val(),

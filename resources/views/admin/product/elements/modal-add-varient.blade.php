@@ -12,6 +12,7 @@
                         <button type="button" id="addVariantRow" class="btn btn-success">Thêm thuộc tính</button>
                     </div>
                     <div class="row variant-row template" style="display:none">
+                        <input type="hidden" class="variant_id" value="">
                         <div class="col-md-2">
                             <div class="form-group">
                                 <label>Chọn màu:</label>

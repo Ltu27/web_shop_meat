@@ -21,6 +21,8 @@ class ListProductVariantResource extends JsonResource
             'variant_price' => $this->variant_price,
             'production_date' => $this->production_date,
             'expiration_date' => $this->expiration_date,
+            'cart' => $this->carts ?? null,
+            'order_detail' => $this->orderDetails ?? null
         ];
     }
 }
