@@ -74,7 +74,7 @@
                                     </td>
                                     
                                     <td>
-                                        <a title="Xóa sản phẩm khỏi giỏ hàng" onclick="return confirm('Are you suare want to delete product?')" 
+                                        <a title="Xóa sản phẩm khỏi giỏ hàng" onclick="return confirm('Bạn có chắc chắn muốn xóa sản phẩm khỏi giỏ hàng?')" 
                                         href="{{ route('cart.delete', $item->product_id) }}"><i class="fa fa-trash"></i></a>
                                     </td>
                                 </tr>
@@ -86,7 +86,7 @@
                     <div class="text-center">
                         <a href="" class="btn btn-primary">Tiếp tục mua sắm</a>
                         @if ($carts->count())
-                            <a href="{{ route('cart.clear') }}" class="btn btn-danger" onclick="return confirm('Are you suare want to delete all product?')">Xóa giỏ hàng</a>
+                            <a href="{{ route('cart.clear') }}" class="btn btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa toàn bộ sản phẩm khỏi giỏ hàng?')">Xóa giỏ hàng</a>
                             <button type="submit" class="btn btn-success">Đặt hàng</button>
                         @endif
                     </div>
