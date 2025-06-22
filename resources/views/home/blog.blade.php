@@ -31,11 +31,11 @@
                     @foreach ($blogs as $blog)
                         <div class="col-lg-8">
                             <div class="blog-item">
-                                <div class="blog-thumb">
+                                {{-- <div class="blog-thumb">
                                     <a href=") }}">
                                         <img src="{{ $blog->image ? asset('uploads/blogs/' . $blog->image) : asset('assets/img/blog/default.jpg') }}" alt="{{ $blog->name }}">
                                     </a>
-                                </div>
+                                </div> --}}
                                 <div class="blog-content">
                                     <div class="blog-meta-two">
                                         <ul class="list-wrap">
@@ -46,10 +46,10 @@
                                     <h2 class="title">
                                         <a href="">{{ $blog->name }}</a>
                                     </h2>
-                                    <p>{{ \Str::limit($blog->description, 150) }}</p>
-                                    <a href="" class="link-btn">
+                                    <p>{{ $blog->description, 150 }}</p>
+                                    {{-- <a href="" class="link-btn">
                                         Đọc tiếp <i class="fas fa-angle-double-right"></i>
-                                    </a>
+                                    </a> --}}
                                 </div>
                             </div>
                         </div>

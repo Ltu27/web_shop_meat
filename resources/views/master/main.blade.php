@@ -123,7 +123,7 @@
                                             <li class="header-shop-cart">
                                                 <a href="{{ route('cart.index') }}">
                                                     <i class="flaticon-shopping-basket"></i>
-                                                    <span>{{ $carts->sum('quantity') }}</span>
+                                                    <span>{{ count($carts) }}</span>
                                                 </a>
                                             </li>
                                         </ul>
