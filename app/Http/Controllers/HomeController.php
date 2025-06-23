@@ -16,8 +16,8 @@ class HomeController extends Controller
         $topBanner = Banner::getBanner()->first();
         $galleries = Banner::getBanner('gallery')->get();
 
-        $new_products = Product::orderBy('created_at', 'DESC')->limit(2)->get();
-        $feature_products = Product::inRandomOrder()->limit(4)->get();
+        $new_products = Product::where('status', 1)->orderBy('created_at', 'DESC')->limit(2)->get();
+        $feature_products = Product::where('status', 1)->inRandomOrder()->limit(4)->get();
 
         return view('home.index', compact('topBanner', 'galleries', 'new_products', 'feature_products'));
     }
@@ -27,13 +27,13 @@ class HomeController extends Controller
     }
 
     public function category(Category $cat) {
-        $products = $cat->products()->paginate(9);
-        $new_products = Product::orderBy('created_at', 'DESC')->limit(3)->get();
+        $products = $cat->products()->where('status', 1)->paginate(9);
+        $new_products = Product::where('status', 1)->orderBy('created_at', 'DESC')->limit(3)->get();
         return view('home.category', compact('cat', 'products', 'new_products'));
     }
 
     public function product(Product $product) {
-        $products = Product::where('category_id', $product->category_id)->limit(12)->get();
+        $products = Product::where(['category_id' => $product->category_id, 'status' => 1])->limit(12)->get();
         return view('home.product', compact(
             'product', 
             'products',
@@ -65,7 +65,7 @@ class HomeController extends Controller
             return redirect()->back()->with('no', 'Vui lòng nhập từ khóa tìm kiếm.');
         }
 
-        $products = Product::where('name', 'LIKE', '%' . $keyword . '%')->get();
+        $products = Product::where('status', 1)->where('name', 'LIKE', '%' . $keyword . '%')->get();
 
         if ($products->isNotEmpty()) {
             return view('home.product.search-product', compact('products'));

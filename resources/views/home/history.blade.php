@@ -1,5 +1,5 @@
 @extends('master.main')
-@section('title', 'Lịch sử đơn hàng')
+@section('title', 'Đơn của tôi')
 @section('main')
     
 <!-- main-area -->
@@ -11,11 +11,11 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb-content">
-                        <h2 class="title">Lịch sử đơn hàng</h2>
+                        <h2 class="title">Đơn của tôi</h2>
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{ route('home.index') }}">Trang chủ</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Lịch sử đơn hàng</li>
+                                <li class="breadcrumb-item active" aria-current="page">Đơn của tôi</li>
                             </ol>
                         </nav>
                     </div>

@@ -141,10 +141,6 @@
                                             <td class="discounted-price" data-original="{{ $total }}">
                                                 {{ number_format($total, 0, ',', '.') }} đ
                                             </td>
-                                            <td>
-                                                <a title="Xóa sản phẩm khỏi giỏ hàng" onclick="return confirm('Bạn có chắc chắn muốn xóa?')" 
-                                                href="{{ route('cart.delete', $item->product_id) }}"><i class="fa fa-trash"></i></a>
-                                            </td>
                                         </tr>
                                     @endforeach
                                     <tr>
