@@ -70,12 +70,6 @@
                                             <option value="0" {{ $auth->gender == 0 ? 'selected' : '' }}>Nữ</option>
                                         </select>
                                     </div>
-                                    <div class="form-grp">
-                                        <input name="password" type="password" placeholder="Mật khẩu của bạn *" required>
-                                        @error('password')
-                                            <div class="help-block">{{ $message }}</div>
-                                        @enderror
-                                    </div>
                                     <button type="submit">Cập nhật thông tin cá nhân</button>
                                 </div>
                             </form>

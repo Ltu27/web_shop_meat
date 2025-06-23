@@ -94,10 +94,10 @@ class AccountController extends Controller
         $data['email_verified_at'] = date('Y-m-d');
         if ($acc = Customer::create($data)) {
             // Mail::to($acc->email)->send(new VerifyAccount($acc));
-            return redirect()->route('account.login')->with('ok', 'Register successfully, please check your email to verify account');
+            return redirect()->route('account.login')->with('ok', 'Đăng ký tài khoản thành công');
         }
 
-        return redirect()->back()->with('no', 'Something error, please try again');
+        return redirect()->back()->with('no', 'Có lỗi xảy ra, vui lòng thử lại');
     }
 
     public function verify($email) {
@@ -126,9 +126,9 @@ class AccountController extends Controller
 
         if ($auth->update($data)) {
             auth('cus')->logout();
-            return redirect()->route('account.login')->with('ok', 'Update your password successfully');
+            return redirect()->route('account.login')->with('ok', 'Đổi mật khẩu thành công');
         }
-        return redirect()->back()->with('no', 'Something error, please check again');
+        return redirect()->back()->with('no', 'Có lỗi xảy ra, vui lòng thử lại');
     }
 
     public function forgot_password() {
@@ -152,7 +152,7 @@ class AccountController extends Controller
             Mail::to($req->email)->send(new ForgotPassword($customer, $token));
             return redirect()->back()->with('ok', 'Send mail successfully, please check email to continue');
         }
-        return redirect()->back()->with('no', 'Something error, please check again');
+        return redirect()->back()->with('no', 'Có lỗi xảy ra, vui lòng thử lại');
 
     }
 
@@ -169,11 +169,6 @@ class AccountController extends Controller
             'phone' => 'required|min:6|unique:customers,phone,'.$auth->id,
             'address' => 'required|min:4',
             'gender' => 'required',
-            'password' => ['required', function($attr, $value, $fail) use($auth) {
-                if (!Hash::check($value, $auth->password)) {
-                    return $fail('Your password is not much');
-                }
-            }],
         ], [
             'name.required' => 'Họ tên không được để trống',
             'name.min' => 'Họ tên tối thiểu 6 ký tự',
@@ -188,17 +183,15 @@ class AccountController extends Controller
             'address.required' => 'Địa chỉ không được để trống',
             'address.min' => 'Địa chỉ tối thiểu 4 ký tự',
             'gender.required' => 'Giới tính không được để trống',
-            'password.required' => 'Mật khẩu không được để trống',
-            'password.min' => 'Mật khẩu tối thiểu 4 ký tự',
         ]);
 
         $data = $req->only('name', 'email', 'phone', 'address', 'gender');
 
         $check = $auth->update($data);
         if ($check) {
-            return redirect()->back()->with('ok', 'Update your profile successfully');
+            return redirect()->back()->with('ok', 'Cập nhật thông tin cá nhân thành công');
         }
-        return redirect()->back()->with('no', 'Something error, please check again');
+        return redirect()->back()->with('no', 'Có lỗi xảy ra, vui lòng thử lại!');
     }
 
     public function reset_password($token) {
@@ -222,8 +215,8 @@ class AccountController extends Controller
         
         $check = $customer->update($data);
         if ($check) {
-            return redirect()->back()->with('ok', 'Reset your password successfully');
+            return redirect()->back()->with('ok', 'Cập nhật mật khẩu thành công');
         }
-        return redirect()->back()->with('no', 'Something error, please check again');
+        return redirect()->back()->with('no', 'Có lỗi xảy ra, vui lòng thử lại!');
     }
 }

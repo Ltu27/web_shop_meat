@@ -53,7 +53,7 @@
                             <div class="choose-content">
                                 <div class="line" data-background="uploads/images/line.png"></div>
                                 <h2 class="title">Chất lượng sản phẩm</h2>
-                                <p>Chúng tôi cung cấp những loại thịt tươi ngon, an toàn và chất lượng cao. Với nguồn cung ứng đáng tin cậy và  thịt luôn được bảo quản đúng cách để duy trì chất lượng.</p>
+                                <p>Chất lượng sản phẩm tại TheFaceShop luôn được đặt lên hàng đầu. Mỗi sản phẩm của TheFaceShop không chỉ mang lại hiệu quả rõ rệt mà còn đảm bảo sự dịu nhẹ, phù hợp với mọi loại da, kể cả da nhạy cảm.</p>
                             </div>
                         </div>
                     </div>
@@ -70,7 +70,7 @@
                             <div class="choose-content">
                                 <div class="line" data-background="uploads/images/line.png"></div>
                                 <h2 class="title">Dịch vụ chuyên nghiệp</h2>
-                                <p>Dịch vụ chuyên nghiệp và thân thiện, nhân viên có kiến thức về các loại thịt, cách chế biến và tư vấn cho khách hàng.</p>
+                                <p>Dịch vụ chuyên nghiệp và thân thiện, nhân viên có kiến thức về các loại mỹ phẩm, dược phẩm và tư vấn cho khách hàng.</p>
                             </div>
                         </div>
                     </div>
@@ -87,7 +87,7 @@
                             <div class="choose-content">
                                 <div class="line" data-background="uploads/images/line.png"></div>
                                 <h2 class="title">Đa dạng sản phẩm và dịch vụ</h2>
-                                <p>Các sản phẩm và dịch vụ đa dạng, bán các loại thịt tươi sống, thịt đã chế biến sẵn, các loại gia vị và phụ kiện đi kèm.</p>
+                                <p>Các sản phẩm và dịch vụ đa dạng, bán các loại mỹ phẩm đạt chuẩn, có đẩy đủ chứng nhận, kèm theo nhiều loại ưu đãi, giảm giá khác nhau.</p>
                             </div>
                         </div>
                     </div>
@@ -119,24 +119,24 @@
                                 <div class="accordion-item">
                                     <h2 class="accordion-header">
                                         <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                            Thịt cam kết 100% tười sống.
+                                            Mỹ phẩm cam kết chính hãng.
                                         </button>
                                     </h2>
                                     <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
                                         <div class="accordion-body">
-                                            <p>Thị được cung cấp từ những nguồn cung uy tín nhất.</p>
+                                            <p>Mỹ phẩm được cung cấp từ những nguồn cung uy tín nhất.</p>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="accordion-item">
                                     <h2 class="accordion-header">
                                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                            Có phải thịt sạch không?
+                                            Điểm nổi bật của sản phẩm?
                                         </button>
                                     </h2>
                                     <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                                         <div class="accordion-body">
-                                            <p>Trang trại nuôi trồng sạch sẽ, thịt không chất bảo quản.</p>
+                                            <p>Công nghệ sản xuất hiện đại từ Hàn Quốc. Đã được kiểm nghiệm về an toàn da liễu.</p>
                                         </div>
                                     </div>
                                 </div>

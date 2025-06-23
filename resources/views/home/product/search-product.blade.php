@@ -38,7 +38,7 @@
                                         <p>Showing 1–09 of 20 results</p>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                {{-- <div class="col-md-6">
                                     <div class="shop-ordering">
                                         <select name="orderby" class="orderby">
                                             <option value="Default sorting">Sort by Top Rating</option>
@@ -48,7 +48,7 @@
                                             <option value="Sort by latest">Sort by latest</option>
                                         </select>
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                         <div class="shop-item-wrap">
@@ -63,11 +63,8 @@
                                             <div class="product-content-three">
                                                 <a href="#" class="tag">{{ $product->cat->name }}</a>
                                                 <h2 class="title"><a href="{{ route('home.product', $product->id) }}">{{ $product->name }}</a></h2>
-                                                @if ($product->sale_price > 0)
-                                                    <h2><s>{{ number_format($product->price) }} VNĐ</s></h2>
-                                                    <h2 class="price">{{ number_format($product->sale_price) }} VNĐ</h2>
-                                                @else
-                                                    <h2 class="price">{{ number_format($product->price) }} VNĐ</h2>
+                                                @if (count($product->variants) > 0)
+                                                    <h2 class="price">{{ number_format($product->variants[0]->variant_price) }} VNĐ</h2>
                                                 @endif
                                                 <div class="favorite-action">
                                                     @if (auth('cus')->check())
@@ -78,20 +75,20 @@
                                                             <a title="Yêu thích" href="{{ route('home.favorite', $product->id) }}">
                                                                 <i class="far fa-heart"></i></a>
                                                         @endif
-                                                            <a title="Thêm vào giỏ hàng" href="{{ route('cart.add', $product->id) }}">
-                                                                <i class="fa fa-shopping-cart"></i></a>
+                                                            {{-- <a title="Thêm vào giỏ hàng" href="{{ route('cart.add', $product->id) }}">
+                                                                <i class="fa fa-shopping-cart"></i></a> --}}
                                                     @else
-                                                    <a title="Thêm vào giỏ hàng" href="{{ route('account.login') }}" 
-                                                    onclick="alert('Vui lòng đăng nhập để thêm giỏ hàng')"><i class="fa fa-shopping-cart"></i></a>
+                                                    {{-- <a title="Thêm vào giỏ hàng" href="{{ route('account.login') }}" 
+                                                    onclick="alert('Vui lòng đăng nhập để thêm giỏ hàng')"><i class="fa fa-shopping-cart"></i></a> --}}
                                                     @endif
                                                 </div>
-                                                <div class="product-cart-wrap">
+                                                {{-- <div class="product-cart-wrap">
                                                     <form action="#">
                                                         <div class="cart-plus-minus">
                                                             <input type="text" value="1">
                                                         </div>
                                                     </form>
-                                                </div>
+                                                </div> --}}
                                             </div>
                                             <div class="product-shape-two">
                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 303 445" preserveAspectRatio="none">
