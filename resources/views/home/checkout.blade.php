@@ -130,13 +130,7 @@
                                             </td>
                                             <td>{{ $item->price }}</td>
                                             <td>
-                                                <form class="update-cart-form" data-id="{{ $item->product_id }}" 
-                                                    data-variant-id="{{ $item->variant_id }}"
-                                                    @csrf
-                                                    <input type="number" value="{{ $item->quantity }}" name="quantity" 
-                                                        class="quantity-input" style="width: 60px; text-align:center">
-                                                    <button type="submit"><i class="fa fa-save"></i></button>
-                                                </form>
+                                                {{ $item->quantity }}
                                             </td>
                                             <td>
                                                 {{ $item->price * $item->quantity }}
@@ -148,7 +142,7 @@
                                                 {{ number_format($total, 0, ',', '.') }} đ
                                             </td>
                                             <td>
-                                                <a title="Xóa sản phẩm khỏi giỏ hàng" onclick="return confirm('Are you suare want to delete product?')" 
+                                                <a title="Xóa sản phẩm khỏi giỏ hàng" onclick="return confirm('Bạn có chắc chắn muốn xóa?')" 
                                                 href="{{ route('cart.delete', $item->product_id) }}"><i class="fa fa-trash"></i></a>
                                             </td>
                                         </tr>

@@ -46,47 +46,48 @@ class AdminController extends Controller
             $daysInMonth = Carbon::create($year, $month, 1)->daysInMonth;
             $result = [];
             $labels = [];
-
+        
             for ($d = 1; $d <= $daysInMonth; $d++) {
-                $revenue = Order::whereDay('created_at', $d)
+                $orders = Order::whereDay('created_at', $d)
                     ->whereMonth('created_at', $month)
                     ->whereYear('created_at', $year)
                     ->whereIn('status', [3, 4])
-                    ->with('details')
-                    ->get()
-                    ->flatMap->details
-                    ->sum(function ($detail) {
-                        return $detail->price * $detail->quantity;
-                    });
+                    ->with('details') 
+                    ->get();
+        
+                $revenue = $orders->sum(function ($order) {
+                    return $order->totalPrice;
+                });
+        
                 $result[] = round($revenue / 1000);
                 $labels[] = (string)$d;
             }
-
+        
             return response()->json([
                 'labels' => $labels,
                 'data' => $result
             ]);
         } else {
-            // Thống kê theo năm: từng tháng
             $result = [];
+        
             for ($m = 1; $m <= 12; $m++) {
-                $revenue = Order::whereMonth('created_at', $m)
+                $orders = Order::whereMonth('created_at', $m)
                     ->whereYear('created_at', $year)
                     ->whereIn('status', [3, 4])
-                    ->with('details')
-                    ->get()
-                    ->flatMap->details
-                    ->sum(function ($detail) {
-                        return $detail->price * $detail->quantity;
-                    });
-                $result[] = round($revenue / 1000); // Đơn vị: nghìn đồng
+                    ->with('details') 
+                    ->get();
+                    
+                $revenue = $orders->sum(function ($order) {
+                    return $order->totalPrice;
+                });
+                $result[] = round($revenue / 1000);
             }
-
+        
             return response()->json([
                 'labels' => ['T1','T2','T3','T4','T5','T6','T7','T8','T9','T10','T11','T12'],
                 'data' => $result
             ]);
-        } 
+        }
     }
 
 
