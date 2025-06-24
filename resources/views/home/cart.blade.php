@@ -126,10 +126,15 @@
                         position: 'top-center',
                     });
                 },
-                error: function() {
+                error: function(xhr) {
+                    let message = 'Đã xảy ra lỗi khi cập nhật';
+                    if (xhr.responseJSON && xhr.responseJSON.message) {
+                        message = xhr.responseJSON.message;
+                    }
+
                     $.toast({
                         heading: 'Thông báo',
-                        text: 'Đã xảy ra lỗi khi cập nhật',
+                        text: message,
                         showHideTransition: 'fade',
                         icon: 'error',
                         position: 'top-center',

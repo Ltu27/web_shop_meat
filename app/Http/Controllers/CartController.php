@@ -157,6 +157,15 @@ class CartController extends Controller
                 'variant_id' => 'required|exists:product_variants,id'
             ]);
 
+            $variant = ProductVariant::find($data['variant_id']);
+            $checkQuantity = $this->checkQuantity($variant, $data['quantity']);
+            if (!$checkQuantity) {
+                return response()->json([
+                    'status' => 'no',
+                    'message' => 'Số lượng sản phẩm không đủ'
+                ], 400);
+            }
+
             $cus_id = auth('cus')->id();
             $cart = Cart::where([
                 'customer_id' => $cus_id,

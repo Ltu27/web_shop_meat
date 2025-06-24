@@ -24,7 +24,7 @@ class ListOrderResource extends JsonResource
             'phone' => $this->phone,
             'address' => $this->address,
             'status' => OrderConstant::getLabel($this->status) ?? null,
-            'created_at' => $this->created_at,
+            'created_at' => $this->created_at ? $this->created_at->format('d/m/Y') : null,
             'customer' => new ShowCustomerResource($this->customer) ?? null,
             'details' => $this->details ? OrderDetailResource::collection($this->details) : null,
             'total_price' => $this->getTotalPriceAttribute() ?? null,
