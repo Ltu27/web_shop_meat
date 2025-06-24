@@ -161,6 +161,10 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
+        if ($product->orderDetails->count() > 0 || $product->carts->count() > 0) {
+            return redirect()->back()->with('no', 'Sản phẩm đang đang được bán, khöng thể xóa');
+        }
+
         $img_name = $product->image;
         $image_path = public_path('uploads/product').'/'.$img_name;
         if ($product->images->count() > 0) {

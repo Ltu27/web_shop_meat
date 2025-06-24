@@ -66,7 +66,7 @@
                         </td>
                 
                         <td class="text-right">
-                            <form action="{{ route('product.destroy', $model->id) }}" method="post" onsubmit="return confirm('Are you want to delete?')">
+                            <form action="{{ route('product.destroy', $model->id) }}" method="post" onsubmit="return confirm('Bạn có chắc chắn muốn xóa?')">
                                 @csrf
                                 @method('DELETE')
                                 <a href="{{ route('product.edit', $model->id) }}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></a>
