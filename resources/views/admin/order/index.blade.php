@@ -62,6 +62,20 @@
             processing: true,
             serverSide: true,
             searching: false,
+            language: {
+                "processing":   "Đang xử lý...",
+                "lengthMenu":   "Hiển thị _MENU_ mục",
+                "zeroRecords":  "Không tìm thấy dòng nào phù hợp",
+                "info":         "Đang hiển thị _START_ đến _END_ trong tổng số _TOTAL_ mục",
+                "infoEmpty":    "Đang hiển thị 0 đến 0 trong tổng số 0 mục",
+                "infoFiltered": "(được lọc từ _MAX_ mục)",
+                "paginate": {
+                    "first":    "Đầu",
+                    "previous": "Trước",
+                    "next":     "Tiếp",
+                    "last":     "Cuối"
+                }
+            },
             ajax: {
                 url: '{{ route("order.getListOrder") }}',
                 data: function(d) {
