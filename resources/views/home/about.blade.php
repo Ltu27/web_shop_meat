@@ -101,13 +101,13 @@
     <section class="faq-area tg-motion-effects faq-bg" data-background="uploads/bg/faq_bg.jpg">
         <div class="container">
             <div class="row align-items-center justify-content-center">
-                <div class="col-lg-6 col-md-10">
-                    <div class="faq-img-wrap">
-                        <img src="uploads/images/faq_img01.png" alt="">
+                {{-- <div class="col-lg-6 col-md-10"> --}}
+                    {{-- <div class="faq-img-wrap">
+                        <img src="uploads/images/anh-hue.avif" alt="">
                         <img src="uploads/images/faq_img02.png" alt="">
                         <img src="uploads/images/faq_img03.png" alt="">
-                    </div>
-                </div>
+                    </div> --}}
+                {{-- </div> --}}
                 <div class="col-lg-6">
                     <div class="faq-content">
                         <div class="section-title mb-60">
@@ -146,10 +146,10 @@
                 </div>
             </div>
         </div>
-        <div class="faq-shape-wrap">
+        {{-- <div class="faq-shape-wrap">
             <img src="uploads/images/faq_shape01.png" alt="" class="tg-motion-effects3">
             <img src="uploads/images/faq_shape02.png" alt="" class="tg-motion-effects2">
-        </div>
+        </div> --}}
     </section>
     <!-- faq-area-end -->
 

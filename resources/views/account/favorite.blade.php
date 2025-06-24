@@ -46,7 +46,7 @@
                                 <td scope="row">{{ $loop->index + 1 }}</td>
                                 <td>{{ $item->prod->name }}</td>
                                 <td><img src="uploads/product/{{ $item->prod->image }}" alt="" width="60"></td>
-                                <td>{{ $item->prod->sale_price }}</td>
+                                <td>{{ number_format($item->prod->variants ? $item->prod->variants[0]->variant_price : '') }}</td>
                                 <td>{{ $item->created_at->format('d/m/Y') }}</td>
                             </tr>
                         @endforeach
