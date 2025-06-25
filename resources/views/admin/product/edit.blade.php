@@ -35,7 +35,7 @@
                             <img src="uploads/product/{{ $img->image }}" alt="">
                         </a>
                         <div class="caption" style="position: absolute; top: 5px; right: 20px">
-                            <a onclick="return confirm('Are you sure delete it?')" href="{{ route('product.destroyImage', $img->id) }}" class="btn btn-sm btn-danger">
+                            <a onclick="return confirm('Bạn có chắc chắn muốn xóa?')" href="{{ route('product.destroyImage', $img->id) }}" class="btn btn-sm btn-danger">
                                 <i class="fa fa-trash"></i>
                             </a>
                         </div>
@@ -100,9 +100,11 @@
 
 @section('css')
 <link rel="stylesheet" href="ad_assets/plugins/summernote/summernote.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.css" rel="stylesheet">
 @stop()
 
 @section('js')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.js"></script>
 <script src="ad_assets/plugins/summernote/summernote.min.js"></script>
 <script>
     $('.description').summernote({
